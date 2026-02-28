@@ -1,0 +1,315 @@
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    font-family: 'Poppins', sans-serif;
+}
+
+/* Início Header */
+
+header {
+    background-color: var(--bg-secondary);
+    display: flex;
+    justify-content: space-between;
+    height: 70px;
+    color: #fff;
+}
+
+.headerLogo {
+    height: 100%;
+    width: 100px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.containerLogo {
+    height: 90%;
+}
+
+.logo {
+    height: 100%;
+}
+
+/* ----- */
+
+.headerLinks {
+    display: flex;
+    height: 100%;
+}
+
+.headerLinks .containerLink {
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.headerLinks .textoLink {
+    color: inherit;
+    text-decoration: none;
+    width: 8rem;
+    text-align: center;
+}
+
+/* ----- */
+
+.headerButtons {
+    display: flex;
+    height: 100%;
+}
+
+.headerButtons .containerButton {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100%;
+    margin: 0 2rem;
+}
+
+.headerButtons button {
+    height: 2rem;
+    width: 7rem;
+    border-radius: 5rem;
+    border: transparent;
+    color: var();
+    font-weight: bold;
+}
+
+/* Fim Header */
+
+/* Começo Main */
+
+#idMain {
+    background-image: url(../assets/background-homeMain.png);
+    width: 100%;
+    height: 60vh;
+    min-height: 400px;
+    max-height: 700px;
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center;
+}
+
+/* Fim Main */
+
+/* Começo Problemas */
+
+#idProblemas {
+    width: 100%;
+    padding-top: 3rem;
+}
+
+.containerTitle {
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+}
+
+.containerTitle hr {
+    width: 35%;
+}
+
+.containerTitle h2 {
+    color: var(--bg-secondary);
+}
+
+.containerProblemas {
+    width: 90%;
+    width: 100%;
+    display: flex;
+    margin-top: 2rem;
+    justify-content: space-around;
+}
+
+.containerProblemas .containerProblema {
+    width: 30%;
+}
+
+.containerProblemas .problema {
+    width: 100%;
+    min-width: 60%;
+    height: 400px;
+    min-height: 400px;
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: contain;
+    display: flex;
+    justify-content: center;
+    align-items: end;
+}
+
+.containerProblemas #idRouboCarga {
+    background-image: url(../assets/problema1.png);
+}
+
+.containerProblemas #idPrejuizosLogisticos {
+    background-image: url(../assets/problema2.png);
+}
+
+.containerProblemas #idViasAltosRiscos {
+    background-image: url(../assets/problema3.png);
+}
+
+.containerProblemas .problema span {
+    color: var(--bg-primary);
+    font-weight: bold;
+    margin: 2rem;
+    font-size: 2rem;
+}
+
+/* Fim Problemas */
+
+/* Começo Como Funciona */
+
+#idComoFunciona {
+    padding-top: 3rem;
+    padding-bottom: 2rem;
+}
+
+.containerCaminhao {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    padding-top: 1rem;
+}
+
+.containerCaminhao .classCaminhao {
+    width: 30%;
+    margin-bottom: -.7rem;
+}
+
+.containerCaminhao .classEstrada {
+    width: 100%;
+}
+
+.containerPassos {
+    width: 100%;
+    display: flex;
+    justify-content: space-around;
+}
+
+.containerPassos .containerPasso {
+    width: 20%;
+    flex-direction: column;
+}
+
+.containerPasso .steps {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    font-weight: bold;
+    font-size: 1.7rem;
+    margin: 2rem;
+}
+
+.containerPasso .numberStep {
+    color: var(--bg-primary);
+    background-color: var(--bg-secondary);
+    padding: 0 .5rem;
+    border-radius: 10rem;
+    margin-left: 1rem;
+}
+
+.containerPasso .title {
+    width: 100%;
+    display: flex;
+    
+}
+
+.containerPasso .imgTitle {
+    width: 30%;
+}
+
+.containerPasso .containerTextTitle {
+    display: flex;
+    align-items: center;
+    margin: 0.4rem;
+}
+
+.containerPasso .textTitle {
+    font-weight: bold;
+    font-size: 1.3rem;
+}
+
+.containerPasso .text {
+    font-weight: bold;
+    color: var(--bg-secondary);
+    width: 80%;
+    text-align: center;
+    margin-top: 1rem;
+}
+
+/* Fim Como Funciona */
+
+/* Começo Sobre */
+
+#idSobre {
+    background-color: var(--bg-secondary);
+    padding-top: 2rem;
+    padding-bottom: 3rem;
+    display: flex;
+    flex-direction: column;
+}
+
+#idSobre h2 {
+    color: var(--bg-primary);
+}
+
+.containerIntroducao {
+    width: 100%;
+    display: flex;
+    justify-content: space-around;
+}
+
+.containerIntroducao .frases {
+    width: 40%;
+    font-size: 2.5rem;
+    color: var(--bg-primary);
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+}
+
+.containerIntroducao .fundado {
+    color: #939393;
+    margin-left: 5rem;
+}
+
+.containerIntroducao .logistica {
+    margin-left: 10rem;
+    text-shadow: rgb(0, 0, 0, 0.25) 1px 4px 4px;
+}
+
+.containerIntroducao .fraseLogisticaBolder {
+    color: #07C7FE;
+    font-style: italic;
+}
+
+.containerIntroducao .containerImagem {
+    width: 40%;
+}
+
+.containerIntroducao .imagem {
+    width: 100%;
+}
+
+.containerTextSobre {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    margin-top: 2rem;
+}
+
+.containerTextSobre .boxTextSobre {
+    width: 70%;
+    color: var(--bg-primary);
+}
+
+.containerTextSobre p {
+    font-size: 1.5rem;
+
+}
+
+/* Fim Sobre */
