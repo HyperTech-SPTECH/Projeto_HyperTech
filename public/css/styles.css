@@ -1,0 +1,50 @@
+/* 1. Importação corrigida: Agora puxa a Inter e a Poppins juntas */
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;700&family=Poppins:wght@400;600;700&display=swap');
+
+:root {
+  /* Cores de Fundo */
+  --bg-primary: #FFFFFF;
+  --bg-secondary: #0244AB;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: 'Inter', sans-serif;
+  color: #000;
+  background-color: var(--bg-primary);
+  overflow-x: hidden;
+}
+
+main {   
+  padding: 0;   
+  display: flex; 
+  flex-direction: column;
+}
+
+h1, h2, h3 {
+  font-family: 'Poppins', sans-serif;
+}
+
+h1 { font-size: clamp(2.25rem, 5vw, 3.5rem); }
+h2 { font-size: clamp(1.75rem, 4vw, 2.5rem); }
+h3 { font-size: clamp(1.25rem, 3vw, 1.75rem); }
+
+p { font-size: clamp(1rem, 1.2vw, 1.125rem); }
+ul { list-style-type: none; }
+
+a {
+  font-size: clamp(1rem, 1.2vw, 1.125rem);
+  text-decoration: none;
+  color: inherit;
+}
+
+img {
+  width: 100%;
+  height: auto;
+  display: block;
+}
