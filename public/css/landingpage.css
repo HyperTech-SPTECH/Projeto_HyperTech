@@ -314,3 +314,53 @@
     color: var(--bg-primary);
     line-height: 1.4;
 }
+
+@media (max-width: 749px) {
+    /* Oculta links menos importantes do header */
+    .opcoes-navegacao a[href="#como-funciona"],
+    .opcoes-navegacao a[href="#sobre"],
+    .opcoes-navegacao a[href="#contato"] {
+        display: none;
+    }
+
+    /* Oculta imagens do Sobre Nós e do Como Funciona */
+    .imagem-caminhao,
+    .imagem-estrada,
+    .imagem-sobre {
+        display: none;
+    }
+
+    /* Invés de colocar as imagens e textos um ao lado do outro, coloca um em cima do outro */
+    .item-problema {
+        flex-direction: column;
+        align-items: center;
+        text-align: center;
+    }
+    
+    .imagem-problema {
+        margin-bottom: 1.5rem;
+    }
+
+    /* Invés de colocar as imagens e textos um ao lado do outro, coloca um em cima do outro */
+    .funcionalidades {
+        flex-direction: column;
+        align-items: center;
+        gap: 4rem;
+    }
+
+    /* Invés de colocar as imagens e textos um ao lado do outro, coloca um em cima do outro */
+    .itens-mvv {
+        flex-direction: column;
+        align-items: center;
+        gap: 4rem;
+    }
+
+    .conteudo-sobre {
+        text-align: center;
+    }
+    
+    .grade-equipe {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 2rem 1rem;
+    }
+}
