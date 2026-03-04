@@ -1,0 +1,144 @@
+
+
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;700&family=Poppins:wght@400;600;700&display=swap');
+
+:root {
+  /* Cores de Fundo */
+  --bg-primary: #FFFFFF;
+  --bg-secondary: #0244AB;
+}
+
+body{
+  display: flex;
+  height: 100%;
+  margin: 0;
+  font-family: 'Poppins';
+  box-sizing: border-box;
+  padding: 0;
+}
+
+
+.principal{
+  display: flex;
+  flex-direction: row;
+  width: 100%;
+  margin-top: 0%;
+  height: 100vh;
+    padding-top: 0%;
+    padding: auto;
+  
+
+}
+
+
+.container-esq{
+  width: 50%;
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+}
+
+.box {
+    display: flex;
+    flex-direction: column; 
+    align-items: center;
+    justify-content: center; 
+    width: 100%;
+    height: 80%;
+}
+
+.container-esq h1{
+  font-family: 'Poppins', sans-serif;
+  font-size: 1.9rem;
+    font-weight: 600;
+    color: #1f2937;
+    margin: 0%;
+}
+
+.container-esq img{
+    width: 15vw; 
+}
+
+.inputs{
+  display: flex;
+  width: 60%;
+  height: 80%;
+  align-items: start;
+  flex-direction: column;
+  margin-top: -2%;
+}
+
+.inputs p{
+    font-size: 1.0rem;
+    margin-top: 14px;
+    margin-bottom: 10px;
+
+}
+.inputs input {
+  width: 100%;
+  height: 70px;
+  background-color:  #c1d5f0;;
+  border: none;
+  border-radius: 1vw;
+  padding: 3%;
+  font-size: 1.1vw;
+  
+
+}
+input:focus{
+  outline-color: var(--bg-secondary);
+}
+input::placeholder{
+  font-size: 15px;
+  font-family: 'Poppins';
+  font-weight: 500;
+  color: var(--bg-secondary);
+  
+}
+
+button{
+    padding: 1.8% 10%;
+    border: none;
+    border-radius: 1vw;
+    background: #3f6fb5;
+    color:var(--bg-primary);
+    font-size: 1.4vw;
+    cursor: pointer;
+    box-shadow: 0 0.5vw 1vw rgba(63, 111, 181, 0.3);
+    margin-top: 14%;
+}
+button:hover {
+background: #355fa0;
+}
+
+/* CSS Lado Direito - Imagem*/
+
+.container{
+ background-image: url(image\ 22.png);
+ background-size: cover;
+ width: 50%;
+height: 100%;
+} 
+
+.conteudo{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: end;
+  height: 100%;
+  margin: 0;
+
+}
+
+.conteudo .titulo{
+  position: absolute; 
+bottom: 8%;
+left: 53%;
+color: var(--bg-primary);
+font-size: 1.3vw;
+font-style: italic;
+text-shadow: 0 0.2vw 0.5vw rgba(0,0,0,0.5);
+
+}
