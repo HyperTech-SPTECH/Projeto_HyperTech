@@ -5,7 +5,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     
-    <link rel="stylesheet" href="cad.css">
+    <link rel="stylesheet" href="css/cad.css">
     <title>HyperTech Cadastro</title>
 </head>
 
@@ -14,7 +14,7 @@
      
         <div class="container-esq">
             <div class="box">
-                <img src="logo.png" alt="">
+                <img src="assets/logo.png" alt="">
                 <h1>Crie sua conta</h1>
                 
                 <div class="inputs"> <br>
@@ -28,12 +28,13 @@
                     <input type="password" id="input_senha" maxlength="6"  placeholder="  ******"> <br>
                     <p>Confirmar senha</p>
                     <input type="password" id="input_confirmacao" maxlength="6" placeholder="   ******"> <br>
-                    <div id="res">Preencher todos os campos!</div>
+                    <div id="res" style="display: none;">Preencher todos os campos!</div>
                 </div>
                  <button onclick="criar()">Entrar</button>
             </div>
         </div>
-           <div class="container">
+
+        <div class="container">
             <div class="conteudo">
                 <span class="titulo">Para você focar apenas no que importa!</span>
             </div>
@@ -130,9 +131,11 @@
     if (mensagem === "") {
         res.innerHTML = "Cadastro realizado com sucesso!";
         res.style.color = "green";
+        res.style.display = "block";
     } else {
         res.innerHTML = mensagem;
         res.style.color = "red";
+        res.style.display = "block";
     }
 }
 </script>
