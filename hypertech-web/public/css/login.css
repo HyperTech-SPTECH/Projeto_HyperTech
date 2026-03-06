@@ -7,10 +7,9 @@
 
 body {
   display: flex;
-  height: 100vh;
+  min-height: 100vh;
   background: #f8f9fb;
 }
-
 
 #CampoEsquerda {
   width: 50%;
@@ -19,80 +18,70 @@ body {
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  gap: 2.5%;
-  padding: 5%;
+  gap: 20px;
+  padding: 40px;
   text-align: center;
 }
 
-
 #CampoEsquerda img {
-  width: 25vw;     
-  max-width: 65%;  
+  width: 220px;
+  max-width: 80%;
 }
 
-
 h1 {
-  font-size: 2.4vw;
+  font-size: 32px;
   font-weight: 600;
   color: #1f2937;
-  margin-bottom: 5%;
 }
 
 h2 {
-  font-size: 1.1vw;
+  font-size: 16px;
   font-weight: 400;
   color: #6b7280;
 }
 
-
 .campo {
   display: flex;
-  align-items: center;
-  gap: 3%;
+  flex-direction: column;
   width: 100%;
-  max-width: 70%;
-  justify-content: center;
-  margin-left: -10%;
+  max-width: 380px;
+  gap: 6px;
 }
-
 
 .campo label {
-  width: 20%;
-  font-size: 1.1vw;
+  font-size: 14px;
   color: #374151;
-  text-align: right;
   font-weight: 500;
+  text-align: left;
 }
 
-
 .campo input {
-  flex: 1;
-  padding: 3%;
-  border-radius: 1vw;
+  padding: 12px;
+  border-radius: 8px;
   border: none;
   background: #c1d5f0;
   outline: none;
-  font-size: 1.1vw;
+  font-size: 14px;
 }
 
 
 #CampoEsquerda h2:last-of-type {
-  font-size: 0.9vw;
+  font-size: 13px;
   color: #3b82f6;
 }
 
 
 button {
-  width: 35%;
-  padding: 3%;
+  width: 200px;
+  padding: 12px;
   border: none;
-  border-radius: 1vw;
+  border-radius: 8px;
   background: #3f6fb5;
   color: white;
-  font-size: 1.4vw;
+  font-size: 16px;
   font-weight: 500;
   cursor: pointer;
-  box-shadow: 0 0.5vw 1vw rgba(63, 111, 181, 0.3);
+  box-shadow: 0 5px 10px rgba(63, 111, 181, 0.3);
   transition: 0.2s;
 }
 
@@ -100,9 +89,8 @@ button:hover {
   background: #355fa0;
 }
 
-
 a {
-  font-size: 1vw;
+  font-size: 14px;
   color: #374151;
   text-decoration: none;
 }
@@ -111,10 +99,9 @@ a:hover {
   color: #3f6fb5;
 }
 
-
 #foto {
   width: 50%;
-  height: 100%;
+  height: 100vh;
   overflow: hidden;
   position: relative;
 }
@@ -125,14 +112,42 @@ a:hover {
   object-fit: cover;
 }
 
-
 #foto::after {
   content: "Para você focar apenas no que importa!";
-  position: absolute; 
-  bottom: 8%;
-  left: 8%;
+  position: absolute;
+  bottom: 40px;
+  left: 40px;
   color: white;
-  font-size: 1.6vw;
+  font-size: 22px;
   font-style: italic;
-  text-shadow: 0 0.2vw 0.5vw rgba(0,0,0,0.5);
+  text-shadow: 0 2px 8px rgba(0,0,0,0.5);
+}
+
+@media (max-width: 900px) {
+
+  #foto {
+    display: none;
+  }
+
+  body {
+    justify-content: center;
+    align-items: center;
+    background-image: url(../assets/background.png);
+    background-size: cover;
+    background-position: center;
+  }
+
+  #CampoEsquerda {
+    width: 90%;
+    background-color: rgba(255,255,255,0.7);
+    backdrop-filter: blur(3px);
+    border-radius: 10px;
+    box-shadow: 0 5px 10px rgba(0,0,0,0.2);
+  }
+
+  button {
+    width: 100%;
+    max-width: 300px;
+  }
+
 }

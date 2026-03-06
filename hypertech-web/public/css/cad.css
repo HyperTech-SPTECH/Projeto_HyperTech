@@ -38,7 +38,7 @@ body {
 }
 
 .container-esq {
-  width: 50%;
+  width: 60%;
   height: 100vh;
   display: flex;
   justify-content: center;
@@ -121,7 +121,7 @@ button:hover {
 .container {
   background-image: url(../assets/background.png);
   background-size: cover;
-  width: 100%;
+  width: 60%;
   height: 100%;
 }
 
