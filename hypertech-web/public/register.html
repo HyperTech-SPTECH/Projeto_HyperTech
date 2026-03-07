@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/register.css">
+    <title>HyperTech Cadastro</title>
+</head>
+
+<body>
+    <div class="principal">
+        <div class="container-esq">
+            <div class="box">
+                <a href="index.html">
+                    <img src="assets/logo.png" alt="" >
+                </a>
+                <h1>Crie sua conta</h1>
+                
+                <div class="inputs"> <br>
+                    <p>Nome</p>
+                    <input type="text" id="input_nome" placeholder="    Ex: Maria Antonia OLiveira"> <br>
+                    <p>CNPJ</p>
+                    <input oninput="mascara()" type="text" id="input_cnpj" maxlength="18" placeholder=" Ex. XX.XXX.XXX/0001-XX"> <br>
+                    <p>E-mail</p>
+                    <input type="text" id="input_email" placeholder="  Ex. hypertech@gmail.com"> <br>
+                    <p>Senha</p>
+                    <input type="password" id="input_senha" maxlength="6"  placeholder="  ******"> <br>
+                    <p>Confirmar senha</p>
+                    <input type="password" id="input_confirmacao" maxlength="6" placeholder="   ******"> <br>
+                    <div id="res" style="display: none;">Preencher todos os campos!</div>
+                </div>
+                 <button onclick="criar()">Entrar</button>
+            </div>
+        </div>
+
+        <div class="container">
+            <div class="conteudo">
+                <span class="titulo">Para você focar apenas no que importa!</span>
+            </div>
+
+        </div>
+    </div>
+
+
+</body>
+
+</html>
+
+
+<script>
+
+
+
+  function mascara() {
+
+  var cnpj = document.getElementById('input_cnpj')
+
+   if( cnpj.value.length == 2 ||  cnpj.value.length == 6){
+   cnpj.value += "."
+   }
+   if(cnpj.value.length == 10){
+    cnpj.value += "/"
+   }
+   if(cnpj.value.length == 15){
+    cnpj.value += "-"
+   }
+   console.log(cnpj)
+
+
+}function criar() {
+    var nome = input_nome.value.trim();
+    var cnpj = input_cnpj.value.trim();
+    var email = input_email.value.trim();
+    var senha = input_senha.value;
+    var confirmacao = input_confirmacao.value;
+
+    var mensagem = "";
+
+    // Validação do email
+    if (!(email.includes("@gmail.com") || email.includes("@sptech.school"))) {
+        mensagem += "Email deve ser @gmail.com ou @sptech.school<br>";
+    }
+
+        // ===== Validação da senha (COM includes) =====
+    var temLetra = false;
+    var temNumero = false;
+    var temEspecial = false;
+
+    // Letras
+    var letras = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ";
+    for (var i = 0; i < letras.length; i++) {
+        if (senha.includes(letras[i])) {
+            temLetra = true;
+            break;
+        }
+    }
+
+    // Números (0 a 9)
+    var numeros = "0123456789";
+    for (var i = 0; i < numeros.length; i++) {
+        if (senha.includes(numeros[i])) {
+            temNumero = true;
+            break;
+        }
+    }
+
+    // Caracteres especiais permitidos
+    var especiais = "!@#%";
+    for (var i = 0; i < especiais.length; i++) {
+        if (senha.includes(especiais[i])) {
+            temEspecial = true;
+            break;
+        }
+    }
+
+    if (senha.length < 6) {
+        mensagem += "Senha deve ter no mínimo 6 caracteres<br>";
+    }
+
+    if (!temLetra || !temNumero || !temEspecial) {
+        mensagem += "Senha deve conter letras, números e caractere especial (! @ # %)<br>";
+    }
+
+    // Validação da confirmação de senha
+    if (senha !== confirmacao) {
+        mensagem += "Senhas não conferem<br>";
+    }
+
+    // Resultado final
+    if (mensagem === "") {
+        res.innerHTML = "Cadastro realizado com sucesso!";
+        res.style.color = "green";
+        res.style.display = "block";
+    } else {
+        res.innerHTML = mensagem;
+        res.style.color = "red";
+        res.style.display = "block";
+    }
+}
+</script>
