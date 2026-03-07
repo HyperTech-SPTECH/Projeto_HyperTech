@@ -1,8 +1,6 @@
-/* 1. Importação corrigida: Agora puxa a Inter e a Poppins juntas */
 @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;700&family=Poppins:wght@400;600;700&display=swap');
 
 :root {
-  /* Cores de Fundo */
   --bg-primary: #FFFFFF;
   --bg-secondary: #0244AB;
 }

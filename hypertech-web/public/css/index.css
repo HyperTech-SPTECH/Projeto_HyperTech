@@ -39,7 +39,7 @@
 }
 
 /* Header */
-.header {
+header {
     background: var(--bg-secondary);
     padding: 1rem 0;
     position: sticky;
@@ -48,7 +48,7 @@
     box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
 }
 
-.header .recipiente {
+header .recipiente {
     display: flex;
     justify-content: space-between;
     align-items: center;
@@ -140,6 +140,7 @@
 .imagem-estrada { 
     height: 2.75rem; 
     object-fit: cover; 
+    margin-top: -3rem;
 }
 
 .funcionalidades {
