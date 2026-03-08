@@ -130,7 +130,7 @@
 
 .auth-lateral-dir {
     width: 50%;
-    background-image: url('../assets/background.png');
+    background-image: url('../assets/Background.png');
     background-size: cover;
     background-position: center;
     display: flex;
@@ -193,5 +193,50 @@
 
     .auth-grupo-input input {
         padding: 0.8rem;
+    }
+}
+
+/* Tirar scroll em telas de notebook */
+
+@media (max-height: 800px) and (min-width: 901px) {
+    .auth-lateral-esq {
+        padding: 0.5rem;
+    }
+
+    .auth-caixa {
+        gap: 0.5rem; 
+    }
+
+    .auth-logo {
+        max-height: 55px;
+    }
+
+    .auth-titulo {
+        font-size: 1.5rem; 
+    }
+
+    .auth-subtitulo {
+        font-size: 0.85rem;
+        margin-top: -0.2rem;
+    }
+
+    .auth-formulario {
+        gap: 0.5rem;
+    }
+
+    .auth-grupo-input {
+        gap: 0.1rem;
+    }
+
+    .auth-grupo-input input {
+        padding: 0.6rem 0.8rem;
+    }
+
+    .auth-botao {
+        padding: 0.6rem;
+    }
+
+    .auth-lateral-dir {
+        padding-bottom: 2rem;
     }
 }
