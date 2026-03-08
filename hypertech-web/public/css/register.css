@@ -87,7 +87,6 @@ input::placeholder {
   font-size: 15px;
   font-family: "Poppins";
   font-weight: 500;
-  color: var(--bg-secondary);
 }
 
 button {
@@ -95,7 +94,7 @@ button {
   border: none;
   border-radius: 1vw;
   background: #3f6fb5;
-  color: var(--bg-primary);
+  color: white;
   font-size: 1.4vw;
   cursor: pointer;
   box-shadow: 0 0.5vw 1vw rgba(63, 111, 181, 0.3);
@@ -129,7 +128,7 @@ button:hover {
   position: absolute;
   bottom: 8%;
   left: 53%;
-  color: var(--bg-primary);
+  color: white;
   font-size: 1.3rem;
   font-style: italic;
   text-shadow: 0 0.2vw 0.5vw rgba(0, 0, 0, 0.5);
