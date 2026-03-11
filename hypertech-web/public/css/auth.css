@@ -130,7 +130,7 @@
 
 .auth-lateral-dir {
     width: 50%;
-    background-image: url('../assets/Background.png');
+    background-image: url('../assets/background.png');
     background-size: cover;
     background-position: center;
     display: flex;

@@ -296,10 +296,12 @@ header .recipiente {
     width: clamp(8rem, 12vw, 10.9375rem);
     height: clamp(5rem, 8vw, 6.875rem);
     margin: 0 auto clamp(0.75rem, 1.5vw, 1.25rem);
-    background: #d9d9d9;
 }
 
-.foto-membro img { height: 100%; object-fit: cover; }
+.foto-membro img { 
+    height: 100%;
+    object-fit: contain; 
+}
 
 .nome-membro {
     font-weight: 500;
