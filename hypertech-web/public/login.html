@@ -1,0 +1,49 @@
+<!doctype html>
+<html lang="pt-BR">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Login</title>
+    <link rel="stylesheet" href="css/styles.css">
+    <link rel="stylesheet" href="css/auth.css"> </head>
+
+<body>
+    <div class="auth-recipiente">
+        
+        <div class="auth-lateral-esq">
+            <div class="auth-caixa">
+                <a href="index.html">
+                    <img class="auth-logo" src="./assets/LogoComEscrita.png" alt="HyperTech Logo">
+                </a> 
+                
+                <h1 class="auth-titulo">Faça login em sua conta</h1>
+                <p class="auth-subtitulo">Insira suas credenciais e clique no botão para entrar</p>
+                
+                <div class="auth-formulario">
+                    <div class="auth-grupo-input">
+                        <label>Email</label>
+                        <input type="text" id="ipt_email" placeholder="Ex: hypertech@gmail.com" />
+                    </div>
+                    
+                    <div class="auth-grupo-input">
+                        <label>Senha</label>
+                        <input type="password" id="ipt_senha" placeholder="**********" />
+                    </div>
+                </div>
+                
+                <p class="auth-mensagem" style="color: #3b82f6;">Os campos devem ser preenchidos.</p>
+                
+                <button class="auth-botao" onclick="entrar()" id="br_entrar">Entrar</button>
+                
+                <a class="auth-link" href="register.html">Se ainda não tem conta,<br />Cadastre-se agora</a>
+            </div>
+        </div>
+        
+        <div class="auth-lateral-dir">
+            <h2 class="auth-frase-fixa">Para você focar apenas no que importa!</h2>
+        </div>
+        
+    </div>
+</body>
+</html>

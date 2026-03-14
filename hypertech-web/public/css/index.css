@@ -1,0 +1,369 @@
+/* Compartilhados LandingPage */
+.recipiente {
+    width: 100%;
+    max-width: 1440px;
+    margin: 0 auto;
+    padding: 0 clamp(1.5rem, 3vw, 2.5rem);  
+}
+
+.titulo-secao {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: clamp(1.25rem, 2vw, 1.875rem);
+    margin-bottom: clamp(2.5rem, 4vw, 3.75rem);
+}
+
+.titulo-secao .linha {
+    flex: 1;
+    height: 2px;
+    background: var(--bg-primary);
+}
+
+.titulo-secao.azul .linha { 
+    background: var(--bg-secondary); 
+}
+
+.titulo-secao.branco .linha { 
+    background: var(--bg-primary); 
+}
+
+.titulo-secao h2 {
+    font-weight: 700;
+    color: var(--bg-primary);
+    white-space: nowrap;
+}
+
+.titulo-secao.azul h2 { 
+    color: var(--bg-secondary); 
+}
+
+/* Header */
+header {
+    background: var(--bg-secondary);
+    padding: 1rem 0;
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+}
+
+header .recipiente {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.logotipo img {
+    height: clamp(3rem, 5vw, 4.375rem);
+    width: auto;
+}
+
+.opcoes-navegacao {
+    display: flex;
+    gap: clamp(1.5rem, 2.5vw, 2.5rem);
+    align-items: center;
+}
+
+.opcoes-navegacao a {
+    color: var(--bg-primary);
+    transition: opacity 0.3s ease;
+}
+
+.opcoes-navegacao a:hover { opacity: 0.8; }
+
+/* Banner */
+.banner {
+    background: var(--bg-primary);
+    padding: clamp(2.5rem, 4vw, 3.125rem) 0;
+}
+
+.imagem-banner { margin-bottom: clamp(1.5rem, 2.5vw, 1.875rem); }
+
+.texto-banner {
+    max-width: 1440px;
+    margin: 0 auto;
+}
+
+.texto-banner p {
+    font-family: 'Poppins', sans-serif;
+    font-size: clamp(1.125rem, 1.8vw, 1.5rem);
+    line-height: 1.6;
+    text-align: justify;
+}
+
+.destaque {
+    color: var(--bg-secondary);
+    font-weight: 600;
+}
+
+/* Problemas */
+.problemas {
+    background: var(--bg-secondary);
+    padding: clamp(2.5rem, 4vw, 3.75rem) 0 clamp(3rem, 5vw, 5rem);
+}
+
+.item-problema {
+    display: flex;
+    align-items: flex-start;
+    gap: clamp(1.5rem, 3vw, 2.5rem);
+    margin-bottom: clamp(1.5rem, 3vw, 2.5rem);
+}
+
+.imagem-problema {
+    flex-shrink: 0;
+    width: clamp(12rem, 18vw, 16.0625rem);
+    height: clamp(9rem, 14vw, 12.5rem);
+}
+
+.imagem-problema img { 
+    height: 100%; 
+    object-fit: cover; 
+}
+
+.texto-problema p {
+    line-height: 1.6;
+    color: var(--bg-primary);
+}
+
+/* Como Funciona Section */
+.como-funciona {
+    background: #fafcff;
+    padding: clamp(3rem, 5vw, 4.375rem) 0 clamp(3.5rem, 6vw, 5rem);
+}
+
+.imagem-caminhao {
+    max-width: 47.3125rem;
+    margin: 0 auto clamp(0.75rem, 1.5vw, 1.25rem);
+}
+
+.imagem-estrada { 
+    height: 2.75rem; 
+    object-fit: cover; 
+    margin-top: -3rem;
+}
+
+.funcionalidades {
+    display: flex;
+    justify-content: space-between;
+    gap: clamp(1.5rem, 3vw, 3.125rem);
+    margin-top: clamp(3rem, 5vw, 5rem);
+}
+
+.item-funcionalidade { 
+    text-align: center; 
+    flex: 1; 
+}
+
+.icone-funcionalidade {
+    width: clamp(10rem, 15vw, 15.625rem);
+    height: clamp(10rem, 15vw, 15.625rem);
+    margin: 0 auto clamp(1rem, 2vw, 1.875rem);
+}
+
+.item-funcionalidade h3 {
+    font-weight: 700;
+    color: var(--bg-secondary);
+    margin-bottom: clamp(0.75rem, 1.5vw, 1.25rem);
+}
+
+.item-funcionalidade p { line-height: 1.6; }
+
+/* Sobre Nós Section */
+.sobre-nos {
+    background: var(--bg-secondary);
+    padding: clamp(3.5rem, 6vw, 5rem) 0;
+}
+
+.conteudo-sobre {
+    display: flex;
+    align-items: center;
+    gap: clamp(2rem, 4vw, 3.75rem);
+}
+
+.texto-sobre { 
+    flex: 1; 
+}
+
+.data-fundacao {
+    font-family: 'Montserrat', sans-serif;
+    font-size: clamp(1.5rem, 3vw, 2rem);
+    font-weight: 600;
+    color: #939393;
+    margin-bottom: clamp(1rem, 2vw, 1.875rem);
+}
+
+.titulo-sobre {
+    font-family: 'Montserrat', sans-serif;
+    color: var(--bg-primary);
+    margin-bottom: clamp(2rem, 3.5vw, 3.125rem);
+    line-height: 1.3;
+    text-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+}
+
+.destaque-italico {
+    font-style: italic;
+    color: #07c7fe;
+}
+
+.descricao-sobre {
+    font-weight: 500;
+    line-height: 1.6;
+    color: var(--bg-primary);
+    text-align: justify;
+    margin-top: clamp(2rem, 3.5vw, 3.125rem);
+}
+
+.imagem-sobre { 
+    width: clamp(20rem, 30vw, 30.9375rem); 
+}
+
+.imagem-sobre img { 
+    transform: rotate(-0.3deg); 
+}
+
+/* MVV Section */
+.missao-visao-valores {
+    background: var(--bg-primary);
+    padding: clamp(3.5rem, 6vw, 5rem) 0;
+}
+
+.itens-mvv {
+    display: flex;
+    justify-content: space-between;
+    gap: clamp(2rem, 4vw, 3.75rem);
+}
+
+.item-mvv { 
+    flex: 1; 
+    text-align: center; 
+}
+
+.circulo-mvv {
+    width: clamp(10rem, 15vw, 15.625rem);
+    height: clamp(10rem, 15vw, 15.625rem);
+    margin: 0 auto clamp(1rem, 2vw, 1.875rem);
+}
+
+.circulo-mvv img { 
+    height: 100%; 
+    object-fit: cover; 
+    border-radius: 50%; 
+}
+
+.item-mvv h3 {
+    font-weight: 700;
+    color: var(--bg-secondary);
+    margin-bottom: clamp(0.75rem, 1.5vw, 1.25rem);
+}
+
+.item-mvv p { 
+    line-height: 1.6; 
+}
+
+/* Footer */
+.footer {
+    background: var(--bg-secondary);
+    padding: clamp(2rem, 3vw, 3rem) 0 clamp(1.5rem, 3vw, 2.5rem);
+}
+
+.recipiente-footer {
+    max-width: 90rem;
+    margin: 0 auto;
+    padding: 0 clamp(1.5rem, 3vw, 2.5rem);
+}
+
+.equipe-footer { margin-bottom: 0; }
+
+.titulo-equipe {
+    font-weight: 700;
+    color: var(--bg-primary);
+    text-align: center;
+    margin-bottom: clamp(1.5rem, 3vw, 2.5rem);
+}
+
+.grade-equipe {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: clamp(1.5rem, 3vw, 2.5rem) clamp(2.5rem, 4vw, 5rem);
+    max-width: 56.25rem;
+    margin: 0 auto;
+}
+
+.membro-equipe { text-align: center; }
+
+.foto-membro {
+    width: clamp(8rem, 12vw, 10.9375rem);
+    height: clamp(5rem, 8vw, 6.875rem);
+    margin: 0 auto clamp(0.75rem, 1.5vw, 1.25rem);
+}
+
+.foto-membro img { 
+    height: 100%;
+    object-fit: contain; 
+}
+
+.nome-membro {
+    font-weight: 500;
+    color: var(--bg-primary);
+}
+
+.direitos-autorais {
+    margin-top: clamp(2rem, 3vw, 3rem);
+    text-align: center;
+}
+
+.direitos-autorais p {
+    color: var(--bg-primary);
+    line-height: 1.4;
+}
+
+@media (max-width: 749px) {
+    /* Oculta links menos importantes do header */
+    .opcoes-navegacao a[href="#como-funciona"],
+    .opcoes-navegacao a[href="#sobre"],
+    .opcoes-navegacao a[href="#contato"] {
+        display: none;
+    }
+
+    /* Oculta imagens do Sobre Nós e do Como Funciona */
+    .imagem-caminhao,
+    .imagem-estrada,
+    .imagem-sobre {
+        display: none;
+    }
+
+    /* Invés de colocar as imagens e textos um ao lado do outro, coloca um em cima do outro */
+    .item-problema {
+        flex-direction: column;
+        align-items: center;
+        text-align: center;
+    }
+    
+    .imagem-problema {
+        margin-bottom: 1.5rem;
+    }
+
+    /* Invés de colocar as imagens e textos um ao lado do outro, coloca um em cima do outro */
+    .funcionalidades {
+        flex-direction: column;
+        align-items: center;
+        gap: 4rem;
+    }
+
+    /* Invés de colocar as imagens e textos um ao lado do outro, coloca um em cima do outro */
+    .itens-mvv {
+        flex-direction: column;
+        align-items: center;
+        gap: 4rem;
+    }
+
+    .conteudo-sobre {
+        text-align: center;
+    }
+    
+    .grade-equipe {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 2rem 1rem;
+    }
+}
