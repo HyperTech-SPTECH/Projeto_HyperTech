@@ -80,7 +80,7 @@
                     
 
                     setTimeout(function () {
-                        window.location = "./dashboard/quiz.html"; 
+                        window.location = "./dashboard"; 
                     }, 1000); // apenas para exibir o loading
 
                 });
@@ -91,7 +91,6 @@
 
                 resposta.text().then(texto => {
                     console.error(texto);
-                    finalizarAguardar(texto);
                 });
             }
 
