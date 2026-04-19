@@ -1,82 +1,229 @@
 <!DOCTYPE html>
-<html lang="en">
-
+<html lang="pt-BR">
 <head>
     <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-    <title>AquaTech | Página Inicial</title>
-
-    <script src="./js/sessao.js"></script>
-
-    <link rel="stylesheet" href="./css/estilo.css">
-    <link rel="icon" href="./assets/icon/favicon2.ico">
-    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <title>HyperTech</title>
+    <link rel="stylesheet" href="css/styles.css">
+    <link rel="stylesheet" href="css/index.css">
 </head>
-
 <body>
-    <div class="header">
-      <div class="container">
-        <h1 class="titulo">AquaTech</h1>
-        <ul class="navbar">
-          <li class="agora">
-            <a href="#">Inicial</a>
-          </li>
-          <li>
-            <a href="simulador.html">Simulador</a>
-          </li>
-          <li>|</li>
-          <li>
-            <a href="login.html">Login</a>
-          </li>
-          <li>
-            <a href="cadastro.html">Cadastro</a>
-          </li>
-        </ul>
-      </div>
-    </div>
-  
-    <div class="banner">
-      <div class="container">
-        <p>Preservando <span>hoje</span> para existirem <span>amanhã</span>.</p>
-      </div>
-    </div>
-  
-    <div class="social">
-      <div class="container">
-        <div class="boxes">
-          <div class="box">
-            <img src="assets/imgs/planet-earth_color.png">
-            <h4>Missão</h4>
-            <p>Lorem ipsum, dolor sit amet consectetur adipisicing elit. Et, quas cupiditate asperiores provident magnam
-              vitae illum iusto fugiat atque deleniti nulla sed iure suscipit, laborum, aliquid accusantium cum dicta
-              minima.</p>
-          </div>
-          <div class="box">
-            <img src="assets/imgs/lightbulb_color.png">
-            <h4>Visão</h4>
-            <p>Lorem ipsum, dolor sit amet consectetur adipisicing elit. Et, quas cupiditate asperiores provident magnam
-              vitae illum iusto fugiat atque deleniti nulla sed iure suscipit, laborum, aliquid accusantium cum dicta
-              minima.</p>
-          </div>
-          <div class="box">
-            <img src="assets/imgs/growth_color.png">
-            <h4>Valores</h4>
-            <p>Lorem ipsum, dolor sit amet consectetur adipisicing elit. Et, quas cupiditate asperiores provident magnam
-              vitae illum iusto fugiat atque deleniti nulla sed iure suscipit, laborum, aliquid accusantium cum dicta
-              minima.</p>
-          </div>
+    <header>
+        <div class="recipiente">
+            <div class="logotipo">
+                <a href="#inicio">
+                    <img src="assets/logo.png" alt="HyperTech Logo">
+                </a>
+            </div>
+            <nav class="opcoes-navegacao">
+                <a href="#como-funciona">Como Funciona</a>
+                <a href="#sobre">Sobre</a>
+                <a href="#contato">Contato</a>
+                <a href="register.html">Cadastro</a>
+                <a href="login.html">Login</a>
+            </nav>
         </div>
-      </div>
-    </div>
-  
-    <div class="footer">
-      <div class="container">
-        <h4>Feito com amor por aluno &hearts; SPTech &copy; 2023</h4>
-        <span class="version">v1.0.0</span>
-      </div>
-    </div>
-  </body>
-
+    </header>
+    
+    <main>
+        <section id="inicio" class="banner">
+            <div class="recipiente">
+                <div class="imagem-banner">
+                    <img src="assets/Banner.png" alt="Background">
+                </div>
+                <div class="texto-banner">
+                    <p>Na <span class="destaque">HyperTech</span>, acreditamos em uma logística mais segura. Aqui, através de um software de roteirização de alta precisão, eliminamos as zonas de risco do seu mapa, traçamos a melhor rota para a sua entrega e antecipamos incidentes antes que eles se tornem prejuízo.</p>
+                </div>
+            </div>
+        </section>
+        
+        <section class="problemas">
+            <div class="recipiente">
+                <div class="titulo-secao">
+                    <div class="linha"></div>
+                    <h2>Problemas</h2>
+                    <div class="linha"></div>
+                </div>
+                
+                <div class="item-problema">
+                    <div class="imagem-problema">
+                        <img src="assets/Roubo.png" alt="Roubo de Carga">
+                    </div>
+                    <div class="texto-problema">
+                        <p>Em 2025, o roubo de cargas gerou um prejuízo de R$ 1,2 bilhão, com o Sudeste concentrando 80% desse valor. Nas áreas urbanas de São Paulo, caminhões são rendidos a cada hora, transformando a distribuição de alimentos, eletrônicos e cargas fracionadas em risco logístico. </p>
+                    </div>
+                </div>
+                
+                <div class="item-problema">
+                    <div class="imagem-problema">
+                        <img src="assets/Prejuizo.png" alt="Prejuízos Logísticos">
+                    </div>
+                    <div class="texto-problema">
+                        <p>Com margens de lucro apertadas, um único assalto a um veículo de distribuição urbana pode causar um prejuízo relevante com franquias de seguro, perda de faturamento e custos operacionais irrecuperáveis. Hoje, impressionantes 65% do valor de um frete urbano são destinados apenas para pagar o aparato de segurança.</p>
+                    </div>
+                </div>
+                
+                <div class="item-problema">
+                    <div class="imagem-problema">
+                        <img src="assets/Via.png" alt="Vias Perigosas">
+                    </div>
+                    <div class="texto-problema">
+                        <p>Nossa solução nasce para devolver o controle da operação às transportadoras. Através de um sistema inteligente que analisa dados criminais, calculamos a rota mais segura com base no dia e horário exatos da entrega. Nosso objetivo é reduzir em até 45% as perdas financeiras com sinistros e otimizar os gastos com segurança privada. Ao desviar de zonas de alto risco de forma preditiva, garantimos que sua carga chegue ao destino e, mais importante, que sua margem de lucro permaneça intacta.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+        
+        <section id="como-funciona" class="como-funciona">
+            <div class="recipiente">
+                <div class="titulo-secao azul">
+                    <div class="linha"></div>
+                    <h2>Como Funciona</h2>
+                    <div class="linha"></div>
+                </div>
+                
+                <div class="imagem-caminhao">
+                    <img src="assets/caminhao.png" alt="Caminhão" style="position: relative;">
+                </div>
+                <div class="imagem-estrada">
+                    <img src="assets/estrada.png" alt="Estrada">
+                </div>
+                
+                <div class="funcionalidades">
+                    <div class="item-funcionalidade">
+                        <div class="icone-funcionalidade">
+                            <img src="assets/Rota.png" alt="Roterização">
+                        </div>
+                        <h3>Roterização</h3>
+                        <p>Com base em dados da SSP, analisamos as regiões mais perigosas e traçamos a rota mais segura para você.</p>
+                    </div>
+                    
+                    <div class="item-funcionalidade">
+                        <div class="icone-funcionalidade">
+                            <img src="assets/Seguranca.png" alt="Segurança">
+                        </div>
+                        <h3>Segurança</h3>
+                        <p>Desta maneira, reduzimos o prejuízo causados por sinistros em até 45%, garantindo maiores chances de você chegar ao seu destino.</p>
+                    </div>
+                    
+                    <div class="item-funcionalidade">
+                        <div class="icone-funcionalidade">
+                            <img src="assets/dashboard.png" alt="Dashboard">
+                        </div>
+                        <h3>Dashboard</h3>
+                        <p>Tenha acesso ao histórico das suas rotas, salve suas rotas mais frequentes, e visualize estatísticas através de nossa dashboard e KPIs.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+        
+        <section id="sobre" class="sobre-nos">
+            <div class="recipiente">
+                <div class="titulo-secao branco">
+                    <div class="linha"></div>
+                    <h2>Sobre Nós</h2>
+                    <div class="linha"></div>
+                </div>
+                <div class="conteudo-sobre">
+                    <div class="texto-sobre">
+                        <p class="data-fundacao">FUNDADOS EM 2026</p>
+                        <h2 class="titulo-sobre">
+                            Levamos segurança <span class="destaque-italico">Inteligente</span> para logísticas
+                        </h2>
+                        <p class="descricao-sobre">Uma empresa feita para outras empresas se sentirem seguras. Com foco em transportadoras e logísticas, a HyperTech tem como missão se preocupar pela sua carga para que você foque apenas no seu destino.</p>
+                    </div>
+                    <div class="imagem-sobre">
+                        <img src="assets/container.png" alt="Container">
+                    </div>
+                </div>
+            </div>
+        </section>
+        
+        <section class="missao-visao-valores">
+            <div class="recipiente">
+                <div class="itens-mvv">
+                    <div class="item-mvv">
+                        <div class="circulo-mvv">
+                            <img src="assets/Missao.png" alt="Missão">
+                        </div>
+                        <h3>Missão</h3>
+                        <p>Garantir maiores chances de sucesso na entrega de suas cargas, pensando na saúde social e financeira.</p>
+                    </div>
+                    
+                    <div class="item-mvv">
+                        <div class="circulo-mvv">
+                            <img src="assets/Visao.png" alt="Visão">
+                        </div>
+                        <h3>Visão</h3>
+                        <p>Ser referência em análise estratégica de risco logístico no Brasil, elevando o padrão de segurança do setor.</p>
+                    </div>
+                    
+                    <div class="item-mvv">
+                        <div class="circulo-mvv">
+                            <img src="assets/Valores.png" alt="Valores">
+                        </div>
+                        <h3>Valores</h3>
+                        <p>Inovação com propósito.<br>Segurança em primeiro lugar.<br>Transparência e Confiança.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+    
+    <footer id="contato" class="footer">
+        <div class="recipiente-footer">
+            <div class="equipe-footer">
+                <h2 class="titulo-equipe">Nossa Equipe</h2>
+                
+                <div class="grade-equipe">
+                    <div class="membro-equipe">
+                        <div class="foto-membro">
+                            <img src="assets/Eduardo.png" alt="Eduardo">
+                        </div>
+                        <p class="nome-membro">Eduardo</p>
+                    </div>
+                    
+                    <div class="membro-equipe">
+                        <div class="foto-membro">
+                            <img src="assets/Erick.png" alt="Erick">
+                        </div>
+                        <p class="nome-membro">Erick</p>
+                    </div>
+                    
+                    <div class="membro-equipe">
+                        <div class="foto-membro">
+                            <img src="assets/Fernanda.png" alt="Fernanda">
+                        </div>
+                        <p class="nome-membro">Fernanda</p>
+                    </div>
+                    
+                    <div class="membro-equipe">
+                        <div class="foto-membro">
+                            <img src="assets/Lucas.png" alt="Lucas">
+                        </div>
+                        <p class="nome-membro">Lucas</p>
+                    </div>
+                    
+                    <div class="membro-equipe">
+                        <div class="foto-membro">
+                            <img src="assets/Matheus.png" alt="Matheus">
+                        </div>
+                        <p class="nome-membro">Matheus</p>
+                    </div>
+                    
+                    <div class="membro-equipe">
+                        <div class="foto-membro">
+                            <img src="assets/Wagner.png" alt="Wagner">
+                        </div>
+                        <p class="nome-membro">Wagner</p>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="direitos-autorais">
+                <p>Copyright© 2026<br>HyperTech LTDA</p>
+            </div>
+        </div>
+    </footer>
+</body>
 </html>
