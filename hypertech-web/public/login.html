@@ -56,6 +56,7 @@
         var emailVar = email_input.value;
         var senhaVar = senha_input.value;
 
+        window.location = "./home.html";
 
         fetch("/usuarios/autenticar", {
             method: "POST",
@@ -80,7 +81,7 @@
                     
 
                     setTimeout(function () {
-                        window.location = "./dashboard"; 
+                        window.location = "./dashboard/quiz.html"; 
                     }, 1000); // apenas para exibir o loading
 
                 });
@@ -91,6 +92,7 @@
 
                 resposta.text().then(texto => {
                     console.error(texto);
+                    finalizarAguardar(texto);
                 });
             }
 
