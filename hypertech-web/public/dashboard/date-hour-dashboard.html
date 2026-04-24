@@ -1,0 +1,59 @@
+<div class="dashboard-panel">
+    <h2 class="dashboard-panel__title">Dashboard de Periculosidade Por Dia e Horário</h2>
+    
+    <div class="dashboard-panel__row">
+        <div class="dashboard-card dashboard-card--filters">
+            <div class="dashboard-card__header">Filtrar</div>
+            <div class="dashboard-card__body">
+            </div>
+        </div>
+        
+        <div class="dashboard-card dashboard-card--summary">
+            <div class="dashboard-card__header">Resumo de Regiões</div>
+            <div class="dashboard-card__body">
+            </div>
+        </div>
+    </div>
+    
+    <div class="dashboard-panel__row">
+        <div class="dashboard-card dashboard-card--heatmap">
+            <div class="dashboard-card__header">Gráfico de Periculosidade (Dia da Semana x Horários)</div>
+            <div class="dashboard-card__body">
+                <div class="heatmap">
+                    <div class="heatmap__grid" id="heatmap-grid"></div>
+                    
+                    <div class="heatmap__legend">
+                        <div class="heatmap__legend-item">
+                            <span class="heatmap__block heatmap__block--baixo">B</span> Baixo Risco
+                        </div>
+                        <div class="heatmap__legend-item">
+                            <span class="heatmap__block heatmap__block--medio">M</span> Médio Risco
+                        </div>
+                        <div class="heatmap__legend-item">
+                            <span class="heatmap__block heatmap__block--alto">A</span> Alto Risco
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <div class="dashboard-panel__kpi-column">
+            <div class="dashboard-card dashboard-card--kpi">
+                <div class="dashboard-card__header dashboard-card__header--danger">Dias Mais Perigosos da Semana</div>
+                <div class="dashboard-card__body">...</div>
+            </div>
+            <div class="dashboard-card dashboard-card--kpi">
+                <div class="dashboard-card__header dashboard-card__header--safe">Dias Mais Seguros da Semana</div>
+                <div class="dashboard-card__body">...</div>
+            </div>
+            <div class="dashboard-card dashboard-card--kpi">
+                <div class="dashboard-card__header dashboard-card__header--danger">Horários Mais Perigosos da Semana</div>
+                <div class="dashboard-card__body">...</div>
+            </div>
+            <div class="dashboard-card dashboard-card--kpi">
+                <div class="dashboard-card__header dashboard-card__header--safe">Horários Mais Seguros da Semana</div>
+                <div class="dashboard-card__body">...</div>
+            </div>
+        </div>
+    </div>
+</div>
