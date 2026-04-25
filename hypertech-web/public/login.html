@@ -8,7 +8,7 @@
     <link rel="stylesheet" href="css/styles.css">
     <link rel="stylesheet" href="css/auth.css"> </head>
 
-<body>
+<body onload="resetSessao()">
     <div class="auth-recipiente">
         
         <div class="auth-lateral-esq">
@@ -23,12 +23,12 @@
                 <div class="auth-formulario">
                     <div class="auth-grupo-input">
                         <label>Email</label>
-                        <input type="text" id="email_input" placeholder="Ex: hypertech@gmail.com" />
+                        <input type="text" id="email_input" value="admin@gmail.com" placeholder="Ex: hypertech@gmail.com" />
                     </div>
                     
                     <div class="auth-grupo-input">
                         <label>Senha</label>
-                        <input type="password" id="senha_input" placeholder="**********" />
+                        <input type="password" id="senha_input" value="Abcd#1234" placeholder="**********" />
                     </div>
                 </div>
                 
@@ -73,14 +73,17 @@
 
                 resposta.json().then(json => {
                     console.log(json);
+                    console.log("a")
                     console.log(JSON.stringify(json));
-                    sessionStorage.EMAIL_USUARIO = json.email;
-                    sessionStorage.NOME_USUARIO = json.nome;
-                    sessionStorage.ID_USUARIO = json.id;
+                    console.log("b")
+                    sessionStorage.EMAIL_USUARIO = json[0].email;
+                    sessionStorage.NOME_USUARIO = json[0].nome;
+                    sessionStorage.ID_USUARIO = json[0].usuario_id;
+                    sessionStorage.CARGO_USUARIO = json[0].cargo_id;
                     
 
                     setTimeout(function () {
-                        window.location = "./dashboard"; 
+                        window.location = "./dashboard.html"; 
                     }, 1000); // apenas para exibir o loading
 
                 });
@@ -101,5 +104,7 @@
         return false;
     }
 
-
+    function resetSessao() {
+        sessionStorage.clear()
+    }
 </script>

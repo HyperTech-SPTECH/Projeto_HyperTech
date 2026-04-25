@@ -24,6 +24,11 @@ header {
     color: #ffffff;
 }
 
+header img {
+    height: calc(var(--altura-header) - 5px);
+    cursor: pointer;
+}
+
 #idTelaTotal {
     display: flex;
     height: 100%;

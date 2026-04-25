@@ -1,3 +1,11 @@
+function sairTelaDashboard() {
+    sessionStorage.clear()
+
+    setTimeout(() => {
+        window.location = 'index.html'
+    }, 500);
+}
+
 function alterarTela(ev) {
     let evAtual = ev.target
     let classesAtuais = evAtual.className
