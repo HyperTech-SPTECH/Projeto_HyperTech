@@ -7,7 +7,7 @@
     <link rel="stylesheet" href="css/styles.css">
     <link rel="stylesheet" href="css/index.css">
 </head>
-<body>
+<body onload="resetSessao()">
     <header>
         <div class="recipiente">
             <div class="logotipo">
@@ -130,7 +130,7 @@
                         <h2 class="titulo-sobre">
                             Levamos segurança <span class="destaque-italico">Inteligente</span> para logísticas
                         </h2>
-                        <p class="descricao-sobre">Uma empresa feita para outras empresas se sentirem seguras. Com foco em transportadoras e logísticas, a HyperTech tem como missão se preocupar pela sua carga para que você foque apenas no seu destino.</p>
+                        <p class="descricao-sobre">Uma empresa feita para outras empresas se sentirem seguras. Com foco em seguradoras de carga, a HyperTech tem como missão se preocupar pela sua carga para que você foque apenas no seu destino.</p>
                     </div>
                     <div class="imagem-sobre">
                         <img src="assets/container.png" alt="Container">
@@ -172,6 +172,27 @@
     
     <footer id="contato" class="footer">
         <div class="recipiente-footer">
+            <div class="faleConosco-footer">
+                <div class="containerTituloFaleConosco-footer">
+                    <div class="linha"></div>
+                    <h2 class="titulo-faleConosco">Fale Conosco</h2>
+                    <div class="linha"></div>
+                </div>
+
+                <div class="conteudo-faleConosco">
+                    <div class="subTitle-faleConosco">
+                        <img src="./assets/logo.png" alt="">
+                        <span>Entre em contato para saber mais sobre nossos serviços e como podemos ajudar sua operação logística</span>
+                    </div>
+                    <div class="inserirInput-faleConosco">
+                        <input type="email" id="idEmail-faleConosco" placeholder="Digite seu Email">
+                        <input type="button" id="idButton-faleConosco" value="Enviar">
+                    </div>
+                </div>
+            </div>
+
+            <hr>
+            
             <div class="equipe-footer">
                 <h2 class="titulo-equipe">Nossa Equipe</h2>
                 
@@ -227,3 +248,9 @@
     </footer>
 </body>
 </html>
+
+<script>
+    function resetSessao() {
+        sessionStorage.clear()
+    }
+</script>
