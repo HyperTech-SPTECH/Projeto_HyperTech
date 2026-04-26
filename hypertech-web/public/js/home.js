@@ -18,6 +18,10 @@ async function loadComponent(fileName) {
                 renderHeatmap();
             }
         }
+
+        if(fileName.includes('region-dashboard.html')){
+            if(typeof renderGraficoCargas === 'function') renderGraficoCargas();
+        }
         
     } catch (error) {
         console.error("Error loading component:", error);

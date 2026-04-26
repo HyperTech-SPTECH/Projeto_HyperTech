@@ -1,4 +1,4 @@
-/* Container Filtro */
+/* --- Container Filtro (Mantido) --- */
 .dashboard-button-changeScreen {
     cursor: pointer;
 }
@@ -16,6 +16,7 @@
 
 .dashboard-card__body {
     display: flex;
+    border-radius: 8px;
 }
 
 .dashboard-card__body .containerSideLeftFiltro {
@@ -59,125 +60,134 @@
     border-radius: .4rem;
 }
 
-/* Fim Container Filtro */
+/* --- Novo Layout Principal (Gráfico Esq / KPIs Dir) --- */
 
-.dashboard-panelLeft {
-    flex: 2;
+.dashboard-main-content-row {
+    display: flex;
+    gap: 20px;
+    margin-top: 20px;
+    align-items: stretch; /* Faz as duas colunas terem a mesma altura */
 }
 
-/* Container KPIs */
+.dashboard-chart-container {
+    flex: 2;
+    background-color: #ffffff;
+    border-radius: 8px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
+    border: 1px solid #f0f0f0;
+    overflow: hidden; /* Importante para a faixa azul respeitar o arredondamento */
+    display: flex;
+    flex-direction: column;
+    padding: 0px !important; /* Remove o padding para a faixa azul ocupar o topo */
+}
+
+/* Garante que o canvas não tenha fundo próprio */
+#graficoCargas {
+    background-color: transparent !important;
+}
+
+.dashboard-chart-container:hover {
+    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.08);
+}
+
+#dash-card-content {
+    padding: 0 !important;
+}
+
+.dashboard-kpi-column {
+    flex: 1; /* Proporção menor para as KPIs lateralizadas */
+    display: flex;
+    flex-direction: column; /* Empilha as KPIs verticalmente */
+    gap: 20px; /* Espaço entre a KPI de cima e a de baixo */
+}
+
+/* --- Container KPIs (Ajustado para o novo layout) --- */
 
 .dashboard-panelKPIs {
     border-radius: .3rem;
 }
 
-.dashboard-panelKPIs .containerKpiRegiao {
-    width: 50%;
+/* Removido o width: 50% anterior para ocupar a coluna inteira */
+.containerKpiRegiao {
+    width: 100%; 
     background-color: var(--bg-primary);
+    margin-top: 15px;
+    border-radius: .3rem;
+    overflow: hidden; /* Garante que a faixa colorida respeite o border-radius */
 }
 
-.dashboard-panelKPIs .faixaRegiaoKpi {
+.faixaRegiaoKpi {
     height: .6rem;
-    border-radius: .3rem .3rem 0 0;
 }
 
-.dashboard-panelKPIs .titleKpiRegiao {
+.titleKpiRegiao {
     margin: .5rem;    
     font-weight: bold;
 }
 
-.dashboard-panelKPIs .titleKpiPerigo {
+.titleKpiPerigo {
     color: #c00000;
 }
 
-.dashboard-panelKPIs .titleKpiSeguro {
+.titleKpiSeguro {
     color: #008000;
 }
 
-.dashboard-panelKPIs .miniTitlesKpisRegiao, 
-.dashboard-panelKPIs .miniTitlesKpisRegiao table,
-.dashboard-panelKPIs .miniTitlesKpisRegiao table thead {
+/* Estilização das Tabelas de KPI */
+
+.miniTitlesKpisRegiao, 
+.miniTitlesKpisRegiao table {
     width: 100%;
 }
 
-.dashboard-panelKPIs .miniTitlesKpisRegiao thead tr {
+.miniTitlesKpisRegiao thead tr {
     display: flex;
-    width: 97%;
+    width: 100%;
+    border-bottom: 1px solid rgba(0, 0, 0, 0.1);
 }
 
-.dashboard-panelKPIs .miniTitlesKpisRegiao th {
-    border-bottom: 1px solid rgba(0, 0, 0, 0.5);
+.miniTitlesKpisRegiao th, 
+.miniTitlesKpisRegiao td {
+    padding: 8px 4px;
 }
 
-.dashboard-panelKPIs .miniTitlesKpisRegiao .kpiRegiaoValores {
+.miniTitlesKpisRegiao .kpiRegiaoValores {
     display: flex;
     justify-content: flex-start;
-    margin: .3rem .15rem;
+    align-items: center;
 }
 
-.dashboard-panelKPIs .miniTitlesKpisRegiao .kpiRegiaoPosicao {
-    width: 10%;
-}
+/* Proporções das colunas na tabela lateral */
+.miniTitlesKpisRegiao .kpiRegiaoPosicao { width: 15%; }
+.miniTitlesKpisRegiao .kpiRegiaoLocal { width: 50%; }
+.miniTitlesKpisRegiao .kpiRegiaoQuantidade { width: 35%; }
 
-.dashboard-panelKPIs .miniTitlesKpisRegiao .kpiRegiaoPosicao .regiaoKpiPos {
-    border-radius: 1rem;
+/* Medalhas/Posições */
+.miniTitlesKpisRegiao .kpiRegiaoPosicao .regiaoKpiPos {
+    border-radius: 50%;
     display: flex;
     justify-content: center;
     align-items: center;
     width: 1.7rem;
     height: 1.7rem;
+    color: white;
+    font-size: 0.8rem;
 }
 
-.dashboard-panelKPIs .miniTitlesKpisRegiao .kpiRegiaoPosicao .regiaoKpiPos1 {
-    background-color: #c00000;
+.regiaoKpiPos1 { background-color: #c00000; }
+.regiaoKpiPos2 { background-color: #c43131; }
+.regiaoKpiPos3 { background-color: #ce5b5b; }
+
+.regiaoKpiPos1Seguro { background-color: #008000; }
+.regiaoKpiPos2Seguro { background-color: #339133; }
+.regiaoKpiPos3Seguro { background-color: #6ae66a; }
+
+.kpiRegiaoQuantidade .kpiQuantidadePorCem {
+    font-size: 0.75rem;
+    color: #666;
+    margin-left: 4px;
 }
 
-.dashboard-panelKPIs .miniTitlesKpisRegiao .kpiRegiaoPosicao .regiaoKpiPos2 {
-    background-color: #c43131;
-}
-
-.dashboard-panelKPIs .miniTitlesKpisRegiao .kpiRegiaoPosicao .regiaoKpiPos3 {
-    background-color: #ce5b5b;
-}
-
-.dashboard-panelKPIs .miniTitlesKpisRegiao .kpiRegiaoPosicao .regiaoKpiPos1Seguro {
-    background-color: #008000;
-}
-
-.dashboard-panelKPIs .miniTitlesKpisRegiao .kpiRegiaoPosicao .regiaoKpiPos2Seguro {
-    background-color: #339133;
-}
-
-.dashboard-panelKPIs .miniTitlesKpisRegiao .kpiRegiaoPosicao .regiaoKpiPos3Seguro {
-    background-color: #6ae66a;
-}
-
-.dashboard-panelKPIs .miniTitlesKpisRegiao .kpiRegiaoLocal {
-    width: 35%;
-}
-
-.dashboard-panelKPIs .miniTitlesKpisRegiao .kpiRegiaoQuantidade {
-    width: 25%;
-}
-
-.dashboard-panelKPIs .miniTitlesKpisRegiao .kpiRegiaoQuantidade .kpiQuantidadePorCem {
-    transform: scale(0.8);
-    color: rgb(73, 73, 73);
-}
-
-.dashboard-panelKPIs .miniTitlesKpisRegiao .kpiRegiaoTendencia {
-    width: 25%;
-}
-
-/* Fim Container KPIs */
-
-/* Gráfico Cargas mais Visadas */
-
-
-
-/* Fim Gráfico Cargas mais Visadas */
-
-.dashboard-panelRight {
-    flex: 1;
-}
-
+/* --- Finalização --- */
+.dashboard-panelLeft { flex: 2; }
+.dashboard-panelRight { flex: 1; }
