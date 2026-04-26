@@ -59,3 +59,11 @@ document.getElementById('btn-cad-func').addEventListener('click', handleNavClick
 document.addEventListener('DOMContentLoaded', () => {
     loadComponent('./dashboard/date-hour-dashboard.html');
 });
+
+function trocarDashRegiao() {
+    loadComponent('./dashboard/region-dashboard.html');
+}
+
+function trocarDashHoraDia() {
+    loadComponent('./dashboard/date-hour-dashboard.html');
+}

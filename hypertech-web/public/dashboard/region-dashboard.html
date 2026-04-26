@@ -1,0 +1,132 @@
+<div class="dashboard-panel">
+    <h2 class="dashboard-panel__title">Dashboard de Periculosidade por Região e Carga</h2>
+    
+    <div class="dashboard-panel__row">
+        <div class="dashboard-card dashboard-card--summary dashboard-button-changeScreen" onclick="trocarDashHoraDia()">
+            <div class="dashboard-card__header">
+                <span>Resumo por Dia e Horário </span>
+                <span class="textAlterAba">clique aqui para trocar de Aba</span>
+            </div>
+            <div class="dashboard-card__body">
+            </div>
+        </div>
+
+        <div class="dashboard-card dashboard-card--filters">
+            <div class="dashboard-card__header">Filtrar</div>
+            <div class="dashboard-card__body">
+                <div class="containerSideLeftFiltro">
+                    <div class="miniContainerFiltro containerFiltroCidade">
+                        <span>Cidade:</span>
+                        <select name="" id="idSelectFiltroCidade">
+                            <option value="#" selected>Todas Cidades</option>
+                        </select>
+                    </div>
+                    <div class="miniContainerFiltro containerFiltroMes">
+                        <span>Mês:</span>
+                        <select name="" id="idSelectFiltroMes">
+                            <option value="#" selected>Todos os Meses</option>
+                            <option value="1">Janeiro</option>
+                            <option value="2">Fevereiro</option>
+                            <option value="3">Março</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="containerSideRightFiltro">
+                    <div class="miniContainerFiltro contianerFiltroBairro">
+                        <span>Bairro</span>
+                        <select name="" id="idSelectFiltroBairro">
+                            <option value="#" selected>Todos os Bairros</option>
+                        </select>
+                    </div>
+                    <div class="containerButtonAplicarFiltro">
+                        <span id="idAplicarFiltros">Aplicar Filtros</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <div class="dashboard-panel__row">
+        <div class="dashboard-panelLeft">
+            <div class="dashboard-panel__row dashboard-panelKPIs">
+                <div class="containerKpiRegiao containerKpiPerigo">
+                    <div class="faixaRegiaoKpi dashboard-card__header--danger"></div>
+                    <div class="titleKpiRegiao titleKpiPerigo">Regiões mais Perigosas</div>
+                    <div class="miniTitlesKpisRegiao">
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th class="kpiRegiaoValores kpiRegiaoPosicao"></th>
+                                    <th class="kpiRegiaoValores kpiRegiaoLocal">Cidade</th>
+                                    <th class="kpiRegiaoValores kpiRegiaoQuantidade">Roubos</th>
+                                    <th class="kpiRegiaoValores kpiRegiaoTendencia">Tendência</th>
+                                </tr>
+                                <tr>
+                                    <td class="kpiRegiaoValores kpiRegiaoPosicao"><span class="regiaoKpiPos regiaoKpiPos1">1</span></td>
+                                    <td class="kpiRegiaoValores kpiRegiaoLocal">Mauá</td>
+                                    <td class="kpiRegiaoValores kpiRegiaoQuantidade"><span id="idKpiQuantidade1">200</span> <span class="kpiQuantidadePorCem">(<span id="idKpiQuantidadePorCem1">32</span>%)</span></td>
+                                    <td class="kpiRegiaoValores kpiRegiaoTendencia">.</td>
+                                </tr>
+                                <tr>
+                                    <td class="kpiRegiaoValores kpiRegiaoPosicao"><span class="regiaoKpiPos regiaoKpiPos2">2</span></td>
+                                    <td class="kpiRegiaoValores kpiRegiaoLocal">São Paulo</td>
+                                    <td class="kpiRegiaoValores kpiRegiaoQuantidade"><span id="idKpiQuantidade2">150</span> <span class="kpiQuantidadePorCem">(<span id="idKpiQuantidadePorCem2">32</span>%)</span></td>
+                                    <td class="kpiRegiaoValores kpiRegiaoTendencia">.</td>
+                                </tr>
+                                <tr>
+                                    <td class="kpiRegiaoValores kpiRegiaoPosicao"><span class="regiaoKpiPos regiaoKpiPos3">3</span></td>
+                                    <td class="kpiRegiaoValores kpiRegiaoLocal">Caraguatatuba</td>
+                                    <td class="kpiRegiaoValores kpiRegiaoQuantidade"><span id="idKpiQuantidade3">100</span> <span class="kpiQuantidadePorCem">(<span id="idKpiQuantidadePorCem3">32</span>%)</span></td>
+                                    <td class="kpiRegiaoValores kpiRegiaoTendencia">.</td>
+                                </tr>
+                            </thead>
+                        </table>
+                    </div>
+                </div>
+                <div class="containerKpiRegiao containerKpiSeguro">
+                    <div class="faixaRegiaoKpi dashboard-card__header--safe"></div>
+                    <div class="titleKpiRegiao titleKpiSeguro">Regiões mais Seguras</div>
+                    <div class="miniTitlesKpisRegiao">
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th class="kpiRegiaoValores kpiRegiaoPosicao"></th>
+                                    <th class="kpiRegiaoValores kpiRegiaoLocal">Cidade</th>
+                                    <th class="kpiRegiaoValores kpiRegiaoQuantidade">Roubos</th>
+                                    <th class="kpiRegiaoValores kpiRegiaoTendencia">Tendência</th>
+                                </tr>
+                                <tr>
+                                    <td class="kpiRegiaoValores kpiRegiaoPosicao"><span class="regiaoKpiPos regiaoKpiPos1Seguro">1</span></td>
+                                    <td class="kpiRegiaoValores kpiRegiaoLocal">Cotia</td>
+                                    <td class="kpiRegiaoValores kpiRegiaoQuantidade"><span id="idKpiQuantidade1">6</span> <span class="kpiQuantidadePorCem">(<span id="idKpiQuantidadePorCem1">1</span>%)</span></td>
+                                    <td class="kpiRegiaoValores kpiRegiaoTendencia">.</td>
+                                </tr>
+                                <tr>
+                                    <td class="kpiRegiaoValores kpiRegiaoPosicao"><span class="regiaoKpiPos regiaoKpiPos2Seguro">2</span></td>
+                                    <td class="kpiRegiaoValores kpiRegiaoLocal">Itapevi</td>
+                                    <td class="kpiRegiaoValores kpiRegiaoQuantidade"><span id="idKpiQuantidade2">15</span> <span class="kpiQuantidadePorCem">(<span id="idKpiQuantidadePorCem2">2</span>%)</span></td>
+                                    <td class="kpiRegiaoValores kpiRegiaoTendencia">.</td>
+                                </tr>
+                                <tr>
+                                    <td class="kpiRegiaoValores kpiRegiaoPosicao"><span class="regiaoKpiPos regiaoKpiPos3Seguro">3</span></td>
+                                    <td class="kpiRegiaoValores kpiRegiaoLocal">Itatiba</td>
+                                    <td class="kpiRegiaoValores kpiRegiaoQuantidade"><span id="idKpiQuantidade3">30</span> <span class="kpiQuantidadePorCem">(<span id="idKpiQuantidadePorCem3">4</span>%)</span></td>
+                                    <td class="kpiRegiaoValores kpiRegiaoTendencia">.</td>
+                                </tr>
+                            </thead>
+                        </table>
+                    </div>
+                </div>
+            </div>
+            <div class="dashboard-card__body">
+                <div>aqui vai ter o gráfico de Barras - Cargas mais visadas</div>
+            </div>
+        </div>
+        
+        <div class="dashboard-panelRight">
+            <div>
+                aqui vai o gráfico na vertical das abordagens
+            </div>
+        </div>
+    </div>
+</div>

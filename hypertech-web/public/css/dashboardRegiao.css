@@ -1,0 +1,183 @@
+/* Container Filtro */
+.dashboard-button-changeScreen {
+    cursor: pointer;
+}
+
+.dashboard-card__header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.textAlterAba {
+    align-items: end;
+    font-size: .6rem;
+}
+
+.dashboard-card__body {
+    display: flex;
+}
+
+.dashboard-card__body .containerSideLeftFiltro {
+    width: 50%;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    align-items: center;
+}
+
+.dashboard-card__body .miniContainerFiltro {
+    width: 85%;
+    display: flex;
+    justify-content: space-between;
+    margin: .8rem 0;
+    align-items: center;
+}
+
+.dashboard-card__body select {
+    width: 70%;
+    height: 2rem;
+}
+
+.dashboard-card__body .containerSideRightFiltro {
+    width: 50%;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    align-items: center;
+}
+
+.dashboard-card__body .containerButtonAplicarFiltro {
+    width: 100%;
+    height: 2rem;
+    background-color: var(--bg-secondary);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: .8rem 0;
+    color: var(--bg-primary);
+    border-radius: .4rem;
+}
+
+/* Fim Container Filtro */
+
+.dashboard-panelLeft {
+    flex: 2;
+}
+
+/* Container KPIs */
+
+.dashboard-panelKPIs {
+    border-radius: .3rem;
+}
+
+.dashboard-panelKPIs .containerKpiRegiao {
+    width: 50%;
+    background-color: var(--bg-primary);
+}
+
+.dashboard-panelKPIs .faixaRegiaoKpi {
+    height: .6rem;
+    border-radius: .3rem .3rem 0 0;
+}
+
+.dashboard-panelKPIs .titleKpiRegiao {
+    margin: .5rem;    
+    font-weight: bold;
+}
+
+.dashboard-panelKPIs .titleKpiPerigo {
+    color: #c00000;
+}
+
+.dashboard-panelKPIs .titleKpiSeguro {
+    color: #008000;
+}
+
+.dashboard-panelKPIs .miniTitlesKpisRegiao, 
+.dashboard-panelKPIs .miniTitlesKpisRegiao table,
+.dashboard-panelKPIs .miniTitlesKpisRegiao table thead {
+    width: 100%;
+}
+
+.dashboard-panelKPIs .miniTitlesKpisRegiao thead tr {
+    display: flex;
+    width: 97%;
+}
+
+.dashboard-panelKPIs .miniTitlesKpisRegiao th {
+    border-bottom: 1px solid rgba(0, 0, 0, 0.5);
+}
+
+.dashboard-panelKPIs .miniTitlesKpisRegiao .kpiRegiaoValores {
+    display: flex;
+    justify-content: flex-start;
+    margin: .3rem .15rem;
+}
+
+.dashboard-panelKPIs .miniTitlesKpisRegiao .kpiRegiaoPosicao {
+    width: 10%;
+}
+
+.dashboard-panelKPIs .miniTitlesKpisRegiao .kpiRegiaoPosicao .regiaoKpiPos {
+    border-radius: 1rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 1.7rem;
+    height: 1.7rem;
+}
+
+.dashboard-panelKPIs .miniTitlesKpisRegiao .kpiRegiaoPosicao .regiaoKpiPos1 {
+    background-color: #c00000;
+}
+
+.dashboard-panelKPIs .miniTitlesKpisRegiao .kpiRegiaoPosicao .regiaoKpiPos2 {
+    background-color: #c43131;
+}
+
+.dashboard-panelKPIs .miniTitlesKpisRegiao .kpiRegiaoPosicao .regiaoKpiPos3 {
+    background-color: #ce5b5b;
+}
+
+.dashboard-panelKPIs .miniTitlesKpisRegiao .kpiRegiaoPosicao .regiaoKpiPos1Seguro {
+    background-color: #008000;
+}
+
+.dashboard-panelKPIs .miniTitlesKpisRegiao .kpiRegiaoPosicao .regiaoKpiPos2Seguro {
+    background-color: #339133;
+}
+
+.dashboard-panelKPIs .miniTitlesKpisRegiao .kpiRegiaoPosicao .regiaoKpiPos3Seguro {
+    background-color: #6ae66a;
+}
+
+.dashboard-panelKPIs .miniTitlesKpisRegiao .kpiRegiaoLocal {
+    width: 35%;
+}
+
+.dashboard-panelKPIs .miniTitlesKpisRegiao .kpiRegiaoQuantidade {
+    width: 25%;
+}
+
+.dashboard-panelKPIs .miniTitlesKpisRegiao .kpiRegiaoQuantidade .kpiQuantidadePorCem {
+    transform: scale(0.8);
+    color: rgb(73, 73, 73);
+}
+
+.dashboard-panelKPIs .miniTitlesKpisRegiao .kpiRegiaoTendencia {
+    width: 25%;
+}
+
+/* Fim Container KPIs */
+
+/* Gráfico Cargas mais Visadas */
+
+
+
+/* Fim Gráfico Cargas mais Visadas */
+
+.dashboard-panelRight {
+    flex: 1;
+}
+
