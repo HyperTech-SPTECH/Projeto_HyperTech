@@ -7,31 +7,35 @@
         
         <div class="dashboard-card dashboard-card--filters">
             <div class="dashboard-card__header">Filtrar</div>
-            <div class="dashboard-card__body">
-
-                <div class="filter-row">
-                    <div class="filter-group">
-                        <label>Cidade:</label>
-                        <input type="text" value="São Paulo">
+            <div class="dashboard-card__body-Region">
+                <div class="containerSideLeftFiltro">
+                    <div class="miniContainerFiltro containerFiltroCidade">
+                        <span>Cidade:</span>
+                        <select name="" id="idSelectFiltroCidade">
+                            <option value="#" selected>Todas Cidades</option>
+                        </select>
                     </div>
-
-                    <div class="filter-group">
-                        <label>Bairro:</label>
-                        <input type="text" value="Vila Prudente">
+                    <div class="miniContainerFiltro containerFiltroMes">
+                        <span>Mês:</span>
+                        <select name="" id="idSelectFiltroMes">
+                            <option value="#" selected>Todos os Meses</option>
+                            <option value="1">Janeiro</option>
+                            <option value="2">Fevereiro</option>
+                            <option value="3">Março</option>
+                        </select>
                     </div>
                 </div>
-
-                <div class="filter-row">
-                    <div class="filter-group">
-                        <label>Mês:</label>
-                        <input type="text" value="Abril">
+                <div class="containerSideRightFiltro">
+                    <div class="miniContainerFiltro contianerFiltroBairro">
+                        <span>Bairro</span>
+                        <select name="" id="idSelectFiltroBairro">
+                            <option value="#" selected>Todos os Bairros</option>
+                        </select>
                     </div>
-
-                    <button class="btn-filter">
-                        Aplicar Filtros
-                    </button>
+                    <div class="containerButtonAplicarFiltro">
+                        <span id="idAplicarFiltros">Aplicar Filtros</span>
+                    </div>
                 </div>
-
             </div>
         </div>
         
@@ -41,35 +45,45 @@
                 <span class="textAlterAba">clique aqui para trocar de Aba</span>
             </div>
             <div class="dashboard-card__body">
+                <div class="rank-item">
+                    <span></span>
+                    <span class="tag-diaSeguro">Regiões mais Seguras</span>
+                    <span></span>
+                    <span></span>
+                    
+                    <span class="tag-diaPerigoso">Regiões mais Perigosas</span>
+                    <span></span>
+                    <span></span>
+                </div>
 
                 <div class="rank-item">
                     <span class="rank rank-green">1</span>
-                    <span>Grajaú</span>
-                    <span>2 (1%)</span>
+                    <span>Cotia</span>
+                    <span>6 (1%)</span>
 
                     <span class="rank rank-red ml">1</span>
-                    <span>Grajaú</span>
-                    <span>300 (30%)</span>
+                    <span>Mauá</span>
+                    <span>200 (32%)</span>
                 </div>
 
                 <div class="rank-item">
                     <span class="rank rank-yellow">2</span>
-                    <span>Mauá</span>
-                    <span>15 (11%)</span>
+                    <span>Itapevi</span>
+                    <span>15 (2%)</span>
 
                     <span class="rank rank-orange ml">2</span>
-                    <span>Mauá</span>
-                    <span>200 (22%)</span>
+                    <span>São Paulo</span>
+                    <span>150 (24%)</span>
                 </div>
 
                 <div class="rank-item">
                     <span class="rank rank-yellow">3</span>
-                    <span>Diadema</span>
-                    <span>30 (22%)</span>
+                    <span>Itatibi</span>
+                    <span>30 (4%)</span>
 
                     <span class="rank rank-orange ml">3</span>
-                    <span>Diadema</span>
-                    <span>90 (10%)</span>
+                    <span>Caraguatatuba</span>
+                    <span>100 (16%)</span>
                 </div>
 
             </div>

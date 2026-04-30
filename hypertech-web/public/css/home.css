@@ -34,7 +34,11 @@ header h1 {
 
 #sidebar-nav {
     width: 100%;
+    height: calc(100% - 20px);
     margin-top: 20px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
 }
 
 #sidebar-nav .nav-button {
