@@ -16,6 +16,7 @@
     font-family: 'Poppins', sans-serif;
     font-weight: 500;
     font-size: 1.5rem;
+    margin-bottom: -10px;
 }
 
 .dashboard-panel__row {
@@ -55,6 +56,7 @@
     font-family: 'Poppins', sans-serif;
     font-weight: 500;
     font-size: 1rem;
+    margin-top: -3px;
 }
 
 .dashboard-card__header--danger {
@@ -131,4 +133,165 @@
     width: 35px;
     height: 35px;
     padding: 0;
+}
+/*Filtro*/
+
+.dashboard-card--filters .dashboard-card__body{
+    padding:10px;
+   
+}
+
+.filter-row{
+    display:flex;
+    gap:10px;
+}
+
+.filter-group{
+    flex:1;
+    display:flex;
+    flex-direction:column;
+    gap:4px;
+}
+
+.filter-group label{
+    font-size:.72rem;
+    font-weight:500;
+    line-height:1;
+}
+
+.filter-group input{
+    height:28px;
+    border:1px solid #ccc;
+    border-radius:4px;
+    font-size:.72rem;
+}
+
+.btn-filter{
+    flex:1;
+    height:28px;
+    border:none;
+    border-radius:4px;
+    background:#00418B;
+    color:#fff;
+    font-size:.72rem;
+    font-weight:500;
+    cursor:pointer;
+    margin-top: 15px;
+}
+
+
+/*Resumo de Regiões*/
+
+.dashboard-card--summary .dashboard-card__body{
+    padding:2px 0;
+}
+
+.rank-item{
+    display:grid;
+    grid-template-columns:18px 1fr auto 18px 1fr auto;
+    gap:6px;
+    padding:6px 10px;
+    border-bottom:1px solid #eee;
+    align-items:center;
+    font-size:.72rem;
+}
+
+.rank{
+    width:16px;
+    height:16px;
+    border-radius:50%;
+    font-size:.58rem;
+    color:#fff;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+}
+
+.ml{
+    margin-left:4px;
+}
+
+.rank-green{background:#149A1E;}
+.rank-yellow{background:#9a9608;}
+.rank-orange{background:#F4A23F;}
+.rank-red{background:#ff4141;}
+
+
+/* KPIs*/
+
+.dashboard-panel__kpi-column{
+    gap:8px;
+}
+
+.dashboard-card--kpi{
+    border-radius:8px;
+}
+
+.dashboard-card--kpi .dashboard-card__header{
+    padding:6px 10px;
+    font-size:.78rem;
+    min-height:30px;
+}
+
+.dashboard-card__header--danger{
+    border-top:4px solid #900;
+}
+
+.dashboard-card__header--safe{
+    border-top:1px solid #056905;
+}
+
+.dashboard-card--kpi .dashboard-card__body{
+    padding:0;
+}
+
+.dashboard-card--kpi .rank-item{
+    grid-template-columns:18px 1fr auto;
+    padding:4px 10px;
+    min-height:30px;
+}
+
+.dashboard-card--kpi .rank-item span{
+    font-size:.70rem;
+}
+
+.dashboard-card--kpi .rank-item span:last-child{
+    font-size:.68rem;
+    font-weight:500;
+}
+
+
+/*Compactação geral dos cards*/
+
+.dashboard-card{
+    min-height:auto;
+}
+
+.dashboard-card__header{
+    padding:7px 12px;
+    font-size:.82rem;
+}
+
+.dashboard-card__body{
+    padding:8px;
+}
+/* Voltar para site institucional*/
+
+.back-site__link{
+    text-decoration:none;
+    font-family:'Poppins',sans-serif;
+    font-size:0.85rem;
+    font-weight:500;
+    color:#ffffff;
+    background-color:#2a5d97;
+    margin-top: 270%;
+
+    padding:1% 3%;
+    border-radius:8%;
+    
+    display:inline-flex;
+    align-items:center;
+    justify-content:center;
+
+    transition:.3s;
 }
