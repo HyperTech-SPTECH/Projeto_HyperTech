@@ -7,32 +7,35 @@
     height: 100%;
     display: flex;
     flex-direction: column;
-    gap: 10px;
+    gap: 15px;
+    flex: 1;
 }
-
+ 
 .dashboard-panel__title {
     text-align: center;
-    color: #000;
+    color: #111;
     font-family: 'Poppins', sans-serif;
-    font-weight: 500;
-    font-size: 1.5rem;
-    margin-bottom: -10px;
+    font-size: 1.35rem;
+    font-weight: 600;
 }
-
+ 
 .dashboard-panel__row {
     display: flex;
     flex-direction: row;
     gap: 20px;
+    flex-wrap: wrap;
+    flex: 1;
 }
-
+ 
 .dashboard-panel__kpi-column {
     display: flex;
     flex-direction: column;
-    gap: 15px;
+    gap: 10px;
     flex: 1;
+    min-width: 250px;
 }
 
-/* Configurações dos Cards */
+/* Cards */
 
 .dashboard-card {
     background-color: #ffffff;
@@ -42,74 +45,146 @@
     overflow: hidden;
     display: flex;
     flex-direction: column;
+    min-width: 300px;
+    flex: 1;
 }
-
-.dashboard-card--filters { flex: 1; }
-.dashboard-card--summary { flex: 1; }
-.dashboard-card--heatmap { flex: 2.5; }
-.dashboard-card--kpi { flex: 1; }
-
+ 
+.dashboard-card--filters { flex: 1.5; }
+.dashboard-card--summary { flex: 1.5; cursor: pointer; }
+.dashboard-card--heatmap { flex: 3; }
+.dashboard-card--chart   { flex: 2; }
+ 
 .dashboard-card__header {
     background-color: #00418B;
     color: #ffffff;
     padding: 10px 15px;
     font-family: 'Poppins', sans-serif;
-    font-weight: 500;
-    font-size: 1rem;
-    margin-top: -3px;
+    font-size: 1.05rem;
+    font-weight: 600;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
 }
-
-.dashboard-card__header--danger {
-    background-color: #c00000;
+ 
+.dashboard-card__header--danger { background-color: #c00000; }
+.dashboard-card__header--safe   { background-color: #008000; }
+ 
+.textAlterAba {
+    font-family: 'Inter', sans-serif;
+    font-size: 0.72rem;
+    font-weight: 400;
+    opacity: 0.85;
 }
-.dashboard-card__header--safe {
-    background-color: #008000;
-}
-
+ 
 .dashboard-card__body {
-    padding: 15px;
+    padding: 12px 15px;
     flex: 1;
+    display: flex;
+    flex-direction: column;
 }
 
-/* Configurações do Heatmap */
+/* Rank */
 
+.rank-item {
+    display: grid;
+    grid-template-columns: 22px 1fr auto;
+    gap: 8px;
+    padding: 9px 14px;
+    border-bottom: 1px solid #eee;
+    align-items: center;
+}
+ 
+.dashboard-card--summary .rank-item {
+    grid-template-columns: 22px 1fr auto 22px 1fr auto;
+}
+ 
+.rank {
+    width: 20px;
+    height: 20px;
+    border-radius: 50%;
+    font-family: 'Inter', sans-serif;
+    font-size: 0.65rem;
+    font-weight: 700;
+    color: #fff;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+}
+ 
+.ml { margin-left: 6px; }
+ 
+.rank-green  { background: #149A1E; }
+.rank-yellow { background: #9a9608; }
+.rank-orange { background: #F4A23F; }
+.rank-red    { background: #ff4141; }
+ 
+.rank-item__label {
+    font-family: 'Inter', sans-serif;
+    font-size: 0.9rem;
+    font-weight: 400;
+    color: #333;
+}
+ 
+.rank-item__value {
+    font-family: 'Inter', sans-serif;
+    font-size: 0.9rem;
+    font-weight: 600;
+    color: #111;
+    white-space: nowrap;
+}
+ 
+.dashboard-card--summary .rank-item:first-child .rank-item__label,
+.dashboard-card--summary .rank-item:first-child span:not(.rank) {
+    font-family: 'Poppins', sans-serif;
+    font-size: 0.88rem;
+    font-weight: 600;
+    color: #00418B;
+}
+
+/* Heatmap */
 .heatmap {
     display: flex;
     flex-direction: column;
     gap: 20px;
+    flex: 1;
+    justify-content: center;
 }
 
 .heatmap__grid {
     display: grid;
     grid-template-columns: auto repeat(8, 1fr);
     gap: 10px;
-    align-items: center;
+    align-items: stretch;
+    flex: 1;
 }
-
 .heatmap__time-header {
     font-weight: 500;
     text-align: center;
     font-size: 0.9rem;
+    display: flex;
+    align-items: end;
+    justify-content: center;
 }
 
 .heatmap__day-label {
     font-weight: 500;
-    padding-right: 15px;
-    text-align: left;
+    display: flex;
+    align-items: center;
 }
 
 .heatmap__block {
     display: flex;
     justify-content: center;
     align-items: center;
-    padding: 10px 0;
+    padding: 15px 0;
     border-radius: 4px;
     color: #ffffff;
     font-weight: bold;
     width: 100%;
+    height: 100%;
 }
 
-/* Configs Legendas do Heatmap */
 .heatmap__block--baixo { background-color: #6B8E23; }
 .heatmap__block--medio { background-color: #B8860B; }
 .heatmap__block--alto { background-color: #A52A2A; }
@@ -134,7 +209,45 @@
     height: 35px;
     padding: 0;
 }
-/*Filtro*/
+
+/*Filtros*/
+
+.containerSideLeftFiltro, .containerSideRightFiltro {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    flex: 1;
+}
+
+.dashboard-card__body-Region {
+    display: flex;
+    gap: 20px;
+    flex: 1;
+    align-items: center;
+}
+
+.miniContainerFiltro {
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+}
+
+.miniContainerFiltro select {
+    padding: 5px;
+    border-radius: 4px;
+    border: 1px solid #ccc;
+}
+
+.containerButtonAplicarFiltro {
+    background-color: var(--bg-secondary);
+    color: #fff;
+    padding: 8px;
+    text-align: center;
+    border-radius: 4px;
+    cursor: pointer;
+    font-weight: 500;
+    margin-top: auto;
+}
 
 .dashboard-card--filters .dashboard-card__body{
     padding:10px;
@@ -178,7 +291,6 @@
     cursor:pointer;
     margin-top: 15px;
 }
-
 
 /*Resumo de Regiões*/
 
@@ -229,16 +341,7 @@
 
 .dashboard-card--kpi .dashboard-card__header{
     padding:6px 10px;
-    font-size:.78rem;
     min-height:30px;
-}
-
-.dashboard-card__header--danger{
-    border-top:4px solid #900;
-}
-
-.dashboard-card__header--safe{
-    border-top:1px solid #056905;
 }
 
 .dashboard-card--kpi .dashboard-card__body{
@@ -251,16 +354,6 @@
     min-height:30px;
 }
 
-.dashboard-card--kpi .rank-item span{
-    font-size:.70rem;
-}
-
-.dashboard-card--kpi .rank-item span:last-child{
-    font-size:.68rem;
-    font-weight:500;
-}
-
-
 /*Compactação geral dos cards*/
 
 .dashboard-card{
@@ -269,30 +362,8 @@
 
 .dashboard-card__header{
     padding:7px 12px;
-    font-size:.82rem;
 }
 
 .dashboard-card__body{
     padding:8px;
-}
-/* Voltar para site institucional*/
-
-.back-site__link{
-    text-decoration:none;
-    font-family:'Poppins',sans-serif;
-    font-size:0.85rem;
-    font-weight:500;
-    color:#ffffff;
-    background-color:#2a5d97;
-
-    padding: .5rem .1rem;
-    border-radius: 1rem;
-    text-align: center;
-    margin-bottom: 10px;
-    display: flex;
-    margin-top: auto;
-    align-items:center;
-    justify-content:center;
-
-    transition:.3s;
 }

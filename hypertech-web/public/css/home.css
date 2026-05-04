@@ -30,11 +30,13 @@ header h1 {
     box-shadow: var(--shadow-sidebar);
     position: relative; 
     z-index: 5;
+    display: flex;
+    flex-direction: column;
 }
 
 #sidebar-nav {
     width: 100%;
-    height: calc(100% - 20px);
+    flex: 1;
     margin-top: 20px;
     display: flex;
     flex-direction: column;
@@ -75,10 +77,31 @@ header h1 {
     margin: 0 .5rem;
 }
 
+/* Voltar para site institucional */
+
+.back-site__link {
+    text-decoration: none;
+    font-size: 0.85rem;
+    color: #ffffff;
+    background-color: #2a5d97;
+    padding: .8rem 1rem;
+    border-radius: 8px;
+    text-align: center;
+    margin: auto 10px 20px 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: .3s;
+}
+
+.back-site__link:hover {
+    background-color: #00418B;
+}
+
 #main-content {
     width: 90vw;
     height: var(--altura-leftBar-e-conteudo);
+    overflow: hidden;
     display: flex;
-    justify-content: center;
-    align-items: center;
+    flex-direction: column;
 }

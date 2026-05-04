@@ -2,182 +2,125 @@
     <h2 class="dashboard-panel__title">Dashboard de Periculosidade por Região e Carga</h2>
 
     <div class="dashboard-panel__row">
-        <div class="dashboard-card dashboard-card--summary dashboard-button-changeScreen" onclick="trocarDashHoraDia()">
-            <div class="dashboard-card__header">
-                <span>Resumo por Dia e Horário </span>
+        <div class="dashboard-card dashboard-card--summary" onclick="trocarDashHoraDia()">
+            <h3 class="dashboard-card__header">
+                Resumo por Dia e Horário
                 <span class="textAlterAba">clique aqui para trocar de Aba</span>
-            </div>
+            </h3>
             <div class="dashboard-card__body">
                 <div class="rank-item">
                     <span></span>
-                    <span class="tag-diaSeguro">Dias mais Seguros</span>
+                    <span class="tag-diaSeguro rank-item__label">Dias mais Seguros</span>
                     <span></span>
                     <span></span>
-                    
-                    <span class="tag-diaPerigoso">Dias mais Perigosos</span>
-                    <span></span>
+                    <span class="tag-diaPerigoso rank-item__label">Dias mais Perigosos</span>
                     <span></span>
                 </div>
                 <div class="rank-item">
                     <span class="rank rank-green">1</span>
-                    <span>Domingo</span>
-                    <span>2 (1%)</span>
-                    
+                    <span class="rank-item__label">Domingo</span>
+                    <span class="rank-item__value">2 (1%)</span>
                     <span class="rank rank-red ml">1</span>
-                    <span>Sábado</span>
-                    <span>200 (32%)</span>
+                    <span class="rank-item__label">Sábado</span>
+                    <span class="rank-item__value">200 (32%)</span>
                 </div>
-
                 <div class="rank-item">
                     <span class="rank rank-yellow">2</span>
-                    <span>Segunda-Feira</span>
-                    <span>15 (11%)</span>
-
+                    <span class="rank-item__label">Segunda-Feira</span>
+                    <span class="rank-item__value">15 (11%)</span>
                     <span class="rank rank-orange ml">2</span>
-                    <span>Quinta-Feira</span>
-                    <span>135 (20%)</span>
-                </div>
-
-                <div class="rank-item">
-                    <span class="rank rank-yellow">3</span>
-                    <span>Ter;a-Feira</span>
-                    <span>30 (22%)</span>
-
-                    <span class="rank rank-orange ml">3</span>
-                    <span>Sexta-Feira</span>
-                    <span>100 (15%)</span>
+                    <span class="rank-item__label">Quinta-Feira</span>
+                    <span class="rank-item__value">135 (20%)</span>
                 </div>
             </div>
         </div>
 
         <div class="dashboard-card dashboard-card--filters">
-            <div class="dashboard-card__header">Filtrar</div>
-            <div class="dashboard-card__body-Region">
-                <div class="containerSideLeftFiltro">
-                    <div class="miniContainerFiltro containerFiltroCidade">
-                        <span>Cidade:</span>
-                        <select name="" id="idSelectFiltroCidade">
-                            <option value="#" selected>Todas Cidades</option>
-                        </select>
+            <h3 class="dashboard-card__header">Filtrar</h3>
+            <div class="dashboard-card__body">
+                <div class="dashboard-card__body-Region">
+                    <div class="containerSideLeftFiltro">
+                        <div class="miniContainerFiltro">
+                            <span>Cidade:</span>
+                            <select id="idSelectFiltroCidade">
+                                <option value="#" selected>Todas Cidades</option>
+                            </select>
+                        </div>
+                        <div class="miniContainerFiltro">
+                            <span>Mês:</span>
+                            <select id="idSelectFiltroMes">
+                                <option value="#" selected>Todos os Meses</option>
+                            </select>
+                        </div>
                     </div>
-                    <div class="miniContainerFiltro containerFiltroMes">
-                        <span>Mês:</span>
-                        <select name="" id="idSelectFiltroMes">
-                            <option value="#" selected>Todos os Meses</option>
-                            <option value="1">Janeiro</option>
-                            <option value="2">Fevereiro</option>
-                            <option value="3">Março</option>
-                        </select>
-                    </div>
-                </div>
-                <div class="containerSideRightFiltro">
-                    <div class="miniContainerFiltro contianerFiltroBairro">
-                        <span>Bairro</span>
-                        <select name="" id="idSelectFiltroBairro">
-                            <option value="#" selected>Todos os Bairros</option>
-                        </select>
-                    </div>
-                    <div class="containerButtonAplicarFiltro">
-                        <span id="idAplicarFiltros">Aplicar Filtros</span>
+                    <div class="containerSideRightFiltro">
+                        <div class="miniContainerFiltro">
+                            <span>Bairro</span>
+                            <select id="idSelectFiltroBairro">
+                                <option value="#" selected>Todos os Bairros</option>
+                            </select>
+                        </div>
+                        <div class="containerButtonAplicarFiltro">
+                            <span id="idAplicarFiltros">Aplicar Filtros</span>
+                        </div>
                     </div>
                 </div>
             </div>
         </div>
     </div>
 
-    <div class="dashboard-main-content-row" style="display: flex; gap: 20px;">
-
-        <div class="dashboard-chart-container" style="flex: 2;">
-            <div class="dashboard-card__header"
-                style="background-color: #00478f; color: white; padding: 10px 15px; border-radius: 8px 8px 0 0; font-weight: bold;">
-                <span>Cargas mais Visadas</span>
-            </div>
-            <div id="dash-card-content" class="dashboard-card__body" style="height: 100%;">
-                <div style="position: relative; height: 550px; width: 100%; padding: 20px; border-radius: 8px;">
-                    <canvas id="graficoCargas"></canvas>
-                </div>
+    <div class="dashboard-panel__row">
+        <div class="dashboard-card dashboard-card--chart">
+            <h3 class="dashboard-card__header">Cargas mais Visadas</h3>
+            <div class="dashboard-card__body" style="position: relative; height: 100%; min-height: 400px; padding: 20px;">
+                <canvas id="graficoCargas"></canvas>
             </div>
         </div>
 
-        <div class="dashboard-kpi-column" style="flex: 1; display: flex; flex-direction: column; gap: 20px;">
-
-            <div class="containerKpiRegiao containerKpiPerigo" style="width: 100%;">
-                <div class="faixaRegiaoKpi dashboard-card__header--danger"></div>
-                <div class="titleKpiRegiao titleKpiPerigo">Regiões mais Perigosas</div>
-                <div class="miniTitlesKpisRegiao">
-                    <table>
-                        <thead>
-                            <tr>
-                                <th class="kpiRegiaoValores kpiRegiaoPosicao"></th>
-                                <th class="kpiRegiaoValores kpiRegiaoLocal">Cidade</th>
-                                <th class="kpiRegiaoValores kpiRegiaoQuantidade">Roubos</th>
-                            </tr>
-                            <tr>
-                                <td class="kpiRegiaoValores kpiRegiaoPosicao"><span
-                                        class="regiaoKpiPos regiaoKpiPos1">1</span></td>
-                                <td class="kpiRegiaoValores kpiRegiaoLocal">Mauá</td>
-                                <td class="kpiRegiaoValores kpiRegiaoQuantidade"><span id="idKpiQuantidade1">200</span>
-                                    <span class="kpiQuantidadePorCem">(<span
-                                            id="idKpiQuantidadePorCem1">32</span>%)</span></td>
-                            </tr>
-                            <tr>
-                                <td class="kpiRegiaoValores kpiRegiaoPosicao"><span
-                                        class="regiaoKpiPos regiaoKpiPos2">2</span></td>
-                                <td class="kpiRegiaoValores kpiRegiaoLocal">São Paulo</td>
-                                <td class="kpiRegiaoValores kpiRegiaoQuantidade"><span id="idKpiQuantidade2">150</span>
-                                    <span class="kpiQuantidadePorCem">(<span
-                                            id="idKpiQuantidadePorCem2">24</span>%)</span></td>
-                            </tr>
-                            <tr>
-                                <td class="kpiRegiaoValores kpiRegiaoPosicao"><span
-                                        class="regiaoKpiPos regiaoKpiPos3">3</span></td>
-                                <td class="kpiRegiaoValores kpiRegiaoLocal">Caraguatatuba</td>
-                                <td class="kpiRegiaoValores kpiRegiaoQuantidade"><span id="idKpiQuantidade3">100</span>
-                                    <span class="kpiQuantidadePorCem">(<span
-                                            id="idKpiQuantidadePorCem3">16</span>%)</span></td>
-                            </tr>
-                        </thead>
-                    </table>
+        <div class="dashboard-panel__kpi-column">
+            <div class="dashboard-card dashboard-card--kpi">
+                <h3 class="dashboard-card__header dashboard-card__header--danger">
+                    Regiões mais Perigosas
+                </h3>
+                <div class="dashboard-card__body">
+                    <div class="rank-item">
+                        <span class="rank rank-red">1</span>
+                        <span class="rank-item__label">Mauá</span>
+                        <span class="rank-item__value">200 (32%)</span>
+                    </div>
+                    <div class="rank-item">
+                        <span class="rank rank-orange">2</span>
+                        <span class="rank-item__label">São Paulo</span>
+                        <span class="rank-item__value">150 (24%)</span>
+                    </div>
+                    <div class="rank-item">
+                        <span class="rank rank-orange">3</span>
+                        <span class="rank-item__label">Caraguatatuba</span>
+                        <span class="rank-item__value">100 (16%)</span>
+                    </div>
                 </div>
             </div>
 
-            <div class="containerKpiRegiao containerKpiSeguro" style="width: 100%;">
-                <div class="faixaRegiaoKpi dashboard-card__header--safe"></div>
-                <div class="titleKpiRegiao titleKpiSeguro">Regiões mais Seguras</div>
-                <div class="miniTitlesKpisRegiao">
-                    <table>
-                        <thead>
-                            <tr>
-                                <th class="kpiRegiaoValores kpiRegiaoPosicao"></th>
-                                <th class="kpiRegiaoValores kpiRegiaoLocal">Cidade</th>
-                                <th class="kpiRegiaoValores kpiRegiaoQuantidade">Roubos</th>
-                            </tr>
-                            <tr>
-                                <td class="kpiRegiaoValores kpiRegiaoPosicao"><span
-                                        class="regiaoKpiPos regiaoKpiPos1Seguro">1</span></td>
-                                <td class="kpiRegiaoValores kpiRegiaoLocal">Cotia</td>
-                                <td class="kpiRegiaoValores kpiRegiaoQuantidade"><span id="idKpiQuantidade1">6</span>
-                                    <span class="kpiQuantidadePorCem">(<span
-                                            id="idKpiQuantidadePorCem1">1</span>%)</span></td>
-                            </tr>
-                            <tr>
-                                <td class="kpiRegiaoValores kpiRegiaoPosicao"><span
-                                        class="regiaoKpiPos regiaoKpiPos2Seguro">2</span></td>
-                                <td class="kpiRegiaoValores kpiRegiaoLocal">Itapevi</td>
-                                <td class="kpiRegiaoValores kpiRegiaoQuantidade"><span id="idKpiQuantidade2">15</span>
-                                    <span class="kpiQuantidadePorCem">(<span
-                                            id="idKpiQuantidadePorCem2">2</span>%)</span></td>
-                            </tr>
-                            <tr>
-                                <td class="kpiRegiaoValores kpiRegiaoPosicao"><span
-                                        class="regiaoKpiPos regiaoKpiPos3Seguro">3</span></td>
-                                <td class="kpiRegiaoValores kpiRegiaoLocal">Itatiba</td>
-                                <td class="kpiRegiaoValores kpiRegiaoQuantidade"><span id="idKpiQuantidade3">30</span>
-                                    <span class="kpiQuantidadePorCem">(<span
-                                            id="idKpiQuantidadePorCem3">4</span>%)</span></td>
-                            </tr>
-                        </thead>
-                    </table>
+            <div class="dashboard-card dashboard-card--kpi">
+                <h3 class="dashboard-card__header dashboard-card__header--safe">
+                    Regiões mais Seguras
+                </h3>
+                <div class="dashboard-card__body">
+                    <div class="rank-item">
+                        <span class="rank rank-green">1</span>
+                        <span class="rank-item__label">Cotia</span>
+                        <span class="rank-item__value">6 (1%)</span>
+                    </div>
+                    <div class="rank-item">
+                        <span class="rank rank-yellow">2</span>
+                        <span class="rank-item__label">Itapevi</span>
+                        <span class="rank-item__value">15 (2%)</span>
+                    </div>
+                    <div class="rank-item">
+                        <span class="rank rank-yellow">3</span>
+                        <span class="rank-item__label">Itatiba</span>
+                        <span class="rank-item__value">30 (4%)</span>
+                    </div>
                 </div>
             </div>
         </div>

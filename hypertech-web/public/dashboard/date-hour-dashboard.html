@@ -1,103 +1,97 @@
-
 <div class="dashboard-panel">
     <h2 class="dashboard-panel__title">Dashboard de Periculosidade Por Dia e Horário</h2>
     
     <div class="dashboard-panel__row">
-        
-        
         <div class="dashboard-card dashboard-card--filters">
-            <div class="dashboard-card__header">Filtrar</div>
-            <div class="dashboard-card__body-Region">
-                <div class="containerSideLeftFiltro">
-                    <div class="miniContainerFiltro containerFiltroCidade">
-                        <span>Cidade:</span>
-                        <select name="" id="idSelectFiltroCidade">
-                            <option value="#" selected>Todas Cidades</option>
-                        </select>
+            <h3 class="dashboard-card__header">Filtrar</h3>
+            <div class="dashboard-card__body">
+                <div class="dashboard-card__body-Region">
+                    <div class="containerSideLeftFiltro">
+                        <div class="miniContainerFiltro">
+                            <span>Cidade:</span>
+                            <select id="idSelectFiltroCidade">
+                                <option value="#" selected>Todas Cidades</option>
+                            </select>
+                        </div>
+                        <div class="miniContainerFiltro">
+                            <span>Mês:</span>
+                            <select id="idSelectFiltroMes">
+                                <option value="#" selected>Todos os Meses</option>
+                            </select>
+                        </div>
                     </div>
-                    <div class="miniContainerFiltro containerFiltroMes">
-                        <span>Mês:</span>
-                        <select name="" id="idSelectFiltroMes">
-                            <option value="#" selected>Todos os Meses</option>
-                            <option value="1">Janeiro</option>
-                            <option value="2">Fevereiro</option>
-                            <option value="3">Março</option>
-                        </select>
-                    </div>
-                </div>
-                <div class="containerSideRightFiltro">
-                    <div class="miniContainerFiltro contianerFiltroBairro">
-                        <span>Bairro</span>
-                        <select name="" id="idSelectFiltroBairro">
-                            <option value="#" selected>Todos os Bairros</option>
-                        </select>
-                    </div>
-                    <div class="containerButtonAplicarFiltro">
-                        <span id="idAplicarFiltros">Aplicar Filtros</span>
+                    <div class="containerSideRightFiltro">
+                        <div class="miniContainerFiltro">
+                            <span>Bairro</span>
+                            <select id="idSelectFiltroBairro">
+                                <option value="#" selected>Todos os Bairros</option>
+                            </select>
+                        </div>
+                        <div class="containerButtonAplicarFiltro">
+                            <span id="idAplicarFiltros">Aplicar Filtros</span>
+                        </div>
                     </div>
                 </div>
             </div>
         </div>
         
         <div class="dashboard-card dashboard-card--summary dashboard-button-changeScreen" onclick="trocarDashRegiao()">
-            <div class="dashboard-card__header">
-                <span>Resumo de Regiões</span>
+            <h3 class="dashboard-card__header">
+                Resumo de Regiões
                 <span class="textAlterAba">clique aqui para trocar de Aba</span>
-            </div>
+            </h3>
             <div class="dashboard-card__body">
                 <div class="rank-item">
                     <span></span>
-                    <span class="tag-diaSeguro">Regiões mais Seguras</span>
+                    <span class="tag-diaSeguro rank-item__label">Regiões mais Seguras</span>
                     <span></span>
                     <span></span>
                     
-                    <span class="tag-diaPerigoso">Regiões mais Perigosas</span>
+                    <span class="tag-diaPerigoso rank-item__label">Regiões mais Perigosas</span>
                     <span></span>
                     <span></span>
                 </div>
 
                 <div class="rank-item">
                     <span class="rank rank-green">1</span>
-                    <span>Cotia</span>
-                    <span>6 (1%)</span>
+                    <span class="rank-item__label">Cotia</span>
+                    <span class="rank-item__value">6 (1%)</span>
 
                     <span class="rank rank-red ml">1</span>
-                    <span>Mauá</span>
-                    <span>200 (32%)</span>
+                    <span class="rank-item__label">Mauá</span>
+                    <span class="rank-item__value">200 (32%)</span>
                 </div>
 
                 <div class="rank-item">
                     <span class="rank rank-yellow">2</span>
-                    <span>Itapevi</span>
-                    <span>15 (2%)</span>
+                    <span class="rank-item__label">Itapevi</span>
+                    <span class="rank-item__value">15 (2%)</span>
 
                     <span class="rank rank-orange ml">2</span>
-                    <span>São Paulo</span>
-                    <span>150 (24%)</span>
+                    <span class="rank-item__label">São Paulo</span>
+                    <span class="rank-item__value">150 (24%)</span>
                 </div>
 
                 <div class="rank-item">
                     <span class="rank rank-yellow">3</span>
-                    <span>Itatibi</span>
-                    <span>30 (4%)</span>
+                    <span class="rank-item__label">Itatiba</span>
+                    <span class="rank-item__value">30 (4%)</span>
 
                     <span class="rank rank-orange ml">3</span>
-                    <span>Caraguatatuba</span>
-                    <span>100 (16%)</span>
+                    <span class="rank-item__label">Caraguatatuba</span>
+                    <span class="rank-item__value">100 (16%)</span>
                 </div>
 
             </div>
         </div>
     </div>
     
-
     <div class="dashboard-panel__row">
         
-      
         <div class="dashboard-card dashboard-card--heatmap">
-            <div class="dashboard-card__header">
+            <h3 class="dashboard-card__header">
                 Gráfico de Periculosidade (Dia da Semana x Horários)
-            </div>
+            </h3>
 
             <div class="dashboard-card__body">
                 <div class="heatmap">
@@ -123,113 +117,108 @@
             </div>
         </div>
         
-
-        
         <div class="dashboard-panel__kpi-column">
 
             <div class="dashboard-card dashboard-card--kpi">
-                <div class="dashboard-card__header dashboard-card__header--danger">
+                <h3 class="dashboard-card__header dashboard-card__header--danger">
                     Dias Mais Perigosos da Semana
-                </div>
+                </h3>
 
                 <div class="dashboard-card__body">
                     <div class="rank-item">
                         <span class="rank rank-red">1</span>
-                        Sábado
-                        <span>200 (32%)</span>
+                        <span class="rank-item__label">Sábado</span>
+                        <span class="rank-item__value">200 (32%)</span>
                     </div>
 
                     <div class="rank-item">
                         <span class="rank rank-orange">2</span>
-                        Quinta-Feira
-                        <span>135 (20%)</span>
+                        <span class="rank-item__label">Quinta-Feira</span>
+                        <span class="rank-item__value">135 (20%)</span>
                     </div>
 
                     <div class="rank-item">
                         <span class="rank rank-orange">3</span>
-                        Sexta-Feira
-                        <span>100 (15%)</span>
+                        <span class="rank-item__label">Sexta-Feira</span>
+                        <span class="rank-item__value">100 (15%)</span>
                     </div>
                 </div>
             </div>
 
-
             <div class="dashboard-card dashboard-card--kpi">
-                <div class="dashboard-card__header dashboard-card__header--safe">
+                <h3 class="dashboard-card__header dashboard-card__header--safe">
                     Dias Mais Seguros da Semana
-                </div>
+                </h3>
 
                 <div class="dashboard-card__body">
                     <div class="rank-item">
                         <span class="rank rank-green">1</span>
-                        Domingo
-                        <span>2 (1%)</span>
+                        <span class="rank-item__label">Domingo</span>
+                        <span class="rank-item__value">2 (1%)</span>
                     </div>
 
                     <div class="rank-item">
                         <span class="rank rank-yellow">2</span>
-                        Segunda-Feira
-                        <span>15 (11%)</span>
+                        <span class="rank-item__label">Segunda-Feira</span>
+                        <span class="rank-item__value">15 (11%)</span>
                     </div>
 
                     <div class="rank-item">
                         <span class="rank rank-yellow">3</span>
-                        Terça-Feira
-                        <span>30 (22%)</span>
+                        <span class="rank-item__label">Terça-Feira</span>
+                        <span class="rank-item__value">30 (22%)</span>
                     </div>
                 </div>
             </div>
 
-
             <div class="dashboard-card dashboard-card--kpi">
-                <div class="dashboard-card__header dashboard-card__header--danger">
+                <h3 class="dashboard-card__header dashboard-card__header--danger">
                     Horários Mais Perigosos da Semana
-                </div>
+                </h3>
 
                 <div class="dashboard-card__body">
                     <div class="rank-item">
                         <span class="rank rank-red">1</span>
-                        03:00 - 04:00
-                        <span>200 (32%)</span>
+                        <span class="rank-item__label">03:00 - 04:00</span>
+                        <span class="rank-item__value">200 (32%)</span>
                     </div>
 
                     <div class="rank-item">
                         <span class="rank rank-orange">2</span>
-                        07:00 - 08:00
-                        <span>135 (20%)</span>
+                        <span class="rank-item__label">07:00 - 08:00</span>
+                        <span class="rank-item__value">135 (20%)</span>
                     </div>
 
                     <div class="rank-item">
                         <span class="rank rank-orange">3</span>
-                        17:00 - 18:00
-                        <span>100 (15%)</span>
+                        <span class="rank-item__label">17:00 - 18:00</span>
+                        <span class="rank-item__value">100 (15%)</span>
                     </div>
                 </div>
             </div>
 
-
             <div class="dashboard-card dashboard-card--kpi">
-                <div class="dashboard-card__header dashboard-card__header--safe">
+                <h3 class="dashboard-card__header dashboard-card__header--safe">
                     Horários Mais Seguros da Semana
-                </div>
+                </h3>
 
                 <div class="dashboard-card__body">
                     <div class="rank-item">
                         <span class="rank rank-green">1</span>
-                        13:00 - 14:00
-                        <span>2 (1%)</span>
+                        <span class="rank-item__label">13:00 - 14:00</span>
+                        <span class="rank-item__value">2 (1%)</span>
                     </div>
 
                     <div class="rank-item">
                         <span class="rank rank-yellow">2</span>
-                        06:00 - 07:00
-                        <span>15 (11%)</span>
+                        <span class="rank-item__label">06:00 - 07:00</span>
+                        <span class="rank-item__value">15 (11%)</span>
                     </div>
 
                     <div class="rank-item">
                         <span class="rank rank-yellow">3</span>
-                        05:00 - 06:00
-                        <span>30 (22%)</span>
+                        <span class="rank-item__label">05:00 - 06:00</span>
+                        <span class="rank-item__value">30 (22%)</span>
                     </div>
                 </div>
             </div>
@@ -237,4 +226,3 @@
         </div>
     </div>
 </div>
-
