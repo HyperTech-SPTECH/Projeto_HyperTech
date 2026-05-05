@@ -1,5 +1,7 @@
 const contentArea = document.getElementById('main-content');
 
+loadComponent("./dashboard/date-hour-dashboard.html")
+
 async function loadComponent(fileName) {
     try {
         contentArea.innerHTML = '<p>Carregando...</p>';
