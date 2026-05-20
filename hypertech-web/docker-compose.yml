@@ -1,0 +1,43 @@
+version: "3.9"
+
+services:
+  postgres-hyper-container:
+    image: wagnerbronstein/hyper-postgres:latest
+    container_name: postgres-hyper-container
+    ports:
+      - "5432:5432"
+    networks:
+      - hyper-net
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U hyper -d ConstrucaoBancoDeDados"]
+      interval: 5s
+      timeout: 5s
+      retries: 5
+
+  etl:
+    image: wagnerbronstein/hyper-jar:latest
+    depends_on:
+      postgres-hyper-container:
+        condition: service_healthy
+    environment:
+      DB_URL: jdbc:postgresql://postgres-hyper-container:5432/ConstrucaoBancoDeDados
+      DB_USER: hyper
+      DB_PASSWORD: 1234
+    networks:
+      - hyper-net
+    restart: "no"
+
+  api:
+    build: .
+    container_name: hyper-node
+    depends_on:
+      - postgres-hyper-container
+    ports:
+      - "3333:3333"
+    env_file:
+      - .env.dev
+    networks:
+      - hyper-net
+
+networks:
+  hyper-net:
