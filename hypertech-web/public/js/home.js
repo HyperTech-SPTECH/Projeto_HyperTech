@@ -1,6 +1,6 @@
 const contentArea = document.getElementById('main-content');
 
-loadComponent("./dashboard/date-hour-dashboard.html")
+// loadComponent('./dashboard/profile-dashboard.html');
 
 async function loadComponent(fileName) {
     try {
@@ -59,8 +59,8 @@ function handleNavClick(ev) {
 }
 
 document.getElementById('btn-dashboard').addEventListener('click', handleNavClick);
-document.getElementById('btn-rotas').addEventListener('click', handleNavClick);
-document.getElementById('btn-cad-func').addEventListener('click', handleNavClick);
+// document.getElementById('btn-rotas').addEventListener('click', handleNavClick);
+// document.getElementById('btn-cad-func').addEventListener('click', handleNavClick);
 
 document.addEventListener('DOMContentLoaded', () => {
     loadComponent('./dashboard/date-hour-dashboard.html');
@@ -73,3 +73,15 @@ function trocarDashRegiao() {
 function trocarDashHoraDia() {
     loadComponent('./dashboard/date-hour-dashboard.html');
 }
+
+function trocarProfileDash() {
+    loadComponent('./dashboard/profile-dashboard.html');
+}
+
+function trocarNotificationDash() {
+    loadComponent('./dashboard/notification-dashboard.html');
+}
+
+document.getElementById('button-menu').addEventListener('click', () => {
+    document.getElementById('dropdown-menu').classList.toggle('displayNone')
+})

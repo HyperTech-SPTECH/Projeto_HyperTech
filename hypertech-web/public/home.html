@@ -9,6 +9,7 @@
     <link rel="stylesheet" href="css/home.css">
     <link rel="stylesheet" href="css/dashboard.css">
     <link rel="stylesheet" href="css/dashboardRegiao.css">
+    <link rel="stylesheet" href="css/profileDashboard.css">
 
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -19,6 +20,19 @@
 <body>
     <header>
         <h1>HyperTech</h1>
+        <div class="buttons-menu">
+            <div id="button-perfil" onclick="trocarProfileDash()">
+                <img src="./assets/Perfil.png" alt="Botão de perfil">
+            </div>
+            <div id="button-menu">
+                <img src="./assets/Menu.png" alt="Botão de Menu">
+                <div id="dropdown-menu" class="dropdown-menu displayNone">
+                    <span onclick="trocarProfileDash()">Perfil</span>
+                    <span onclick="trocarNotificationDash()">Notificação</span>
+                    <span class="dash-logout">Logout</span>
+                </div>
+            </div>
+        </div>
     </header>
     
     <div id="app-container">
