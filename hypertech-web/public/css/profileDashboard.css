@@ -4,6 +4,7 @@
     background-color: var(--bg-primary);
     border-radius: 2rem;
     border: 1px solid #ccc;
+    position: relative;
 }
 
 .nav-configuration {
@@ -36,16 +37,19 @@
 .profile-data .profile-data-user {
     border: 1px solid #ccc;
     border-radius: 2rem;
+    width: 50%;
 }
 
-.profile-data-user .title-profile-data {
+.profile-data-user .title-profile-data,
+    .profile-data-enterprise .title-profile-data {
     margin: 1.5rem 0 0 1rem;
     font-size: 1.3rem;
     font-weight: bold;
 }
 
 .profile-data-user .changeable-profile-data-user,
-    .profile-data-user .createdAt-profile-data-user {
+    .profile-data-user .createdAt-profile-data-user,
+    .profile-data-enterprise .field-profile-data-enterprise {
     margin: 1rem 1rem 0 2rem;
     display: flex;
     justify-content: center;
@@ -53,15 +57,21 @@
 }
 
 .profile-data-user .changeable-profile-data-user span,
-    .profile-data-user .createdAt-profile-data-user span {
+    .profile-data-user .createdAt-profile-data-user span,
+    .profile-data-enterprise .field-profile-data-enterprise span {
     display: flex;
-    width: 4rem;
+    width: 6rem;
+    font-weight: bold;
 }
 
 .profile-data-user .changeable-profile-data-user input,
-.profile-data-user .createdAt-profile-data-user input {
+    .profile-data-user .createdAt-profile-data-user input,
+    .profile-data-enterprise .field-profile-data-enterprise input {
     font-size: 1rem;
     padding: .3rem;
+    width: 70%;
+    /* border: var(--bg-secondary) 2px solid;
+    border-radius: .3rem; */
 }
 
 .profile-data-user .button-edit-profile-data-user {
@@ -70,5 +80,52 @@
     justify-content: center;
     align-items: center;
     margin: 2rem 0 2rem 0;
-    
+}
+
+.profile-data-user .button-edit-profile-data-user span {
+    background-color: var(--bg-secondary);
+    color: var(--bg-primary);
+    padding: .5rem 3rem;
+    border-radius: 2rem;
+    cursor: pointer;
+    transition: .5s;
+}
+
+.profile-data-user .button-edit-profile-data-user span:hover {
+    transform: scale(1.1);
+}
+
+.profile-data .profile-data-enterprise {
+    border: 1px solid #ccc;
+    border-radius: 2rem;
+    width: 40%;
+}
+
+.buttons-confirm-cancel {
+    width: 95%;
+    display: flex;
+    justify-content: flex-end;
+    position: absolute;
+    bottom: 2rem;
+}
+
+.buttons-confirm-cancel .button-confirm-cancel {
+    padding: .5rem 2rem;
+    border-radius: 2rem;
+    margin-left: 1.5rem;
+    font-weight: bold;
+    transition: .5s;
+    cursor: pointer;
+}
+
+.buttons-confirm-cancel .button-confirm-cancel:hover {
+    transform: scale(1.1);
+}
+
+.buttons-confirm-cancel #idCancel {
+    background-color: rgb(255, 0, 0);
+}
+
+.buttons-confirm-cancel #idConfirm {
+    background-color: rgb(0, 155, 0);
 }

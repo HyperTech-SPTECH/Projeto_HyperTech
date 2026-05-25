@@ -1,0 +1,30 @@
+.notification-options,
+    .registered-emails {
+    width: 90%;
+    margin: auto;
+    margin-top: 3rem;
+}
+
+.title-div {
+    font-size: 1.3rem;
+    font-weight: bold;
+}
+
+.box-infos {
+    border: #ccc 1px solid;
+    border-radius: 2rem;
+}
+
+.box-infos .row-titles-emails {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+}
+
+.box-infos .row-titles-emails span {
+    width: 25%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: .5rem;
+}

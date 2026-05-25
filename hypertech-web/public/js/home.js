@@ -85,3 +85,20 @@ function trocarNotificationDash() {
 document.getElementById('button-menu').addEventListener('click', () => {
     document.getElementById('dropdown-menu').classList.toggle('displayNone')
 })
+
+function editFields() {
+    let inputs = document.getElementsByClassName('changeable-profile-data-user')
+    for (i = 0; i < inputs.length; i++) {
+        inputs[i].querySelector('input').removeAttribute('disabled')
+    }
+    document.getElementById('idButtons').style.display = 'flex'
+}
+
+function cancelEditFields() {
+    let inputs = document.getElementsByClassName('changeable-profile-data-user')
+    for (i = 0; i < inputs.length; i++) {
+        inputs[i].querySelector('input').disabled = true
+    }
+    // VOLTAR OS CAMPOS PARA OS QUE ESTAVAM ANTES (SESSION STORAGE)
+    document.getElementById('idButtons').style.display = 'none'
+}
