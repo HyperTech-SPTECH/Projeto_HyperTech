@@ -1,1 +1,95 @@
-<H1>ROTAS</H1>
+<section class="caixa">
+    <section class="conteiner-entradas">
+        <div class="conteiner-input-endereco">
+            <div class="conteiner-label">
+                <span class="circulo origem"></span>
+                <label for="inputOrigem">Origem</label>
+            </div>
+            <div class="conteiner-campo-input">
+                <input id="inputOrigem" class="input-endereco" type="text" placeholder="Ex.: Av. Paulista, 1000" autocomplete="off"/>
+                <ul id="sugestoesOrigem" class="lista-sugestoes" ></ul>
+            </div>
+        </div>
+        
+        <div class="conteiner-input-endereco">
+            <div class="conteiner-label">
+                <span class="circulo destino"></span>
+                <label for="inputDestino">Destino</label>
+            </div>
+            <div class="conteiner-campo-input">
+                <input id="inputDestino" class="input-endereco" type="text" placeholder="Ex.: Av. Paulista, 1000" autocomplete="off"/>
+                <ul id="sugestoesDestino" class="lista-sugestoes"></ul>
+            </div>
+        </div>
+        
+        <div class="conteiner-botao">
+            <button class="botao-rota calcular" id="btnCalcularRota">
+                Calcular rota
+            </button>
+        </div>
+        
+        <div class="conteiner-botao">
+            <button class="botao-rota limpar" id="btnLimparTudo">
+                Limpar
+            </button>
+        </div>
+        
+        <div class="conteiner-botao">
+            <button class="botao-rota salvar" id="btnSalvarFavorito">
+                Salvar
+            </button>
+        </div>
+        
+    </section>
+    
+    <section class="conteiner-mapa-infos">
+        <div id="mapa" class="mapa"></div>
+        
+        <div class="painel-lateral">
+            <div class="secao-lateral distancia" id="areaResultados">
+                <div class="titulo-secao-lateral">Distâncias</div>
+                <div class="linha-distancia">
+                    <div class="cartao-distancia">
+                        <div class="valor-distancia direta" id="distanciaRotaDireta">-</div>
+                        <div class="label-distancia">KM · Rota Direta</div>
+                    </div>
+                    <div class="cartao-distancia">
+                        <div class="valor-distancia segura" id="distanciaRotaSegura">-</div>
+                        <div class="label-distancia">KM · Rota Segura</div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="secao-lateral">
+                <div class="titulo-secao-lateral">Legenda</div>
+                <div class="item-legenda">
+                    <div class="linha-legenda" style="background:#fb923c;"></div>
+                    Rota direta (menor distância)
+                </div>
+                <div class="item-legenda">
+                    <div class="linha-legenda" style="background:#22c55e;"></div>
+                    Rota segura (evita riscos)
+                </div>
+                <div class="item-legenda">
+                    <div class="poligono-legenda"></div>
+                    Zona de risco (SSP)
+                </div>
+            </div>
+            
+            <div class="secao-lateral">
+                <div class="titulo-secao-lateral">Rotas favoritas</div>
+                
+                <div id="listaFavoritos">
+                    </div>
+                
+                <button class="botao-adicionar-favorito" onclick="salvarFavorito()">
+                    <i class="ti ti-plus" aria-hidden="true"></i>
+                    Salvar rota atual
+                </button>
+            </div>
+            
+        </div>
+    </section>
+</section>
+
+<div class="notificacao-rota" id="routeToast"></div>

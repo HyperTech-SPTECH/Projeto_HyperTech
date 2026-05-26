@@ -1,0 +1,296 @@
+.caixa {
+  width: 100%;
+  height: 100%;
+
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+}
+
+/* Início Header */
+
+.conteiner-entradas {
+  height: fit-content;
+  margin: 20px;
+  
+  display: flex;
+  justify-content: space-between;
+}
+
+/* Inicio Inputs */
+
+.conteiner-input-endereco {
+  height: fit-content;
+  display: flex;
+  flex-direction: column;
+  width: 30%;
+  gap: 10px;
+}
+
+.conteiner-label {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+
+  font-size: 16px;
+  font-weight: 600;
+  font-family: 'Poppins';
+  text-transform: uppercase;
+  letter-spacing: 0.6px;
+
+  color: #94a3b8;
+}
+
+.circulo {
+  width: 9px;
+  height: 9px;
+  border-radius: 50%;
+}
+
+.circulo.origem {
+  background: #22c55e;
+}
+
+.conteiner-campo-input {
+  position: relative;
+  width: 100%;
+}
+
+.input-endereco {
+  width: 100%;
+  height: 36px;
+
+  padding: 0 10px 0 20px;
+  border: 1px solid #cbd5e1;
+  border-radius: 8px;
+
+  font-size: 13px;
+
+  color: #1e293b;
+  background: #f8fafc;
+
+  outline: none;
+}
+
+.lista-sugestoes {
+  position: absolute;
+  top: calc(100% + 4px);
+  left: 0;
+  right: 0;
+  background: #ffffff;
+  border: 1px solid #e2e8f0;
+  border-radius: 8px;
+  z-index: 1000;
+  max-height: 220px;
+  overflow-y: auto;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+  display: none;
+}
+
+.circulo.destino {
+  background: #ef4444;
+}
+
+/* Fim Inputs */
+
+/* Inicio Botões */
+
+.conteiner-botao {
+  width: 10%;
+  display: flex;
+  align-items: end;
+}
+
+.botao-rota {
+  width: 100%;
+  height: 36px;
+  border-radius: 8px;
+  padding: 0 16px;
+
+  font-size: 16px;
+  font-weight: 600;
+  font-family: 'Poppins';
+  text-transform: capitalize;
+  cursor: pointer;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  background: #ffffff;
+  transition: opacity 0.15s;
+}
+
+.botao-rota:hover {
+  opacity: 0.85;
+}
+
+.botao-rota.calcular {
+  color: #103e83;
+  border: 1px solid #1157be69;
+}
+
+.botao-rota.limpar {
+  color: #64748b;
+  border: 1px solid #7d858f;
+}
+
+.botao-rota.salvar {
+  color: #d97706;
+  border: 1px solid #9b710866;
+}
+
+.botao-rota.calcular:hover {
+  background: #3e74c569;
+  opacity: 1;
+}
+
+.botao-rota.limpar:hover {
+  background: #cbd5e1;
+  opacity: 1;
+}
+
+.botao-rota.salvar:hover {
+  background: #f8cd5f66;
+  opacity: 1;
+}
+
+/* Fim Botões */
+
+/* Fim Header */
+
+/* Início Conteúdo */
+
+.conteiner-mapa-infos {
+  display: flex;
+  flex: 1;
+}
+
+.mapa {
+  flex: 1;
+  min-height: 0;
+}
+
+/* Início Painel Lateral */
+
+.painel-lateral {
+  width: 20%;
+
+  display: flex;
+  flex-direction: column;
+
+  border-left: 1px solid #e2e8f0;
+  border: black;
+  flex-shrink: 0;
+}
+
+.secao-lateral {
+  padding: 14px 14px 12px;
+  border-top: 2px dashed rgb(189, 189, 189);
+}
+
+.titulo-secao-lateral {
+  font-size: 16px;
+  font-weight: 600;
+  font-family: 'Poppins';
+  text-transform: uppercase;
+  letter-spacing: 0.7px;
+  color: #94a3b8;
+  margin-bottom: 10px;
+}
+
+.linha-distancia {
+  display: flex;
+  gap: 8px;
+}
+
+.cartao-distancia {
+  flex: 1;
+  background: #f8fafc;
+  border: 1px solid #e2e8f0;
+  border-radius: 8px;
+  padding: 8px 10px;
+}
+
+.valor-distancia {
+  font-size: 18px;
+  font-weight: 500;
+  line-height: 1.1;
+}
+
+.valor-distancia.direta {
+  color: #d97706;
+}
+
+.label-distancia {
+  font-size: 10px;
+  color: #94a3b8;
+  margin-top: 2px;
+}
+
+.valor-distancia.segura {
+  color: #16a34a;
+}
+
+.item-legenda {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 12px;
+  color: #475569;
+  margin-bottom: 8px;
+}
+
+.linha-legenda {
+  width: 24px;
+  height: 4px;
+  border-radius: 2px;
+  flex-shrink: 0;
+}
+
+.poligono-legenda {
+  width: 14px;
+  height: 12px;
+  border-radius: 3px;
+  flex-shrink: 0;
+  opacity: 0.75;
+  border: 1px solid #ef4444;
+  background: #ef444455;
+}
+
+.botao-adicionar-favorito {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  width: 100%;
+  padding: 8px 10px;
+  margin-top: 8px;
+  background: #ffffff;
+  border: 1px dashed #cbd5e1;
+  border-radius: 8px;
+  font-size: 12px;
+  color: #64748b;
+  cursor: pointer;
+  transition: background 0.15s, border-color 0.15s;
+}
+
+.botao-adicionar-favorito:hover {
+  background: #f8fafc;
+  border-color: #94a3b8;
+}
+
+.notificacao-rota {
+  position: fixed;
+  bottom: 24px;
+  left: 50%;
+  transform: translateX(-50%) translateY(60px);
+  background: #1e293b;
+  color: #fff;
+  font-size: 13px;
+  padding: 10px 18px;
+  border-radius: 8px;
+  z-index: 9999;
+  opacity: 0;
+  pointer-events: none;
+  transition: transform 0.3s, opacity 0.3s;
+}
