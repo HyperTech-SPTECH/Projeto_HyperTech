@@ -17,6 +17,7 @@ var app = express();
 
 var indexRouter = require("./src/routes/index");
 var usuarioRouter = require("./src/routes/usuarios");
+var dashboardRouter = require("./src/routes/dashboard")
 // var avisosRouter = require("./src/routes/avisos");
 // var medidasRouter = require("./src/routes/medidas");
 // var aquariosRouter = require("./src/routes/aquarios");
@@ -25,12 +26,13 @@ var usuarioRouter = require("./src/routes/usuarios");
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 // app.use(express.static(path.join(__dirname, "public")));
-app.use(express.static(path.join(__dirname, "public"), { index: 'home.html' }));
+app.use(express.static(path.join(__dirname, "public"), { index: 'index.html' }));
 
 app.use(cors());
 
 app.use("/", indexRouter);
 app.use("/usuarios", usuarioRouter);
+app.use("/dashboard", dashboardRouter);
 // app.use("/avisos", avisosRouter);
 // app.use("/medidas", medidasRouter);
 // app.use("/aquarios", aquariosRouter);
