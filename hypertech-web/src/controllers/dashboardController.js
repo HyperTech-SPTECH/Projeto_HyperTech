@@ -3,17 +3,17 @@ var dashboardModel = require("../models/dashboardModel");
 
 function infoFiltrar(req, res) {
 
-    dashboardModel.infoFiltrar(email, senha)
+    dashboardModel.infoFiltrar()
         .then(function (resposta) {
-        if (resposta.length > 0) {
-            res.status(200).send(resposta);
-        } else {
-            res.status(404).send("Dados não encontrados!");
-        }
+            if (resposta.length > 0) {
+                res.status(200).send(resposta);
+            } else {
+                res.status(404).send("Dados não encontrados!");
+            }
         })
         .catch(function (erro) {
-        console.log(erro);
-        res.status(500).send(erro);
+            console.log(erro);
+            res.status(500).send(erro);
         });
 }
 

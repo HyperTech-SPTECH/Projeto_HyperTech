@@ -1,7 +1,7 @@
 var usuarioModel = require("../models/usuarioModel");
 
 
-function infoFiltrar(req, res) {
+function autenticar(req, res) {
   var email = req.body.emailServer;
   var senha = req.body.senhaServer;
 

@@ -5,7 +5,7 @@ var dashboardController = require("../controllers/dashboardController");
 
 //Recebendo os dados do html e direcionando para a função cadastrar de usuarioController.js
 router.post("/infoFiltrar", function (req, res) {
-    usuarioController.infoFiltrar(req, res);
+    dashboardController.infoFiltrar(req, res);
 })
 
 // router.post("/autenticar", function (req, res) {

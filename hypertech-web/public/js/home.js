@@ -59,8 +59,8 @@ function handleNavClick(ev) {
 }
 
 document.getElementById('btn-dashboard').addEventListener('click', handleNavClick);
-document.getElementById('btn-rotas').addEventListener('click', handleNavClick);
-document.getElementById('btn-cad-func').addEventListener('click', handleNavClick);
+// document.getElementById('btn-rotas').addEventListener('click', handleNavClick);
+// document.getElementById('btn-cad-func').addEventListener('click', handleNavClick);
 
 document.addEventListener('DOMContentLoaded', () => {
     loadComponent('./dashboard/date-hour-dashboard.html');
