@@ -25,7 +25,7 @@ var usuarioRouter = require("./src/routes/usuarios");
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 // app.use(express.static(path.join(__dirname, "public")));
-app.use(express.static(path.join(__dirname, "public"), { index: 'home.html' }));
+app.use(express.static(path.join(__dirname, "public"), { index: 'index.html' }));
 
 app.use(cors());
 

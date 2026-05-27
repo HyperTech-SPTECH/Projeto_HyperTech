@@ -6,7 +6,7 @@ function autenticar(email, senha) {
         SELECT usuario_id, nome, email, senha, cargo_id FROM usuario WHERE email = '${email}' AND senha = '${senha}';
     `;
     console.log("Executando a instrução SQL: \n" + instrucaoSql);
-    return database.executar(instrucaoSql);
+    return database.mysqlExecutar(instrucaoSql);
 }
 
 // Coloque os mesmos parâmetros aqui. Vá para a var instrucaoSql
@@ -15,14 +15,14 @@ async function cadastrar(nome, email, cnpj, senha) {
     
     // Insira exatamente a query do banco aqui, lembrando da nomenclatura exata nos valores
     //  e na ordem de inserção dos dados.
-   var idEmpresa = await database.executar(`Select empresa_id from empresa where cnpj = '${cnpj}'`);
+   var idEmpresa = await database.mysqlExecutar(`Select empresa_id from empresa where cnpj = '${cnpj}'`);
     console.log("Estou aqui" + idEmpresa);
    if(idEmpresa.length > 0){
           var instrucaoSql = `
         INSERT INTO usuario (nome, email, senha, empresa_id, cargo_id) VALUES ('${nome}', '${email}', '${senha}', '${idEmpresa[0].empresa_id}', 1);
     `;
     console.log("Executando a instrução SQL: \n" + instrucaoSql);
-    return database.executar(instrucaoSql);
+    return database.mysqlExecutar(instrucaoSql);
    } else {
     console.log("cnpj não existe");
    }
