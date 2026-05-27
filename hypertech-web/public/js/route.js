@@ -1,4 +1,4 @@
-function renderSistemaRotas(params) {    
+function renderSistemaRotas(params) {
     const URL_GEOCODE  = "/rotas/geocode";
     const URL_CALCULAR = "/rotas/calcular";
     
@@ -33,29 +33,30 @@ function renderSistemaRotas(params) {
         coordenadasSelecionadas[campo].lat = null;
         coordenadasSelecionadas[campo].lng = null;
         
-        if (campo === "origem")
+        if (campo === "origem") {
             clearTimeout(timerOrigem);
-        else 
+        } else {
             clearTimeout(timerDestino);
+        }
         
         var timer = setTimeout(function() { 
             buscarSugestoes(campo, valorDigitado); 
         }, 400);
         
-        if (campo === "origem")
+        if (campo === "origem") {
             timerOrigem  = timer;
-        else
+        } else {
             timerDestino = timer;
+        }
     }
     
     async function buscarSugestoes(campo, textoBuscado) {
         try {
-            var resposta = await fetch(
-                URL_GEOCODE + "?q=" + encodeURIComponent(textoBuscado)
-            );
+            var resposta = await fetch(URL_GEOCODE + "?q=" + encodeURIComponent(textoBuscado));
             
-            if (!resposta.ok) 
+            if (!resposta.ok) {
                 return;
+            }
             
             var listaDeSugestoes = await resposta.json();
             exibirListaDeSugestoes(campo, listaDeSugestoes);
@@ -68,10 +69,11 @@ function renderSistemaRotas(params) {
         var elementoLista = document.getElementById("sugestoes" + capitalizar(campo));
         elementoLista.innerHTML = "";
         
-        if (campo === "origem") 
+        if (campo === "origem") {
             indiceSelecionadoOrigem  = -1;
-        else
+        } else {
             indiceSelecionadoDestino = -1;
+        }
         
         if (sugestoes.length === 0) { 
             esconderLista(campo); 
@@ -101,17 +103,25 @@ function renderSistemaRotas(params) {
         
         var textoResumido = enderecoSelecionado.display.split(",").slice(0, 2).join(",");
         document.getElementById("input" + capitalizar(campo)).value = textoResumido;
+        
         esconderLista(campo);
         
-        if (marcadorDestino !== null) 
+        if (campo == "origem" && marcadorOrigem !== null) {
+            marcadorOrigem.remove();
+        }
+        
+        if (campo == "destino" && marcadorDestino !== null) {
             marcadorDestino.remove();
+        }
         
         if (campo === "origem") {
             marcadorOrigem = L.marker([enderecoSelecionado.lat, enderecoSelecionado.lng])
-            .addTo(mapa).bindPopup("📍 Origem: " + textoResumido);
+            .addTo(mapa)
+            .bindPopup("📍 Origem: " + textoResumido);
         } else {
             marcadorDestino = L.marker([enderecoSelecionado.lat, enderecoSelecionado.lng])
-            .addTo(mapa).bindPopup("🏁 Destino: " + textoResumido);
+            .addTo(mapa)
+            .bindPopup("🏁 Destino: " + textoResumido);
         }
         
         mapa.setView([enderecoSelecionado.lat, enderecoSelecionado.lng], 15);
@@ -122,8 +132,13 @@ function renderSistemaRotas(params) {
     }
     
     document.addEventListener("click", function(evento) {
-        if (!evento.target.closest("#inputOrigem")  && !evento.target.closest("#sugestoesOrigem"))  esconderLista("origem");
-        if (!evento.target.closest("#inputDestino") && !evento.target.closest("#sugestoesDestino")) esconderLista("destino");
+        if (!evento.target.closest("#inputOrigem") && !evento.target.closest("#sugestoesOrigem")) {
+            esconderLista("origem");
+        }
+        
+        if (!evento.target.closest("#inputDestino") && !evento.target.closest("#sugestoesDestino")) {
+            esconderLista("destino");
+        }
     });
     
     async function calcularRota() {
@@ -131,7 +146,6 @@ function renderSistemaRotas(params) {
         var lngOrigem = coordenadasSelecionadas.origem.lng;
         var latDestino = coordenadasSelecionadas.destino.lat;
         var lngDestino = coordenadasSelecionadas.destino.lng;
-        
         
         if (latOrigem === null || latDestino === null) {
             alert("Selecione a origem e o destino nas sugestões antes de calcular.");
@@ -142,21 +156,15 @@ function renderSistemaRotas(params) {
             linhaRotaDireta.remove(); 
             linhaRotaDireta = null; 
         }
-
+        
         if (linhaRotaSegura !== null) { 
             linhaRotaSegura.remove(); 
             linhaRotaSegura = null; 
         }
-
+        
         camadaPoligonos.clearLayers();
-        document.getElementById("areaResultados").style.display = "none";
         
         try {
-            console.log(latOrigem)
-            console.log(lngOrigem)
-            console.log(latDestino)
-            console.log(lngDestino)
-
             var resposta = await fetch(URL_CALCULAR, {
                 method:  "POST",
                 headers: { "Content-Type": "application/json" },
@@ -164,12 +172,12 @@ function renderSistemaRotas(params) {
                     origemLat: latOrigem, 
                     origemLng: lngOrigem, 
                     destLat: latDestino, 
-                    destLng: lngDestino }),
+                    destLng: lngDestino 
+                }),
             });
             
             var dados = await resposta.json();
-            console.log(dados)
-
+            
             if (!resposta.ok) { 
                 alert("Erro: " + (dados.error || "Erro desconhecido")); 
                 return; 
@@ -187,30 +195,30 @@ function renderSistemaRotas(params) {
                 }).addTo(mapa);
             }
             
-            console.log("6");
-            
             if (dados.rota_segura && dados.rota_segura.geometria) {
                 linhaRotaSegura = L.geoJSON(dados.rota_segura.geometria, {
                     style: { color: "#22c55e", weight: 5, opacity: 0.9 },
                 }).addTo(mapa);
             }
             
-            console.log("7");
+            if (linhaRotaSegura !== null) {
+                mapa.fitBounds(linhaRotaSegura.getBounds(), {
+                    padding: [50, 50] 
+                });
+            } else if (linhaRotaDireta !== null) {
+                mapa.fitBounds(linhaRotaDireta.getBounds(), { 
+                    padding: [50, 50] 
+                });
+            }
             
-            
-            if      (linhaRotaSegura !== null) mapa.fitBounds(linhaRotaSegura.getBounds(), { padding: [50, 50] });
-            else if (linhaRotaDireta !== null) mapa.fitBounds(linhaRotaDireta.getBounds(), { padding: [50, 50] });
+            console.log(dados)
+            console.log(dados.rota_padrao)
+            console.log(dados.rota_padrao.distancia_km)
             
             document.getElementById("distanciaRotaDireta").textContent = dados.rota_padrao ? dados.rota_padrao.distancia_km : "—";
             document.getElementById("distanciaRotaSegura").textContent = dados.rota_segura ? dados.rota_segura.distancia_km : "—";
             document.getElementById("areaResultados").style.display = "block";
-            
-            console.log("8");
-            
-            
         } catch (erro) {
-            console.log("9");
-            
             alert("Falha na requisição: " + erro.message);
         }
     }
@@ -218,22 +226,24 @@ function renderSistemaRotas(params) {
     function limparTudo() {
         document.getElementById("inputOrigem").value  = "";
         document.getElementById("inputDestino").value = "";
+        
         coordenadasSelecionadas.origem.lat  = null;
         coordenadasSelecionadas.origem.lng  = null;
         coordenadasSelecionadas.destino.lat = null;
         coordenadasSelecionadas.destino.lng = null;
+        
         esconderLista("origem");
         esconderLista("destino");
-        if (marcadorOrigem  !== null) { marcadorOrigem.remove();  marcadorOrigem  = null; }
+        
+        if (marcadorOrigem !== null)  { marcadorOrigem.remove();  marcadorOrigem  = null; }
         if (marcadorDestino !== null) { marcadorDestino.remove(); marcadorDestino = null; }
         if (linhaRotaDireta !== null) { linhaRotaDireta.remove(); linhaRotaDireta = null; }
         if (linhaRotaSegura !== null) { linhaRotaSegura.remove(); linhaRotaSegura = null; }
+        
         camadaPoligonos.clearLayers();
-        document.getElementById("areaResultados").style.display = "none";
     }
     
     document.getElementById("inputOrigem").addEventListener("input", function() {
-        console.log("aoDigitar")
         aoDigitar('origem');
     });
     
@@ -242,7 +252,6 @@ function renderSistemaRotas(params) {
     });
     
     document.getElementById("btnCalcularRota").addEventListener("click", calcularRota);
-    document.getElementById("btnLimparTudo").addEventListener("click", limparTudo);  
-    
-    console.log("fim")
+    document.getElementById("btnLimparTudo").addEventListener("click", limparTudo);
+    // document.getElementById("btnSalvarRota").addEventListener("click", salvarRota);
 }

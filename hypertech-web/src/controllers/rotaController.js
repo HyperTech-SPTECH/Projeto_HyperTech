@@ -40,58 +40,92 @@ async function calcular(req, res) {
     }
     
     try {
-        // Busca o nó mais próximo do endereço de ORIGEM
-        var respostaNoOrigem = await pool.query(
-            `SELECT id FROM public.ways_vertices_pgr
-             ORDER BY geom <-> ST_SetSRID(ST_MakePoint(${origemLng}, ${origemLat}), 4326)
-             LIMIT 1`,
-        );
+        var queryNo = (lng, lat) => ({
+            text: `
+                SELECT 
+                    CASE WHEN dist_source <= dist_target THEN source ELSE target END AS id
+                FROM (
+                    SELECT 
+                        source, target,
+                        ST_Distance(ST_StartPoint(geom), ST_SetSRID(ST_MakePoint($1,$2),4326)) AS dist_source,
+                        ST_Distance(ST_EndPoint(geom),   ST_SetSRID(ST_MakePoint($1,$2),4326)) AS dist_target
+                    FROM public.ways
+                    ORDER BY geom <-> ST_SetSRID(ST_MakePoint($1,$2),4326)
+                    LIMIT 5
+                ) t
+                ORDER BY LEAST(dist_source, dist_target)
+                LIMIT 1
+            `,
+            values: [lng, lat]
+        });
         
-        // Busca o nó mais próximo do endereço de DESTINO
-        var respostaNoDestino = await pool.query(
-            `SELECT id FROM public.ways_vertices_pgr
-             ORDER BY geom <-> ST_SetSRID(ST_MakePoint(${destLng}, ${destLat}), 4326)
-             LIMIT 1`,
-        );
+        var [resOrig, resDest] = await Promise.all([
+            pool.query(queryNo(origemLng, origemLat)),
+            pool.query(queryNo(destLng, destLat)),
+        ]);
         
-        var idOrigem = respostaNoOrigem.rows[0]?.id;
-        var idDestino = respostaNoDestino.rows[0]?.id;
+        var idOrigem  = resOrig.rows[0]?.id;
+        var idDestino = resDest.rows[0]?.id;
         
         if (!idOrigem || !idDestino) {
             return res.status(404).json({ erro: "Nenhum nó próximo encontrado." });
         }
         
-        console.log(`origem=${idOrigem} | destino=${idDestino}`);
+        // Antes toda vez ele varria a tabela ways (que tem 1.750.500 registors), isso leva muito tempo.
+        // Isso faz com que invés dele carregar todas as arestas, ele carrega somente as próximas as coordenadas passadas.
+        // Bounding box é um retangulo no mapa que envolve todas as coordenadas necessarias para ir da origem ao destino.
         
-        // rota direta + rota segura + polígonos de risco
-        var query = `
+        var bboxSubquery = (costCol, revCostCol) => `
+            SELECT id, source, target, ${costCol} AS cost, ${revCostCol} AS reverse_cost
+            FROM public.ways
+            WHERE geom && ST_Expand(
+                ST_Envelope(ST_Collect(
+                    ST_SetSRID(ST_MakePoint(${destLng},  ${destLat}),  4326),
+                    ST_SetSRID(ST_MakePoint(${origemLng}, ${origemLat}), 4326)
+                )), 0.05
+            )
+        `;
+        
+        const query = `
             WITH calc_padrao AS (
-                SELECT ruas.geom
-                FROM pgr_dijkstra(
-                    'SELECT id, source, target, cost, reverse_cost FROM public.ways',
+                SELECT 
+                    CASE 
+                        WHEN rota.node = ruas.source THEN ruas.geom
+                        ELSE ST_Reverse(ruas.geom)
+                    END AS geom,
+                    rota.seq
+                FROM pgr_bdDijkstra(
+                    '${bboxSubquery('cost', 'reverse_cost')}',
                     ${idOrigem}, ${idDestino}, true
                 ) AS rota
                 JOIN public.ways AS ruas ON rota.edge = ruas.id
+                WHERE rota.edge != -1
             ),
             calc_seguro AS (
-                SELECT ruas.geom
-                FROM pgr_dijkstra(
-                    'SELECT id, source, target, custo_risco AS cost, custo_risco_reverso AS reverse_cost FROM public.ways',
+                SELECT 
+                    CASE 
+                        WHEN rota.node = ruas.source THEN ruas.geom
+                        ELSE ST_Reverse(ruas.geom)
+                    END AS geom,
+                    rota.seq
+                FROM pgr_bdDijkstra(
+                    '${bboxSubquery('custo_risco', 'custo_risco_reverso')}',
                     ${idOrigem}, ${idDestino}, true
                 ) AS rota
                 JOIN public.ways AS ruas ON rota.edge = ruas.id
+                WHERE rota.edge != -1
             ),
             resumo_padrao AS (
                 SELECT
                     ROUND((SUM(ST_Length(geom::geography)) / 1000.0)::numeric, 2) AS distancia_km,
-                    ST_AsGeoJSON(ST_Simplify(ST_MakeLine(geom), 0.0001))::jsonb    AS geometria
+                    ST_AsGeoJSON(ST_Simplify(ST_MakeLine(geom ORDER BY seq), 0.0001))::jsonb AS geometria
                 FROM calc_padrao
             ),
             resumo_seguro AS (
                 SELECT
                     ROUND((SUM(ST_Length(geom::geography)) / 1000.0)::numeric, 2) AS distancia_km,
-                    ST_AsGeoJSON(ST_Simplify(ST_MakeLine(geom), 0.0001))::jsonb    AS geometria,
-                    ST_Envelope(ST_Collect(geom))                                  AS caixa_envolvente
+                    ST_AsGeoJSON(ST_Simplify(ST_MakeLine(geom ORDER BY seq), 0.0001))::jsonb AS geometria,
+                    ST_Envelope(ST_Collect(geom)) AS caixa_envolvente
                 FROM calc_seguro
             ),
             poligonos_relevantes AS (
@@ -115,7 +149,6 @@ async function calcular(req, res) {
         
         console.log("Rota traçada com sucesso.")
         return res.json(dadosEnvio);
-        
     } catch (err) {
         console.error("Erro no cálculo de rota:", err.message);
         return res.status(500).json({ erro: "Erro interno.", detalhe: err.message });
