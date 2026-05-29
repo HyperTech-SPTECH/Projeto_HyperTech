@@ -1,6 +1,6 @@
 const contentArea = document.getElementById('main-content');
 
-loadComponent("./dashboard/date-hour-dashboard.html")
+// loadComponent("./dashboard/date-hour-dashboard.html")
 
 async function loadComponent(fileName) {
     try {
@@ -64,6 +64,7 @@ document.getElementById('btn-dashboard').addEventListener('click', handleNavClic
 
 document.addEventListener('DOMContentLoaded', () => {
     loadComponent('./dashboard/date-hour-dashboard.html');
+    pullInformationFromFilters()
 });
 
 function trocarDashRegiao() {
