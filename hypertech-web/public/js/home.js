@@ -1,6 +1,6 @@
 var contentArea = document.getElementById('main-content');
 
-loadComponent("./dashboard/date-hour-dashboard.html")
+// loadComponent("./dashboard/date-hour-dashboard.html")
 
 async function loadComponent(fileName) {
     try {
@@ -44,9 +44,11 @@ function handleNavClick(ev) {
     }
     evAtual.classList.add('nav-button--selected');
 
-    var targetFile = "";
+    let targetFile = "";
+    let dashboardFilters = false;
     if (evAtual.id === "btn-dashboard") {
         targetFile = "./dashboard/date-hour-dashboard.html";
+        dashboardFilters = true
     } else if (evAtual.id === "btn-rotas") {
         targetFile = "./route.html";
     } else if (evAtual.id === "btn-cad-func") {
@@ -55,20 +57,27 @@ function handleNavClick(ev) {
 
     if(targetFile) {
         loadComponent(targetFile);
+        if (dashboardFilters) {
+            pullInformationFromFilters()
+        }
     }
 }
 
 document.getElementById('btn-dashboard').addEventListener('click', handleNavClick);
 document.getElementById('btn-rotas').addEventListener('click', handleNavClick);
+// document.getElementById('btn-cad-func').addEventListener('click', handleNavClick);
 
 document.addEventListener('DOMContentLoaded', () => {
     loadComponent('./dashboard/date-hour-dashboard.html');
+    pullInformationFromFilters()
 });
 
 function trocarDashRegiao() {
     loadComponent('./dashboard/region-dashboard.html');
+    pullInformationFromFilters()
 }
 
 function trocarDashHoraDia() {
     loadComponent('./dashboard/date-hour-dashboard.html');
+    pullInformationFromFilters()
 }
