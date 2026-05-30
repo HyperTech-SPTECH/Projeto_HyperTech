@@ -45,8 +45,10 @@ function handleNavClick(ev) {
     evAtual.classList.add('nav-button--selected');
 
     let targetFile = "";
+    let dashboardFilters = false;
     if (evAtual.id === "btn-dashboard") {
         targetFile = "./dashboard/date-hour-dashboard.html";
+        dashboardFilters = true
     } else if (evAtual.id === "btn-rotas") {
         targetFile = "./route.html";
     } else if (evAtual.id === "btn-cad-func") {
@@ -55,6 +57,9 @@ function handleNavClick(ev) {
 
     if(targetFile) {
         loadComponent(targetFile);
+        if (dashboardFilters) {
+            pullInformationFromFilters()
+        }
     }
 }
 
@@ -69,8 +74,10 @@ document.addEventListener('DOMContentLoaded', () => {
 
 function trocarDashRegiao() {
     loadComponent('./dashboard/region-dashboard.html');
+    pullInformationFromFilters()
 }
 
 function trocarDashHoraDia() {
     loadComponent('./dashboard/date-hour-dashboard.html');
+    pullInformationFromFilters()
 }
