@@ -76,6 +76,24 @@ function trocarDashHoraDia() {
 
 function trocarProfileDash() {
     loadComponent('./dashboard/profile-dashboard.html');
+    
+    setTimeout(() => {
+        document.getElementById('idInputNomeUser').value = sessionStorage.NOME_USUARIO
+        document.getElementById('idInputEmailUser').value = sessionStorage.EMAIL_USUARIO
+        document.getElementById('idInputSenhaUser').value = '**********'
+        let data = sessionStorage.getItem('DT_CRIACAO_USUARIO')
+        let novaData = new Date(data)
+        document.getElementById('idInputDtCricaoUser').value = novaData.toLocaleDateString('pt-BR');
+        document.getElementById('idInputNomeEmpresa').value = sessionStorage.NOME_EMPRESA
+        document.getElementById('idInputCnpjEmpresa').value = sessionStorage.CNPJ_EMPRESA
+        document.getElementById('idInputEmailEmpresa').value = sessionStorage.EMAIL_EMPRESA
+        document.getElementById('idInputTelefoneEmpresa').value = sessionStorage.TELEFONE_EMPRESA
+        let dataEmpresa = sessionStorage.getItem('DT_CADASTRO_EMPRESA')
+        let novaDataEmpresa = new Date(dataEmpresa)
+        document.getElementById('idInputDtCriadoEmpresa').value = novaDataEmpresa.toLocaleDateString('pt-BR');
+        document.getElementById('idButtons').style.display = 'none'
+
+    }, 20)
 }
 
 function trocarNotificationDash() {
@@ -85,20 +103,3 @@ function trocarNotificationDash() {
 document.getElementById('button-menu').addEventListener('click', () => {
     document.getElementById('dropdown-menu').classList.toggle('displayNone')
 })
-
-function editFields() {
-    let inputs = document.getElementsByClassName('changeable-profile-data-user')
-    for (i = 0; i < inputs.length; i++) {
-        inputs[i].querySelector('input').removeAttribute('disabled')
-    }
-    document.getElementById('idButtons').style.display = 'flex'
-}
-
-function cancelEditFields() {
-    let inputs = document.getElementsByClassName('changeable-profile-data-user')
-    for (i = 0; i < inputs.length; i++) {
-        inputs[i].querySelector('input').disabled = true
-    }
-    // VOLTAR OS CAMPOS PARA OS QUE ESTAVAM ANTES (SESSION STORAGE)
-    document.getElementById('idButtons').style.display = 'none'
-}

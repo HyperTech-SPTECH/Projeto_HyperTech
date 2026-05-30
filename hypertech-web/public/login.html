@@ -80,6 +80,13 @@
                     sessionStorage.NOME_USUARIO = json[0].nome;
                     sessionStorage.ID_USUARIO = json[0].usuario_id;
                     sessionStorage.CARGO_USUARIO = json[0].cargo_id;
+                    sessionStorage.setItem('DT_CRIACAO_USUARIO', json[0].data_criacao);
+                    
+                    sessionStorage.EMAIL_EMPRESA = json[0].email_empresa;
+                    sessionStorage.NOME_EMPRESA = json[0].nome_empresa;
+                    sessionStorage.CNPJ_EMPRESA = json[0].cnpj;
+                    sessionStorage.TELEFONE_EMPRESA = json[0].telefone;
+                    sessionStorage.setItem('DT_CADASTRO_EMPRESA', json[0].data_cadastro);
                     
 
                     setTimeout(function () {
