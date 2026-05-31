@@ -33,6 +33,32 @@ function cancelConfirmRemoveAccount() {
     document.getElementById('idModalConfirmRemoveAccount').style.display = 'none';
 }
 
+// Validação Email
+function valEmail() {
+    var email = document.getElementById('idInputEmailUser').value
+
+    var tamanho = email.length - 1
+    
+    if (email.includes('@')) { // Não pode ter mais de 1 '@'
+        email = email.replace('@', '*')
+        if (email.includes('@')) {
+            idTextWarnProfile.innerHTML = 'Apenas 1 "@" é permitido'
+        } else {
+            idTextWarnProfile.innerHTML = ''
+        }    
+    } else {
+        idTextWarnProfile.innerHTML = ''
+    }    
+
+    if (email[0] == '.' || (email[tamanho] == '.' && email[(tamanho - 1)] == '.')) { // Não deixa começar com ponto e nem ter 2 pontos seguidos
+        idInputEmailUserEmpresa.value = idInputEmailUserEmpresa.value.slice(0, -1)
+    }
+    
+    if (email[tamanho] == ' ' || email[tamanho] == ',' || email[tamanho] == ':' || email[tamanho] == ';') { // Não pode usar 'espaço', 'vírgula', ':', ';'
+        idInputEmailUserEmpresa.value = idInputEmailUserEmpresa.value.slice(0, -1)
+    }
+}
+
 function alterarInformacoesPerfil() {
     var nomeVar = idInputNomeUser.value;
     var emailVar = idInputEmailUser.value;
@@ -40,6 +66,9 @@ function alterarInformacoesPerfil() {
     var idVar = sessionStorage.ID_USUARIO
 
 
+    idTextWarnProfile.innerText = ''
+    document.getElementById('idTextWarnProfile').classList.remove('textRed')
+    document.getElementById('idTextWarnProfile').classList.remove('textGreen')
     // Verificando se há algum campo em branco
     if (nomeVar == '' ||
         emailVar == '' ||
@@ -147,12 +176,9 @@ function alterarInformacoesPerfil() {
                 console.log("a")
                 console.log(JSON.stringify(json));
                 console.log("b")
-                sessionStorage.EMAIL_USUARIO = json[0].email;
-                sessionStorage.NOME_USUARIO = json[0].nome;
-                sessionStorage.ID_USUARIO = json[0].usuario_id;
-                sessionStorage.CARGO_USUARIO = json[0].cargo_id;
-                
-
+                sessionStorage.EMAIL_USUARIO = emailVar;
+                sessionStorage.NOME_USUARIO = nomeVar;
+                cancelEditFields()
                 
                 idTextWarnProfile.innerText = 'Conta alterada'
                 document.getElementById('idTextWarnProfile').classList.add('textGreen')
@@ -162,6 +188,41 @@ function alterarInformacoesPerfil() {
         } else {
 
             console.log("Houve um erro ao tentar realizar a alteração das informações do Usuário!");
+
+            resposta.text().then(texto => {
+                console.error(texto);
+            });
+        }
+
+    }).catch(function (erro) {
+        console.log(erro);
+    })
+}
+
+function removerInformacoesPerfil() {
+    var idVar = sessionStorage.ID_USUARIO
+
+    fetch("/profile/remover", {
+        method: "POST",
+        headers: {
+            "Content-Type": "application/json"
+        },
+        body: JSON.stringify({
+            idServer: idVar
+        })
+    }).then(function (resposta) {
+    
+        if (resposta.ok) {
+            console.log(resposta);
+
+            alert('Conta removida!')
+            setTimeout(function () {
+                window.location = "./index.html";
+            }, 500); // apenas para exibir o loading
+
+        } else {
+
+            console.log("Houve um erro ao tentar realizar a remoção do usuário!");
 
             resposta.text().then(texto => {
                 console.error(texto);

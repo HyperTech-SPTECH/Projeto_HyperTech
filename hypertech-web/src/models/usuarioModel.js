@@ -6,28 +6,6 @@ function autenticar(email, senha) {
         SELECT usuario.usuario_id, usuario.nome, usuario.email, usuario.senha, usuario.cargo_id, usuario.data_criacao, empresa.nome as nome_empresa, empresa.cnpj, empresa.telefone, empresa.email as email_empresa, empresa.data_cadastro FROM usuario JOIN empresa ON usuario.empresa_id = empresa.empresa_id WHERE usuario.email = '${email}' AND senha = '${senha}';
     `;
     console.log("Executando a instrução SQL: \n" + instrucaoSql);
-    // let infos = []
-    // let user = await database.mysqlExecutar(instrucaoSql)
-    // infos.push(user)
-    // console.log(infos)
-    // if (infos.length == 0) {
-    //     return []
-    // }
-    
-    // // CNPJ
-    // var instrucaoSql2 = `
-    //     SELECT cnpj FROM empresa WHERE empresa_id = '${user.empresa_id}';
-    // `;
-    // let cnpj = await database.mysqlExecutar(instrucaoSql2);
-    // console.log("Executando a instrução SQL: \n" + instrucaoSql2);
-
-    // var instrucaoSql3 = `
-    //     SELECT  FROM empresa WHERE cnpj = '${cnpj}';
-    // `;
-    // console.log("Executando a instrução SQL: \n" + instrucaoSql3);
-
-    // let enterprise = await database.mysqlExecutar(instrucaoSql2)
-    // infos.push(enterprise)
     return database.mysqlExecutar(instrucaoSql);
 }
 

@@ -103,3 +103,10 @@ function trocarNotificationDash() {
 document.getElementById('button-menu').addEventListener('click', () => {
     document.getElementById('dropdown-menu').classList.toggle('displayNone')
 })
+
+function logoutDashboard() {
+    sessionStorage.clear()
+    setTimeout(function () {
+        window.location = "./index.html";
+    }, 200); // apenas para exibir o loading
+}

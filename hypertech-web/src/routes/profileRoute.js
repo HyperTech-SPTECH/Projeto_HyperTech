@@ -8,8 +8,8 @@ router.post("/alterar", function (req, res) {
     profileController.alterar(req, res);
 })
 
-// router.post("/autenticar", function (req, res) {
-//     profileController.autenticar(req, res);
-// });
+router.post("/remover", function (req, res) {
+    profileController.remover(req, res);
+});
 
 module.exports = router;

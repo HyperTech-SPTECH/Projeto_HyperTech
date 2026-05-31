@@ -47,7 +47,13 @@ function cadastrar(req, res) {
                     res.json(resultado);
                 }
             ).catch(
-                function (erro) {
+                async function (erro) {
+                    if (erro.code === "ER_DUP_ENTRY") {
+                        console.log('mesmo email')
+                        return await res.status(409).json({
+                            erro: "EMAIL_DUPLICADO"
+                        })
+                    }
                     console.log(erro);
                     console.log(
                         "\nHouve um erro ao realizar o cadastro! Erro: ",

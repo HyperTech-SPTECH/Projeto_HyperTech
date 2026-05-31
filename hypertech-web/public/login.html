@@ -23,7 +23,7 @@
                 <div class="auth-formulario">
                     <div class="auth-grupo-input">
                         <label>Email</label>
-                        <input type="text" id="email_input" value="seguradora@gmail.com" placeholder="Ex: hypertech@gmail.com" />
+                        <input type="text" id="email_input" value="seguradora@gmail.com" placeholder="Ex: hypertech@gmail.com" oninput="valEmail()"/>
                     </div>
                     
                     <div class="auth-grupo-input">
@@ -32,7 +32,7 @@
                     </div>
                 </div>
                 
-                <p class="auth-mensagem" style="color: #3b82f6;">Os campos devem ser preenchidos.</p>
+                <p id="res" class="auth-mensagem" style="color: #3b82f6;">Os campos devem ser preenchidos.</p>
                 
                 <button class="auth-botao" onclick="entrar()" id="br_entrar">Entrar</button>
                 
@@ -89,6 +89,8 @@
                     sessionStorage.setItem('DT_CADASTRO_EMPRESA', json[0].data_cadastro);
                     
 
+                    document.getElementById('res').textContent = 'Login efetuado!'
+                    document.getElementById('res').style.color = '#00ff00'
                     setTimeout(function () {
                         window.location = "./home.html";
                     }, 1000); // apenas para exibir o loading
@@ -101,7 +103,8 @@
 
                 resposta.text().then(texto => {
                     console.error(texto);
-                    finalizarAguardar(texto);
+                    document.getElementById('res').textContent = 'Email ou senha incorretos!'
+                    document.getElementById('res').style.color = '#ff0000'
                 });
             }
 
@@ -114,5 +117,30 @@
 
     function resetSessao() {
         sessionStorage.clear()
+    }
+    
+    function valEmail() {
+        var email = document.getElementById('email_input').value
+
+        var tamanho = email.length - 1
+        
+        if (email.includes('@')) { // Não pode ter mais de 1 '@'
+            email = email.replace('@', '*')
+            if (email.includes('@')) {
+                div_mensagemEmail.innerHTML = 'Apenas 1 "@" é permitido'
+            } else {
+                div_mensagemEmail.innerHTML = ''
+            }    
+        } else {
+            div_mensagemEmail.innerHTML = ''
+        }    
+
+        if (email[0] == '.' || (email[tamanho] == '.' && email[(tamanho - 1)] == '.')) { // Não deixa começar com ponto e nem ter 2 pontos seguidos
+            email_input.value = email_input.value.slice(0, -1)
+        }
+        
+        if (email[tamanho] == ' ' || email[tamanho] == ',' || email[tamanho] == ':' || email[tamanho] == ';') { // Não pode usar 'espaço', 'vírgula', ':', ';'
+            email_input.value = email_input.value.slice(0, -1)
+        }
     }
 </script>
