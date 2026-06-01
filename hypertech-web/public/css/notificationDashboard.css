@@ -15,13 +15,15 @@
     border-radius: 2rem;
 }
 
-.box-infos .row-titles-emails {
+.box-infos .row-titles-emails,
+    .box-infos .row-titles-notifications {
     width: 100%;
     display: flex;
     justify-content: space-between;
 }
 
-.box-infos .row-titles-emails span {
+.box-infos .row-titles-emails span,
+    .box-infos .row-titles-notifications span {
     width: 25%;
     display: flex;
     justify-content: center;

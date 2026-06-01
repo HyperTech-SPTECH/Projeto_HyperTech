@@ -255,6 +255,8 @@
                     res.textContent = "Cadastro realizado com sucesso! Redirecionando para tela de Login...";
                     document.getElementById('res').classList.add('textGreen')
 
+                    criarInformacoesNotificacao(emailVar)
+
                     setTimeout(() => {
                         window.location = "login.html";
                     }, "2000");
@@ -267,10 +269,6 @@
                     document.getElementById('res').classList.add('textRed')
                     return        
                 }
-                // if (resposta.erro === "EMAIL_DUPLICADO") {
-                //     alert('Este email já está cadastrado.')
-                //     return
-                // }
             })
             .catch(function (resposta) {
                 console.log(`#ERRO: ${resposta}`);
@@ -281,5 +279,42 @@
 
         function resetSessao() {
             sessionStorage.clear()
+        }
+
+        function criarInformacoesNotificacao(email) {
+            var emailVar = email;
+
+            fetch("/notification/criacao", {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json"
+                },
+                body: JSON.stringify({
+                    emailServer: emailVar
+                })
+            }).then(function (resposta) {
+            
+                if (resposta.ok) {
+                    console.log(resposta);
+
+                    resposta.json().then(json => {
+                        console.log(json);
+                        console.log("a")
+                        console.log(JSON.stringify(json));
+                        console.log("b")
+                    });
+
+                } else {
+
+                    console.log("Houve um erro ao tentar realizar a criação das informações de notificação do Usuário!");
+
+                    resposta.text().then(texto => {
+                        console.error(texto);
+                    });
+                }
+
+            }).catch(function (erro) {
+                console.log(erro);
+            })
         }
     </script>

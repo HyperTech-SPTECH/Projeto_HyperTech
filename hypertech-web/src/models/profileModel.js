@@ -13,11 +13,27 @@ function alterar(id, nome, email, senha) {
     return database.mysqlExecutar(instrucaoSql);
 }
 
-function remover(id) {
+async function remover(id) {
     console.log("ACESSEI O USUARIO MODEL \n \n\t\t >> Se aqui der erro de 'Error: connect ECONNREFUSED',\n \t\t >> verifique suas credenciais de acesso ao banco\n \t\t >> e se o servidor de seu BD está rodando corretamente. \n\n function remover():",);
     
     // Insira exatamente a query do banco aqui, lembrando da nomenclatura exata nos valores
     //  e na ordem de inserção dos dados.
+
+    var instrucaoSqlSelect = `
+        SELECT id FROM usuario_email_notificacao WHERE usuario_id = '${id}';
+    `;
+    let resultSelect = await database.mysqlExecutar(instrucaoSqlSelect)
+    
+    var instrucaoSqlTabela02 = `
+        DELETE FROM preferencias_notificacao WHERE usuario_email_id = '${resultSelect[0].id}';
+    `
+    database.mysqlExecutar(instrucaoSqlTabela02)
+
+    var instrucaoSqlTabela01 = `
+        DELETE FROM usuario_email_notificacao WHERE usuario_id = '${id}';
+    `
+    database.mysqlExecutar(instrucaoSqlTabela01)
+
     var instrucaoSql = `
         DELETE FROM usuario WHERE usuario_id = '${id}';
     `;
