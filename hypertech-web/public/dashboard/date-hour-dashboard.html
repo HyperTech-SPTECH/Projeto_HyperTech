@@ -1,9 +1,7 @@
-
 <div class="dashboard-panel">
     <h2 class="dashboard-panel__title">Dashboard de Periculosidade Por Dia e Horário</h2>
     
     <div class="dashboard-panel__row">
-        
         
         <div class="dashboard-card dashboard-card--filters">
             <div class="dashboard-card__header">Filtrar</div>
@@ -39,7 +37,7 @@
             </div>
         </div>
         
-        <div class="dashboard-card dashboard-card--summary dashboard-button-changeScreen" onclick="trocarDashRegiao()">
+        <div id="cardResumoDashHoraDia" class="dashboard-card dashboard-card--summary dashboard-button-changeScreen ativo" onclick="trocarDashRegiao()">
             <div class="dashboard-card__header">
                 <span>Resumo de Regiões</span>
                 <span class="textAlterAba">clique aqui para trocar de Aba</span>
@@ -50,70 +48,56 @@
                     <span class="tag-diaSeguro">Regiões mais Seguras</span>
                     <span></span>
                     <span></span>
-                    
                     <span class="tag-diaPerigoso">Regiões mais Perigosas</span>
                     <span></span>
                     <span></span>
                 </div>
-
                 <div class="rank-item">
                     <span class="rank rank-green">1</span>
                     <span>Cotia</span>
                     <span>6 (1%)</span>
-
                     <span class="rank rank-red ml">1</span>
                     <span>Mauá</span>
                     <span>200 (32%)</span>
                 </div>
-
                 <div class="rank-item">
                     <span class="rank rank-yellow">2</span>
                     <span>Itapevi</span>
                     <span>15 (2%)</span>
-
                     <span class="rank rank-orange ml">2</span>
                     <span>São Paulo</span>
                     <span>150 (24%)</span>
                 </div>
-
                 <div class="rank-item">
                     <span class="rank rank-yellow">3</span>
                     <span>Itatibi</span>
                     <span>30 (4%)</span>
-
                     <span class="rank rank-orange ml">3</span>
                     <span>Caraguatatuba</span>
                     <span>100 (16%)</span>
                 </div>
-
             </div>
         </div>
     </div>
-    
 
     <div class="dashboard-panel__row">
         
-      
         <div class="dashboard-card dashboard-card--heatmap">
             <div class="dashboard-card__header">
                 Gráfico de Periculosidade (Dia da Semana x Horários)
             </div>
-
             <div class="dashboard-card__body">
                 <div class="heatmap">
                     <div class="heatmap__grid" id="heatmap-grid"></div>
-                    
                     <div class="heatmap__legend">
                         <div class="heatmap__legend-item">
                             <span class="heatmap__block heatmap__block--baixo">B</span> 
                             Baixo Risco
                         </div>
-
                         <div class="heatmap__legend-item">
                             <span class="heatmap__block heatmap__block--medio">M</span> 
                             Médio Risco
                         </div>
-
                         <div class="heatmap__legend-item">
                             <span class="heatmap__block heatmap__block--alto">A</span> 
                             Alto Risco
@@ -122,29 +106,23 @@
                 </div>
             </div>
         </div>
-        
 
-        
         <div class="dashboard-panel__kpi-column">
-
             <div class="dashboard-card dashboard-card--kpi">
                 <div class="dashboard-card__header dashboard-card__header--danger">
                     Dias Mais Perigosos da Semana
                 </div>
-
                 <div class="dashboard-card__body">
                     <div class="rank-item">
                         <span class="rank rank-red">1</span>
                         Sábado
                         <span>200 (32%)</span>
                     </div>
-
                     <div class="rank-item">
                         <span class="rank rank-orange">2</span>
                         Quinta-Feira
                         <span>135 (20%)</span>
                     </div>
-
                     <div class="rank-item">
                         <span class="rank rank-orange">3</span>
                         Sexta-Feira
@@ -153,25 +131,21 @@
                 </div>
             </div>
 
-
             <div class="dashboard-card dashboard-card--kpi">
                 <div class="dashboard-card__header dashboard-card__header--safe">
                     Dias Mais Seguros da Semana
                 </div>
-
                 <div class="dashboard-card__body">
                     <div class="rank-item">
                         <span class="rank rank-green">1</span>
                         Domingo
                         <span>2 (1%)</span>
                     </div>
-
                     <div class="rank-item">
                         <span class="rank rank-yellow">2</span>
                         Segunda-Feira
                         <span>15 (11%)</span>
                     </div>
-
                     <div class="rank-item">
                         <span class="rank rank-yellow">3</span>
                         Terça-Feira
@@ -180,25 +154,21 @@
                 </div>
             </div>
 
-
             <div class="dashboard-card dashboard-card--kpi">
                 <div class="dashboard-card__header dashboard-card__header--danger">
                     Horários Mais Perigosos da Semana
                 </div>
-
                 <div class="dashboard-card__body">
                     <div class="rank-item">
                         <span class="rank rank-red">1</span>
                         03:00 - 04:00
                         <span>200 (32%)</span>
                     </div>
-
                     <div class="rank-item">
                         <span class="rank rank-orange">2</span>
                         07:00 - 08:00
                         <span>135 (20%)</span>
                     </div>
-
                     <div class="rank-item">
                         <span class="rank rank-orange">3</span>
                         17:00 - 18:00
@@ -207,25 +177,21 @@
                 </div>
             </div>
 
-
             <div class="dashboard-card dashboard-card--kpi">
                 <div class="dashboard-card__header dashboard-card__header--safe">
                     Horários Mais Seguros da Semana
                 </div>
-
                 <div class="dashboard-card__body">
                     <div class="rank-item">
                         <span class="rank rank-green">1</span>
                         13:00 - 14:00
                         <span>2 (1%)</span>
                     </div>
-
                     <div class="rank-item">
                         <span class="rank rank-yellow">2</span>
                         06:00 - 07:00
                         <span>15 (11%)</span>
                     </div>
-
                     <div class="rank-item">
                         <span class="rank rank-yellow">3</span>
                         05:00 - 06:00
@@ -233,8 +199,6 @@
                     </div>
                 </div>
             </div>
-
         </div>
     </div>
 </div>
-
