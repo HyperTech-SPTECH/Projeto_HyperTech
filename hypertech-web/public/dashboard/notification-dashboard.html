@@ -107,46 +107,48 @@
                     <span>Ações</span>
                 </div>
             </section>
-            <div class="option-email">
-                <div class="width-email-email">
-                    <span>eduardo@gmail.com</span>
-                </div>
-                <div class="width-status-email">
-                    <span>Desativado</span>
-                </div>
-                <div class="width-actions-email">
-                    <span>
-                        <div class="options-edit-remove-email">
-                            <div id="idEditEmail1" onclick="modalEditCurrentEmail('eduardo@gmail.com')" title="Editar notificações para esse Email">
-                                <img src="../assets/Edit-blue.png" alt="Botão para editar o Email">
+            <section id="options-email">
+                <div class="option-email">
+                    <div class="width-email-email">
+                        <span>eduardo@gmail.com</span>
+                    </div>
+                    <div class="width-status-email">
+                        <span>Desativado</span>
+                    </div>
+                    <div class="width-actions-email">
+                        <span>
+                            <div class="options-edit-remove-email">
+                                <div id="idEditEmail1" onclick="modalEditCurrentEmail('eduardo@gmail.com')" title="Editar notificações para esse Email">
+                                    <img src="../assets/Edit-blue.png" alt="Botão para editar o Email">
+                                </div>
+                                <div id="idRemoveEmail1" onclick="confirmRemoveCurrentEmail('eduardo@gmail.com')" title="Remover este Email">
+                                    <img src="../assets/Lixo-vermelho.png" alt="Botão para remover o Email">
+                                </div>
                             </div>
-                            <div id="idRemoveEmail1" onclick="confirmRemoveCurrentEmail('eduardo@gmail.com')" title="Remover este Email">
-                                <img src="../assets/Lixo-vermelho.png" alt="Botão para remover o Email">
+                        </span>
+                    </div>
+                </div>
+                <div class="option-email">
+                    <div class="width-email-email">
+                        <span>matheus@gmail.com</span>
+                    </div>
+                    <div class="width-status-email">
+                        <span>Ativado</span>
+                    </div>
+                    <div class="width-actions-email">
+                        <span>
+                            <div class="options-edit-remove-email">
+                                <div id="idEditEmail2" onclick="modalEditCurrentEmail('matheus@gmail.com')" title="Editar notificações para esse Email">
+                                    <img src="../assets/Edit-blue.png" alt="Botão para editar o Email">
+                                </div>
+                                <div id="idRemoveEmail2" onclick="confirmRemoveCurrentEmail('matheus@gmail.com')" title="Remover este Email">
+                                    <img src="../assets/Lixo-vermelho.png" alt="Botão para remover o Email">
+                                </div>
                             </div>
-                        </div>
-                    </span>
+                        </span>
+                    </div>
                 </div>
-            </div>
-            <div class="option-email">
-                <div class="width-email-email">
-                    <span>matheus@gmail.com</span>
-                </div>
-                <div class="width-status-email">
-                    <span>Ativado</span>
-                </div>
-                <div class="width-actions-email">
-                    <span>
-                        <div class="options-edit-remove-email">
-                            <div id="idEditEmail2" onclick="modalEditCurrentEmail('matheus@gmail.com')" title="Editar notificações para esse Email">
-                                <img src="../assets/Edit-blue.png" alt="Botão para editar o Email">
-                            </div>
-                            <div id="idRemoveEmail2" onclick="confirmRemoveCurrentEmail('matheus@gmail.com')" title="Remover este Email">
-                                <img src="../assets/Lixo-vermelho.png" alt="Botão para remover o Email">
-                            </div>
-                        </div>
-                    </span>
-                </div>
-            </div>
+            </section>
             <div class="option-add-email">
                 <div id="idAddNewEmail"title="Adicionar um novo Email" onclick="modalCreateNewEmail()">
                     <span>Adicionar um novo Email</span>

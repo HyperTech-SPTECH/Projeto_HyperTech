@@ -1,7 +1,20 @@
 function showConfirmChangeNotification(textMessage, activate = false) {
-    if(document.getElementById('idModalConfirmActiveDeactivateNotification')) {
+    if (document.getElementById('idModalEditCurrentEmail')) {
         console.log('aqui')
         return;
+
+    } else if (document.getElementById('idModalCreateNewEmail')) {
+        console.log('aqui')
+        return;
+
+    } else if (document.getElementById('idModalConfirmRemoveCurrentEmail')) {
+        console.log('aqui')
+        return;
+
+    } else if (document.getElementById('idModalConfirmActiveDeactivateNotification')) {
+        console.log('aqui')
+        return;
+
     }
 
     let modal = document.createElement('section')
@@ -75,9 +88,22 @@ function cancelChangeNotification() {
 }
 
 function confirmRemoveCurrentEmail(currentEmail) {
-    if(document.getElementById('idModalConfirmRemoveCurrentEmail')) {
+    if (document.getElementById('idModalEditCurrentEmail')) {
         console.log('aqui')
         return;
+
+    } else if (document.getElementById('idModalCreateNewEmail')) {
+        console.log('aqui')
+        return;
+
+    } else if (document.getElementById('idModalConfirmRemoveCurrentEmail')) {
+        console.log('aqui')
+        return;
+
+    } else if (document.getElementById('idModalConfirmActiveDeactivateNotification')) {
+        console.log('aqui')
+        return;
+
     }
 
     let modal = document.createElement('section')
@@ -138,9 +164,22 @@ function cancelRemoveCurrentEmail() {
 }
 
 function modalCreateNewEmail() {
-    if(document.getElementById('idModalCreateNewEmail')) {
+    if (document.getElementById('idModalEditCurrentEmail')) {
         console.log('aqui')
         return;
+
+    } else if (document.getElementById('idModalCreateNewEmail')) {
+        console.log('aqui')
+        return;
+
+    } else if (document.getElementById('idModalConfirmRemoveCurrentEmail')) {
+        console.log('aqui')
+        return;
+
+    } else if (document.getElementById('idModalConfirmActiveDeactivateNotification')) {
+        console.log('aqui')
+        return;
+
     }
 
     let modal = document.createElement('section')
@@ -194,9 +233,22 @@ function cancelCreateNewEmail() {
 }
 
 function modalEditCurrentEmail(currentEmail) {
-    if(document.getElementById('idModalEditCurrentEmail')) {
+    if (document.getElementById('idModalEditCurrentEmail')) {
         console.log('aqui')
         return;
+
+    } else if (document.getElementById('idModalCreateNewEmail')) {
+        console.log('aqui')
+        return;
+
+    } else if (document.getElementById('idModalConfirmRemoveCurrentEmail')) {
+        console.log('aqui')
+        return;
+
+    } else if (document.getElementById('idModalConfirmActiveDeactivateNotification')) {
+        console.log('aqui')
+        return;
+
     }
 
     let modal = document.createElement('section')

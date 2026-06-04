@@ -64,6 +64,7 @@ document.getElementById('btn-dashboard').addEventListener('click', handleNavClic
 
 document.addEventListener('DOMContentLoaded', () => {
     loadComponent('./dashboard/date-hour-dashboard.html');
+    console.log(JSON.parse(sessionStorage.getItem('DADOS_NOTIFICACOES')))
 });
 
 function trocarDashRegiao() {

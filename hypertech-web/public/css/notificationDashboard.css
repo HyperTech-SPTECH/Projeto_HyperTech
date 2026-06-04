@@ -95,6 +95,10 @@
     width: 25%;
 }
 
+.box-infos #options-email {
+    width: 100%;
+}
+
 .box-infos .option-email {
     border-bottom: 1px solid black;
 }

@@ -87,6 +87,21 @@
                     sessionStorage.CNPJ_EMPRESA = json[0].cnpj;
                     sessionStorage.TELEFONE_EMPRESA = json[0].telefone;
                     sessionStorage.setItem('DT_CADASTRO_EMPRESA', json[0].data_cadastro);
+
+                    let listNotification = []
+                    for (let i = 0; i < json.length; i++) {
+                        console.log(json[i])
+                        listNotification.push(
+                            {
+                                idEmailN: json[i].emailN_id,
+                                emailN: json[i].emailN,
+                                idTipoN: json[i].tipoNotificacao_id,
+                                tipoN: json[i].tipoNotificacao,
+                                ativoTipoN: json[i].ativoTipoNotificacao,
+                            }
+                        )
+                    }
+                    sessionStorage.setItem('DADOS_NOTIFICACOES', JSON.stringify(listNotification));
                     
 
                     document.getElementById('res').textContent = 'Login efetuado!'
