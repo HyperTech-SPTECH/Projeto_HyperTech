@@ -23,7 +23,7 @@
             </section>
             <div class="option-notification">
                 <div class="width-name-notification-general">
-                    <span>Diaria</span>
+                    <span>Diária</span>
                 </div>
                 <div class="width-description-notification-general">
                     <span>Alterar a notificação Diaria para todos os Emails cadastrados</span>
@@ -94,7 +94,7 @@
     </section>
 
     <section class="registered-emails">
-        <span class="title-div">Emails cadastrados</span>
+        <span class="title-div">Emails cadastrados para receber Notificações</span>
         <div class="box-infos">
             <section class="row-titles-emails">
                 <div class="width-email-email">
@@ -117,10 +117,10 @@
                 <div class="width-actions-email">
                     <span>
                         <div class="options-edit-remove-email">
-                            <div id="idEditEmail1">
+                            <div id="idEditEmail1" onclick="modalEditCurrentEmail('eduardo@gmail.com')" title="Editar notificações para esse Email">
                                 <img src="../assets/Edit-blue.png" alt="Botão para editar o Email">
                             </div>
-                            <div id="idRemoveEmail1">
+                            <div id="idRemoveEmail1" onclick="confirmRemoveCurrentEmail('eduardo@gmail.com')" title="Remover este Email">
                                 <img src="../assets/Lixo-vermelho.png" alt="Botão para remover o Email">
                             </div>
                         </div>
@@ -137,10 +137,10 @@
                 <div class="width-actions-email">
                     <span>
                         <div class="options-edit-remove-email">
-                            <div id="idEditEmail2">
+                            <div id="idEditEmail2" onclick="modalEditCurrentEmail('matheus@gmail.com')" title="Editar notificações para esse Email">
                                 <img src="../assets/Edit-blue.png" alt="Botão para editar o Email">
                             </div>
-                            <div id="idRemoveEmail2">
+                            <div id="idRemoveEmail2" onclick="confirmRemoveCurrentEmail('matheus@gmail.com')" title="Remover este Email">
                                 <img src="../assets/Lixo-vermelho.png" alt="Botão para remover o Email">
                             </div>
                         </div>
@@ -148,7 +148,7 @@
                 </div>
             </div>
             <div class="option-add-email">
-                <div id="idAddNewEmail" onclick="">
+                <div id="idAddNewEmail"title="Adicionar um novo Email" onclick="modalCreateNewEmail()">
                     <span>Adicionar um novo Email</span>
                     <img src="../assets/activate-green.png" alt="Botão para adicionar um novo Email">
                 </div>
@@ -166,6 +166,79 @@
         <div class="buttons-remove-cancel">
             <span id="idCancelConfirmNotification" onclick="">Cancelar</span>
             <span id="idConfirmConfirmNotification" onclick="">Confirmar</span>
+        </div>
+    </section> -->
+    
+    <!-- <section id="idModalConfirmRemoveCurrentEmail">
+        <div class="zoneCurrentEmail"></div>
+        <div class="textCurrentEmail">
+            <span>Realmente deseja ativar a Notificação Diária para todos os emails cadastrados</span>
+        </div>
+        <div class="buttons-remove-cancel">
+            <span id="idCancelConfirmCurrentEmail" onclick="">Cancelar</span>
+            <span id="idConfirmConfirmNotification" onclick="">Confirmar</span>
+        </div>
+    </section> -->
+
+    <!-- <section id="idModalCreateNewEmail">
+        <div class="zoneCreateEmail"></div>
+        <div class="textCreateEmail">
+            <label for="idTextCreateEmail">Digite um novo Email</label>
+            <input type="text" id="idTextCreateEmail" oninput="valEmail()">
+            <span id="idMsgWarn"></span>
+        </div>
+        <div class="buttons-remove-cancel">
+            <span id="idCancelConfirmCreateEmail">Cancelar</span>
+            <span id="idConfirmConfirmCreateEmail">Adicionar</span>
+        </div>
+    </section> -->
+
+    <!-- <section id="idModalEditCurrentEmail">
+        <div class="containerModalEditCurrentEmail">
+            <div class="zoneEditCurrentEmail"></div>
+            <div class="textTitleEditCurrentEmail">
+                <span>Modifique as configurações do Email abaixo</span>
+            </div>
+            <div class="textEmailEditCurrentEmail">
+                <span>eduardo@email.com</span>
+            </div>
+            <div class="containerEditCurrentEmail">
+                <div class="optionSelect">
+                    <span>Notificação Diária</span>
+                    <select name="" id="idSelectDiaria">
+                        <option value="1">Ativado</option>
+                        <option value="0">Desativado</option>
+                    </select>
+                </div>
+    
+                <div class="optionSelect">
+                    <span>Notificação Semanal</span>
+                    <select name="" id="idSelectSemanal">
+                        <option value="1">Ativado</option>
+                        <option value="0">Desativado</option>
+                    </select>
+                </div>
+    
+                <div class="optionSelect">
+                    <span>Notificação Anual</span>
+                    <select name="" id="idSelectAnual">
+                        <option value="1">Ativado</option>
+                        <option value="0">Desativado</option>
+                    </select>
+                </div>
+    
+                <div class="optionSelect">
+                    <span>Enviar Notificação</span>
+                    <select name="" id="idSelectEnviarN">
+                        <option value="1">Ativado</option>
+                        <option value="0">Desativado</option>
+                    </select>
+                </div>
+            </div>
+            <div class="buttons-remove-cancel">
+                <span id="idCancelConfirmEditCurrentEmail">Cancelar</span>
+                <span id="idConfirmConfirmEditCurrentEmail">Salvar</span>
+            </div>
         </div>
     </section> -->
 </section>
