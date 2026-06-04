@@ -2,6 +2,33 @@ const idUsuarioLogado = sessionStorage.id_usuario || sessionStorage.ID_USUARIO;
 let idFiltroSelecionado = null;
 let dadosLogistica = {}; 
 let listaFiltrosCache = [];
+let listaFiltrosUser = [];
+
+
+function listarFiltrosUsuario() {
+  console.log("filtros carregando")
+    fetch(`/filtros/usuario/${idUsuarioLogado}`)
+        .then((res) => res.status === 204 ? [] : res.json())
+        .then((filtros) => {
+            listaFiltrosUser = filtros;
+            popularSelectFiltro("idSelectFiltroFavorito", listaFiltrosUser, "Filtros Favoritos");
+        })
+        .catch((err) => console.error("Erro ao listar filtros:", err));
+}
+
+function popularSelectFiltro(id, lista, placeholder, valorSelecionado = "") {
+    const select = document.getElementById(id);
+    if (!select) return;
+
+    select.innerHTML = `<option value="">${placeholder}</option>`;
+
+    lista.forEach((item) => {
+        const option = document.createElement("option");
+        option.value = item.filtro_id; 
+        option.textContent = item.nome_filtro; 
+        select.appendChild(option);
+    });
+}
 
 
 function carregarOpcoesFiltros() {
@@ -18,23 +45,18 @@ function carregarOpcoesFiltros() {
         .catch((err) => console.error("Erro ao carregar opções:", err));
 }
 
-// === 3. FUNÇÃO AUXILIAR DE SELECTS ===
-// === 3. FUNÇÃO AUXILIAR DE SELECTS ATUALIZADA ===
 function popularSelect(id, lista, placeholder, valorSelecionado = "") {
     const select = document.getElementById(id);
     if (!select) return;
     
-    // Injeta os comportamentos para limitar a altura dinamicamente (limite de 5 linhas visíveis)
     select.setAttribute("onfocus", "this.size=5;");
     select.setAttribute("onblur", "this.size=1;");
     
-    // Captura o onchange estruturado no seu HTML para não perdê-lo
     const changeOriginal = select.getAttribute("data-original-change") || select.getAttribute("onchange") || "";
     if (changeOriginal && !select.getAttribute("data-original-change")) {
         select.setAttribute("data-original-change", changeOriginal);
     }
     
-    // Fecha o tamanho do select e executa a função de atualizar os bairros em seguida
     const execucaoOriginal = select.getAttribute("data-original-change") || "";
     select.setAttribute("onchange", `this.size=1; this.blur(); ${execucaoOriginal}`);
 

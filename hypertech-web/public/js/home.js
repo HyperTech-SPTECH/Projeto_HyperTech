@@ -72,6 +72,7 @@ document.getElementById('btn-rotas').addEventListener('click', handleNavClick);
 document.addEventListener('DOMContentLoaded', () => {
     loadComponent('./dashboard/date-hour-dashboard.html');
     pullInformationFromFilters()
+    listarFiltrosUsuario()
 });
 
 function trocarDashRegiao() {
