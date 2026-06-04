@@ -100,6 +100,22 @@ function trocarNotificationDash() {
     loadComponent('./dashboard/notification-dashboard.html');
 }
 
+function trocarFiltroDash() {
+    loadComponent('./dashboard/filter-config.html');
+
+    console.log("Injetando rotinas e buscando dados do Postgres/MySQL...");
+    
+    if (typeof carregarOpcoesFiltros === 'function') {
+        carregarOpcoesFiltros();
+    } else {
+        console.error("Função carregarOpcoesFiltros não encontrada. Verifique se o filter.js está importado na home.html");
+    }
+
+    if (typeof atualizarTabelaFiltros === 'function') {
+        atualizarTabelaFiltros();
+    }
+}
+
 document.getElementById('button-menu').addEventListener('click', () => {
     document.getElementById('dropdown-menu').classList.toggle('displayNone')
 })
