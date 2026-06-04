@@ -52,40 +52,51 @@
 
         <div class="dashboard-card dashboard-card--filters">
             <div class="dashboard-card__header">Filtrar</div>
-            <div class="dashboard-card__body-Region">
-                <div class="containerSideLeftFiltro">
-                    <div class="miniContainerFiltro containerFiltroCidade">
+            <div class="dashboard-card__body-Region dashboard-sketch-layout">
+            
+                <div class="filter-grid-container">
+            
+                    <div class="miniContainerFiltro">
                         <span>Cidade:</span>
-                        <select name="" id="idSelectFiltroCidade">
-                            <option value="#" selected>Todas Cidades</option>
+                        <select id="idSelectFiltroCidade">
+                            <option value="#" selected disabled>Todas Cidades</option>
                         </select>
                     </div>
-                    <div class="miniContainerFiltro containerFiltroMes">
+            
+                    <div class="miniContainerFiltro">
+                        <span>Bairro:</span>
+                        <select id="idSelectFiltroBairro">
+                            <option value="#" selected>Escolha uma cidade antes</option>
+                        </select>
+                    </div>
+            
+                    <div class="miniContainerFiltro">
                         <span>Mês:</span>
-                        <select name="" id="idSelectFiltroMes">
+                        <select id="idSelectFiltroMes">
                             <option value="#" selected>Todos os Meses</option>
                             <option value="1">Janeiro</option>
                             <option value="2">Fevereiro</option>
                             <option value="3">Março</option>
                         </select>
                     </div>
-                </div>
-                <div class="containerSideRightFiltro">
-                    <div class="miniContainerFiltro contianerFiltroBairro">
-                        <span>Bairro</span>
-                        <select name="" id="idSelectFiltroBairro">
-                            <option value="#" selected>Todos os Bairros</option>
+            
+                    <div class="miniContainerFiltro">
+                        <span>Favorito:</span>
+                        <select id="idSelectFiltroFavorito">
+                            <option value="#" selected>⭐ Favoritos Salvos...</option>
                         </select>
                     </div>
-                    <div class="containerButtonAplicarFiltro">
-                        <span id="idAplicarFiltros">Aplicar Filtros</span>
-                    </div>
+            
                 </div>
+            
+                <div class="filter-actions-row">
+                    <button type="button" class="btn-sketch-salvar" id="idSalvarFiltro">⭐ Salvar</button>
+                    <button type="button" class="btn-sketch-aplicar" id="idAplicarFiltros">Aplicar Filtros</button>
+                </div>
+            
             </div>
         </div>
-    </div>
-
-    <div class="dashboard-main-content-row" style="display: flex; gap: 20px;">
+    </div> <div class="dashboard-main-content-row" style="display: flex; gap: 20px;">
 
         <div class="dashboard-chart-container" style="flex: 2;">
             <div class="dashboard-card__header"

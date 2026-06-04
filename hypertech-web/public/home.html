@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Dashboard - HyperTech</title>
-
+    
     <link rel="stylesheet" href="css/styles.css">
     <link rel="stylesheet" href="css/home.css">
     <link rel="stylesheet" href="css/dashboard.css">
@@ -12,17 +12,22 @@
     <link rel="stylesheet" href="css/profileDashboard.css">
     <link rel="stylesheet" href="css/notificationDashboard.css">
     <link rel="stylesheet" href="css/filter.css">
+    <link rel="stylesheet" href="css/route.css">
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"/>
 
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap" rel="stylesheet">
+
+    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
     <script src="js/home.js" defer></script>
     <script src="js/dashboard.js" defer></script>
     <script src="js/profile.js" defer></script>
     <script src="js/filter.js" defer></script>
+    <script src="js/route.js" defer></script>
 </head>
-<body>
+<body onload="">
     <header>
         <h1>HyperTech</h1>
         <div class="buttons-menu">
@@ -41,17 +46,17 @@
         </div>
     </header>
     
-    <div id="app-container">
-        <aside id="sidebar">
-            <nav id="sidebar-nav">
+    <div class="app-container">
+        <aside class="sidebar">
+            <nav class="sidebar-nav">
                 <button class="nav-button nav-button--selected" id="btn-dashboard" type="button">
-                    <img src="./assets/Quadro-Cinza.png" alt="" aria-hidden="true">
+                    <img src="./assets/dashboard_preta_transparente.png" alt="" aria-hidden="true">
                     <span>Dashboard</span>
                 </button>
-                <!-- <button class="nav-button" id="btn-rotas" type="button">
-                    <img src="./assets/Quadro-Cinza.png" alt="" aria-hidden="true">
+                <button class="nav-button" id="btn-rotas" type="button">
+                    <img src="./assets/rotas_preta_transparente.png" alt="" aria-hidden="true">
                     <span>Rotas</span>
-                </button> -->
+                </button>
                 <!-- <button class="nav-button" id="btn-cad-func" type="button">
                     <img src="./assets/Quadro-Cinza.png" alt="" aria-hidden="true">
                     <span>Cadastrar Funcionário</span>
@@ -65,9 +70,10 @@
             <section class="content-section" id="section-cad-func" style="display: none;"></section>
         </main>
     </div>
-
+    
     <script src="https://cdn.jsdelivr.net/npm/chart.js" defer></script>
     <script src="https://cdn.jsdelivr.net/npm/chartjs-plugin-datalabels@2" defer></script>
     <script src="js/region-dashboard.js" defer></script>
+    <script src="js/dashboardIntegration.js" defer></script>
 </body>
 </html>
