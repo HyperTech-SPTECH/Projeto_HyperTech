@@ -1,11 +1,13 @@
 /* Header */
 header {
     background-color: #00418B;
+    color: #ffffff;
+    
     height: var(--altura-header);
     display: flex;
     align-items: center;
     padding-left: 1rem;
-    color: #ffffff;
+    
     box-shadow: var(--shadow-header);
     position: relative; 
     z-index: 10;
@@ -70,61 +72,62 @@ header .buttons-menu #button-menu .dropdown-menu .dash-logout:hover {
 #app-container {
     display: flex;
     height: 100%;
+    width: 100%;
 }
 
 /* Navbar */
 
-#sidebar {
-    width: 15vw;
-    height: var(--altura-leftBar-e-conteudo);
-    min-width: 150px;
-    background-color: var(--bg-primary);
+.sidebar {
+    width: 10vw;
     box-shadow: var(--shadow-sidebar);
-    position: relative; 
-    z-index: 5;
+
+    display: flex;
+    align-items: center;
 }
 
-#sidebar-nav {
-    width: 100%;
-    height: calc(100% - 20px);
-    margin-top: 20px;
+.sidebar-nav {
+    height: 95%;
     display: flex;
     flex-direction: column;
-    align-items: center;
 }
 
-#sidebar-nav .nav-button {
-    width: 100%;
-    height: 40px;
-    display: flex;
-    align-items: center;
+.nav-button {
     font-family: 'Poppins', sans-serif;
     font-weight: 500; 
     font-size: 1rem;
+    
+    height: 40px;
+
+    display: flex;
+    align-items: center;
+    padding-left: 0.5rem;
+    
     cursor: pointer;
     border: none;
     background-color: transparent;
-    text-align: left;
-    padding-left: 1rem;
+    gap: 10px;
 }
 
-#sidebar-nav .nav-button:hover {
+.nav-button:hover {
     background-color: rgba(0, 65, 139, 0.2);
 } 
 
-#sidebar-nav .nav-button--selected {
+.nav-button img {
+    height: 100%;
+    width: 20%;
+}
+
+.nav-button--selected {
     background-color: #00418B;
     color: #ffffff;
 }
 
-#sidebar-nav .nav-button--selected:hover {
-    background-color: #00418B;
+.nav-button--selected img {
+    filter: invert(100%);
 }
 
-#sidebar-nav .nav-button img {
-    width: 20px;
-    height: 20px;
-    margin: 0 .5rem;
+.nav-button--selected:hover {
+    background-color: #00418B;
 }
 
 #main-content {
