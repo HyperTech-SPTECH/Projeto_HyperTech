@@ -76,20 +76,85 @@
                 </div>
             </div>
             
-            <div class="secao-lateral">
+            <div class="secao-lateral secao-lateral--favoritos">
                 <div class="titulo-secao-lateral">Rotas favoritas</div>
                 
                 <div id="listaFavoritos">
-                    </div>
-                
-                <button class="botao-adicionar-favorito" onclick="salvarFavorito()">
-                    <i class="ti ti-plus" aria-hidden="true"></i>
-                    Salvar Rota Atual
-                </button>
+                </div>
             </div>
-            
         </div>
     </section>
 </section>
 
-<div class="notificacao-rota" id="routeToast"></div>
+<div id="modalSalvarFavorito" class="modal-scrim">
+    <div class="modal-caixa">
+        <div class="modal-cabecalho">
+            <span class="modal-titulo">Salvar Rota Favorita</span>
+            <button class="modal-botao-fechar" id="btnFecharModalSalvar" aria-label="Fechar"></button>
+        </div>
+        <div class="modal-corpo">
+            <div class="modal-campo">
+                <label class="modal-label" for="modalNomeFavorito">Nome do Favorito <span class="modal-obrigatorio">*</span></label>
+                <input id="modalNomeFavorito" class="modal-input" type="text" placeholder="Ex: Casa \u2192 Trabalho" autocomplete="off" />
+            </div>
+            <div class="modal-campo">
+                <label class="modal-label" for="modalOrigemSalvar">Origem (preenchida automaticamente)</label>
+                <input id="modalOrigemSalvar" class="modal-input" type="text" readonly />
+            </div>
+            <div class="modal-campo">
+                <label class="modal-label" for="modalDestinoSalvar">Destino (preenchido automaticamente)</label>
+                <input id="modalDestinoSalvar" class="modal-input" type="text" readonly />
+            </div>
+        </div>
+        <div class="modal-rodape">
+            <button class="modal-botao cancelar" id="btnCancelarSalvar">Cancelar</button>
+            <button class="modal-botao confirmar" id="btnConfirmarSalvar" disabled>Salvar favorito</button>
+        </div>
+    </div>
+</div>
+
+<div id="modalEditarFavorito" class="modal-scrim">
+    <div class="modal-caixa">
+        <div class="modal-cabecalho">
+            <span class="modal-titulo">Editar Rota Favorita</span>
+            <button class="modal-botao-fechar" id="btnFecharModalEditar" aria-label="Fechar"></button>
+        </div>
+        <div class="modal-corpo">
+            <div class="modal-campo">
+                <label class="modal-label" for="modalNomeEditar">Nome do Favorito <span class="modal-obrigatorio">*</span></label>
+                <input id="modalNomeEditar" class="modal-input" type="text" />
+            </div>
+            <div class="modal-campo">
+                <label class="modal-label" for="modalOrigemEditar">Origem</label>
+                <div class="conteiner-campo-input">
+                    <input id="modalOrigemEditar" class="modal-input" type="text" autocomplete="off" />
+                    <ul id="sugestoesModalOrigem" class="lista-sugestoes"></ul>
+                </div>
+            </div>
+            <div class="modal-campo">
+                <label class="modal-label" for="modalDestinoEditar">Destino</label>
+                <div class="conteiner-campo-input">
+                    <input id="modalDestinoEditar" class="modal-input" type="text" autocomplete="off" />
+                    <ul id="sugestoesModalDestino" class="lista-sugestoes"></ul>
+                </div>
+            </div>
+        </div>
+        <div class="modal-rodape modal-rodape--tres-botoes">
+            <button class="modal-botao cancelar" id="btnCancelarEditar">Cancelar</button>
+            <button class="modal-botao excluir" id="btnExcluirNoEditar">Excluir</button>
+            <button class="modal-botao confirmar" id="btnConfirmarEditar">Salvar</button>
+        </div>
+    </div>
+</div>
+
+<div id="modalConfirmarExclusao" class="modal-scrim">
+    <div class="modal-caixa modal-caixa--confirmacao">
+        <div class="modal-titulo-confirmacao">Excluir rota favorita?</div>
+        <p class="modal-texto-confirmacao">Esta ação não pode ser desfeita. A rota abaixo será removida permanentemente.</p>
+        <div id="modalNomeConfirmacao" class="modal-destaque-nome"></div>
+        <div class="modal-rodape modal-rodape--confirmacao">
+            <button class="modal-botao cancelar escuro" id="btnCancelarExclusao">Cancelar</button>
+            <button class="modal-botao excluir" id="btnConfirmarExclusao">Sim, excluir</button>
+        </div>
+    </div>
+</div>
