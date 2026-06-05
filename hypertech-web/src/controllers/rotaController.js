@@ -1,4 +1,4 @@
-var { pool } = require("../database/config.js");
+var rotaModel = require("../models/rotaModel");
 var {buscarEnderecos} = require("../services/geocodingService");
 
 // Função chama o geocondignService para tentar exibir para o usuario sugestões de endereço
@@ -31,7 +31,6 @@ function coordenadaInvalida(value) {
 }
 
 // Chama o postgree para gerar duas rotas: mais segura e mais rápida.
-// Nem sempre a mais segura será mais demorada.
 async function calcular(req, res) {
     var {origemLat, origemLng, destLat, destLng} = req.body;
     
@@ -40,28 +39,9 @@ async function calcular(req, res) {
     }
     
     try {
-        var queryNo = (lng, lat) => ({
-            text: `
-                SELECT 
-                    CASE WHEN dist_source <= dist_target THEN source ELSE target END AS id
-                FROM (
-                    SELECT 
-                        source, target,
-                        ST_Distance(ST_StartPoint(geom), ST_SetSRID(ST_MakePoint($1,$2),4326)) AS dist_source,
-                        ST_Distance(ST_EndPoint(geom),   ST_SetSRID(ST_MakePoint($1,$2),4326)) AS dist_target
-                    FROM public.ways
-                    ORDER BY geom <-> ST_SetSRID(ST_MakePoint($1,$2),4326)
-                    LIMIT 5
-                ) t
-                ORDER BY LEAST(dist_source, dist_target)
-                LIMIT 1
-            `,
-            values: [lng, lat]
-        });
-        
         var [resOrig, resDest] = await Promise.all([
-            pool.query(queryNo(origemLng, origemLat)),
-            pool.query(queryNo(destLng, destLat)),
+            rotaModel.buscarNoMaisProximo(origemLng, origemLat),
+            rotaModel.buscarNoMaisProximo(destLng, destLat),
         ]);
         
         var idOrigem  = resOrig.rows[0]?.id;
@@ -71,76 +51,9 @@ async function calcular(req, res) {
             return res.status(404).json({ erro: "Nenhum nó próximo encontrado." });
         }
         
-        // Antes toda vez ele varria a tabela ways (que tem 1.750.500 registors), isso leva muito tempo.
-        // Isso faz com que invés dele carregar todas as arestas, ele carrega somente as próximas as coordenadas passadas.
-        // Bounding box é um retangulo no mapa que envolve todas as coordenadas necessarias para ir da origem ao destino.
+        console.log(`origem=${idOrigem} | destino=${idDestino}`);
         
-        var bboxSubquery = (costCol, revCostCol) => `
-            SELECT id, source, target, ${costCol} AS cost, ${revCostCol} AS reverse_cost
-            FROM public.ways
-            WHERE geom && ST_Expand(
-                ST_Envelope(ST_Collect(
-                    ST_SetSRID(ST_MakePoint(${destLng},  ${destLat}),  4326),
-                    ST_SetSRID(ST_MakePoint(${origemLng}, ${origemLat}), 4326)
-                )), 0.05
-            )
-        `;
-        
-        const query = `
-            WITH calc_padrao AS (
-                SELECT 
-                    CASE 
-                        WHEN rota.node = ruas.source THEN ruas.geom
-                        ELSE ST_Reverse(ruas.geom)
-                    END AS geom,
-                    rota.seq
-                FROM pgr_bdDijkstra(
-                    '${bboxSubquery('cost', 'reverse_cost')}',
-                    ${idOrigem}, ${idDestino}, true
-                ) AS rota
-                JOIN public.ways AS ruas ON rota.edge = ruas.id
-                WHERE rota.edge != -1
-            ),
-            calc_seguro AS (
-                SELECT 
-                    CASE 
-                        WHEN rota.node = ruas.source THEN ruas.geom
-                        ELSE ST_Reverse(ruas.geom)
-                    END AS geom,
-                    rota.seq
-                FROM pgr_bdDijkstra(
-                    '${bboxSubquery('custo_risco', 'custo_risco_reverso')}',
-                    ${idOrigem}, ${idDestino}, true
-                ) AS rota
-                JOIN public.ways AS ruas ON rota.edge = ruas.id
-                WHERE rota.edge != -1
-            ),
-            resumo_padrao AS (
-                SELECT
-                    ROUND((SUM(ST_Length(geom::geography)) / 1000.0)::numeric, 2) AS distancia_km,
-                    ST_AsGeoJSON(ST_Simplify(ST_MakeLine(geom ORDER BY seq), 0.0001))::jsonb AS geometria
-                FROM calc_padrao
-            ),
-            resumo_seguro AS (
-                SELECT
-                    ROUND((SUM(ST_Length(geom::geography)) / 1000.0)::numeric, 2) AS distancia_km,
-                    ST_AsGeoJSON(ST_Simplify(ST_MakeLine(geom ORDER BY seq), 0.0001))::jsonb AS geometria,
-                    ST_Envelope(ST_Collect(geom)) AS caixa_envolvente
-                FROM calc_seguro
-            ),
-            poligonos_relevantes AS (
-                SELECT jsonb_agg(ST_AsGeoJSON(p.geom_poligono)::jsonb) AS lista_poligonos
-                FROM public.poligonos_risco_2025 p
-                JOIN resumo_seguro rs ON ST_Intersects(p.geom_poligono, ST_Expand(rs.caixa_envolvente, 0.02))
-            )
-            SELECT jsonb_build_object(
-                'rota_padrao',     (SELECT jsonb_build_object('distancia_km', distancia_km, 'geometria', geometria) FROM resumo_padrao),
-                'rota_segura',     (SELECT jsonb_build_object('distancia_km', distancia_km, 'geometria', geometria) FROM resumo_seguro),
-                'poligonos_risco', (SELECT COALESCE(lista_poligonos, '[]'::jsonb) FROM poligonos_relevantes)
-            ) AS dados_json
-        `;
-        
-        var resultado = await pool.query(query);
+        var resultado = await rotaModel.calcularRotas(idOrigem, idDestino, origemLng, origemLat, destLng, destLat);
         var dadosEnvio = resultado.rows[0]?.dados_json;
         
         if (!dadosEnvio) {
@@ -149,6 +62,7 @@ async function calcular(req, res) {
         
         console.log("Rota traçada com sucesso.")
         return res.json(dadosEnvio);
+        
     } catch (err) {
         console.error("Erro no cálculo de rota:", err.message);
         return res.status(500).json({ erro: "Erro interno.", detalhe: err.message });
@@ -156,3 +70,106 @@ async function calcular(req, res) {
 }
 
 module.exports = { geocode, calcular };
+
+
+async function buscarFavoritos(req, res) {
+    var idUsuario = parseInt(req.query.idUsuario);
+    
+    if (!idUsuario || isNaN(idUsuario)) {
+        return res.status(400).json({ erro: "ID do usuário inválido ou ausente." });
+    }
+    
+    try {
+        var resultado = await rotaModel.buscarFavoritosPorUsuario(idUsuario);
+        return res.json(resultado.rows);
+    } catch (err) {
+        console.error("Erro ao buscar favoritos:", err.message);
+        return res.status(500).json({ erro: "Erro ao buscar favoritos.", detalhe: err.message });
+    }
+}
+
+async function salvarFavorito(req, res) {
+    var {idUsuario, nome, origem, destino, origemLat, origemLng, destinoLat, destinoLng, rota} = req.body;
+    
+    if (!idUsuario || !nome || !origem || !destino) {
+        return res.status(400).json({ erro: "Campos obrigatórios ausentes: idUsuario, nome, origem, destino." });
+    }
+    
+    try {
+        var resultado = await rotaModel.inserirFavorito(
+            parseInt(idUsuario), 
+            nome, 
+            origem, 
+            destino,
+            origemLat ?? null,
+            origemLng ?? null,
+            destinoLat ?? null, 
+            destinoLng ?? null,
+            rota ?? null
+        );
+        
+        return res.status(201).json({ id_favorito: resultado.rows[0].id_favorito });
+    } catch (err) {
+        console.error("Erro ao salvar favorito:", err.message);
+        return res.status(500).json({ erro: "Erro ao salvar favorito.", detalhe: err.message });
+    }
+}
+
+async function editarFavorito(req, res) {
+    var idFavorito = parseInt(req.params.id);
+    var {idUsuario, nome, origem, destino, origemLat, origemLng, destinoLat, destinoLng, rota} = req.body;
+    
+    if (isNaN(idFavorito) || !idUsuario || !nome || !origem || !destino) {
+        return res.status(400).json({ 
+            erro: "Campos obrigatórios ausentes." 
+        });
+    }
+    
+    try {
+        var resultado = await rotaModel.atualizarFavorito(
+            idFavorito, 
+            parseInt(idUsuario), 
+            nome, 
+            origem, 
+            destino,
+            origemLat ?? null,
+            origemLng ?? null,
+            destinoLat ?? null, 
+            destinoLng ?? null,
+            rota ?? null
+        );
+        
+        if (resultado.rowCount === 0) {
+            return res.status(404).json({erro: "Favorito não encontrado ou sem permissão."});
+        }
+        
+        return res.json({mensagem: "Favorito atualizado com sucesso."});
+    } catch (err) {
+        console.error("Erro ao editar favorito:", err.message);
+        return res.status(500).json({ erro: "Erro ao editar favorito.", detalhe: err.message });
+    }
+}
+
+async function deletarFavorito(req, res) {
+    var idFavorito = parseInt(req.params.id);
+    var idUsuario = parseInt(req.query.idUsuario);
+    
+    if (isNaN(idFavorito) || isNaN(idUsuario)) {
+        return res.status(400).json({ erro: "Parâmetros inválidos." });
+    }
+    
+    try {
+        var resultado = await rotaModel.excluirFavorito(idFavorito, idUsuario);
+        
+        if (resultado.rowCount === 0) {
+            return res.status(404).json({ erro: "Favorito não encontrado ou sem permissão." });
+        }
+        
+        return res.json({ mensagem: "Favorito excluído com sucesso." });
+    } catch (err) {
+        console.error("Erro ao excluir favorito:", err.message);
+        return res.status(500).json({ erro: "Erro ao excluir favorito.", detalhe: err.message });
+    }
+}
+
+module.exports = { geocode, calcular, buscarFavoritos, salvarFavorito, editarFavorito, deletarFavorito };
