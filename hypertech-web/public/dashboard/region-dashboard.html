@@ -5,7 +5,7 @@
         <div class="dashboard-card dashboard-card--summary dashboard-button-changeScreen" onclick="trocarDashHoraDia()">
             <div class="dashboard-card__header">
                 <span>Resumo por Dia e Horário </span>
-                <span class="textAlterAba">clique aqui para trocar de Aba</span>
+                <span class="textAlterAba">Trocar!</span>
             </div>
             <div class="dashboard-card__body">
                 <div class="rank-item">
@@ -20,32 +20,32 @@
                 </div>
                 <div class="rank-item">
                     <span class="rank rank-green">1</span>
-                    <span>Domingo</span>
-                    <span>2 (1%)</span>
+                    <span id="idResumoDiaSeguro1">-</span>
+                    <span id="idResumoDiaSeguroInfo1">0 (0%)</span>
                     
                     <span class="rank rank-red ml">1</span>
-                    <span>Sábado</span>
-                    <span>200 (32%)</span>
+                    <span id="idResumoDiaPerigoso1">-</span>
+                    <span id="idResumoDiaPerigosoInfo1">0 (0%)</span>
                 </div>
 
                 <div class="rank-item">
                     <span class="rank rank-yellow">2</span>
-                    <span>Segunda-Feira</span>
-                    <span>15 (11%)</span>
+                    <span id="idResumoDiaSeguro2">-</span>
+                    <span id="idResumoDiaSeguroInfo2">0 (0%)</span>
 
                     <span class="rank rank-orange ml">2</span>
-                    <span>Quinta-Feira</span>
-                    <span>135 (20%)</span>
+                    <span id="idResumoDiaPerigoso2">-</span>
+                    <span id="idResumoDiaPerigosoInfo2">0 (0%)</span>
                 </div>
 
                 <div class="rank-item">
                     <span class="rank rank-yellow">3</span>
-                    <span>Terça-Feira</span>
-                    <span>30 (22%)</span>
+                    <span id="idResumoDiaSeguro3">-</span>
+                    <span id="idResumoDiaSeguroInfo3">0 (0%)</span>
 
                     <span class="rank rank-orange ml">3</span>
-                    <span>Sexta-Feira</span>
-                    <span>100 (15%)</span>
+                    <span id="idResumoDiaPerigoso3">-</span>
+                    <span id="idResumoDiaPerigosoInfo3">0 (0%)</span>
                 </div>
             </div>
         </div>
@@ -103,38 +103,29 @@
 
             <div class="containerKpiRegiao containerKpiPerigo" style="width: 100%;">
                 <div class="faixaRegiaoKpi dashboard-card__header--danger"></div>
-                <div class="titleKpiRegiao titleKpiPerigo">Regiões mais Perigosas</div>
+                <div class="titleKpiRegiao titleKpiPerigo">Cargas Mais Roubadas</div>
                 <div class="miniTitlesKpisRegiao">
                     <table>
                         <thead>
                             <tr>
                                 <th class="kpiRegiaoValores kpiRegiaoPosicao"></th>
-                                <th class="kpiRegiaoValores kpiRegiaoLocal">Cidade</th>
-                                <th class="kpiRegiaoValores kpiRegiaoQuantidade">Roubos</th>
+                                <th class="kpiRegiaoValores kpiRegiaoLocal">Carga</th>
+                                <th class="kpiRegiaoValores kpiRegiaoQuantidade">Quantidade</th>
                             </tr>
                             <tr>
-                                <td class="kpiRegiaoValores kpiRegiaoPosicao"><span
-                                        class="regiaoKpiPos regiaoKpiPos1">1</span></td>
-                                <td class="kpiRegiaoValores kpiRegiaoLocal">Mauá</td>
-                                <td class="kpiRegiaoValores kpiRegiaoQuantidade"><span id="idKpiQuantidade1">200</span>
-                                    <span class="kpiQuantidadePorCem">(<span
-                                            id="idKpiQuantidadePorCem1">32</span>%)</span></td>
+                                <td class="kpiRegiaoValores kpiRegiaoPosicao"><span class="regiaoKpiPos regiaoKpiPos1">1</span></td>
+                                <td class="kpiRegiaoValores kpiRegiaoLocal" id="idKpiMaisCarga1">-</td>
+                                <td class="kpiRegiaoValores kpiRegiaoQuantidade"><span id="idKpiMaisQtd1">0</span></td>
                             </tr>
                             <tr>
-                                <td class="kpiRegiaoValores kpiRegiaoPosicao"><span
-                                        class="regiaoKpiPos regiaoKpiPos2">2</span></td>
-                                <td class="kpiRegiaoValores kpiRegiaoLocal">São Paulo</td>
-                                <td class="kpiRegiaoValores kpiRegiaoQuantidade"><span id="idKpiQuantidade2">150</span>
-                                    <span class="kpiQuantidadePorCem">(<span
-                                            id="idKpiQuantidadePorCem2">24</span>%)</span></td>
+                                <td class="kpiRegiaoValores kpiRegiaoPosicao"><span class="regiaoKpiPos regiaoKpiPos2">2</span></td>
+                                <td class="kpiRegiaoValores kpiRegiaoLocal" id="idKpiMaisCarga2">-</td>
+                                <td class="kpiRegiaoValores kpiRegiaoQuantidade"><span id="idKpiMaisQtd2">0</span></td>
                             </tr>
                             <tr>
-                                <td class="kpiRegiaoValores kpiRegiaoPosicao"><span
-                                        class="regiaoKpiPos regiaoKpiPos3">3</span></td>
-                                <td class="kpiRegiaoValores kpiRegiaoLocal">Caraguatatuba</td>
-                                <td class="kpiRegiaoValores kpiRegiaoQuantidade"><span id="idKpiQuantidade3">100</span>
-                                    <span class="kpiQuantidadePorCem">(<span
-                                            id="idKpiQuantidadePorCem3">16</span>%)</span></td>
+                                <td class="kpiRegiaoValores kpiRegiaoPosicao"><span class="regiaoKpiPos regiaoKpiPos3">3</span></td>
+                                <td class="kpiRegiaoValores kpiRegiaoLocal" id="idKpiMaisCarga3">-</td>
+                                <td class="kpiRegiaoValores kpiRegiaoQuantidade"><span id="idKpiMaisQtd3">0</span></td>
                             </tr>
                         </thead>
                     </table>
@@ -143,38 +134,29 @@
 
             <div class="containerKpiRegiao containerKpiSeguro" style="width: 100%;">
                 <div class="faixaRegiaoKpi dashboard-card__header--safe"></div>
-                <div class="titleKpiRegiao titleKpiSeguro">Regiões mais Seguras</div>
+                <div class="titleKpiRegiao titleKpiSeguro">Cargas Menos Roubadas</div>
                 <div class="miniTitlesKpisRegiao">
                     <table>
                         <thead>
                             <tr>
                                 <th class="kpiRegiaoValores kpiRegiaoPosicao"></th>
-                                <th class="kpiRegiaoValores kpiRegiaoLocal">Cidade</th>
-                                <th class="kpiRegiaoValores kpiRegiaoQuantidade">Roubos</th>
+                                <th class="kpiRegiaoValores kpiRegiaoLocal">Carga</th>
+                                <th class="kpiRegiaoValores kpiRegiaoQuantidade">Quantidade</th>
                             </tr>
                             <tr>
-                                <td class="kpiRegiaoValores kpiRegiaoPosicao"><span
-                                        class="regiaoKpiPos regiaoKpiPos1Seguro">1</span></td>
-                                <td class="kpiRegiaoValores kpiRegiaoLocal">Cotia</td>
-                                <td class="kpiRegiaoValores kpiRegiaoQuantidade"><span id="idKpiQuantidade1">6</span>
-                                    <span class="kpiQuantidadePorCem">(<span
-                                            id="idKpiQuantidadePorCem1">1</span>%)</span></td>
+                                <td class="kpiRegiaoValores kpiRegiaoPosicao"><span class="regiaoKpiPos regiaoKpiPos1Seguro">1</span></td>
+                                <td class="kpiRegiaoValores kpiRegiaoLocal" id="idKpiMenosCarga1">-</td>
+                                <td class="kpiRegiaoValores kpiRegiaoQuantidade"><span id="idKpiMenosQtd1">0</span></td>
                             </tr>
                             <tr>
-                                <td class="kpiRegiaoValores kpiRegiaoPosicao"><span
-                                        class="regiaoKpiPos regiaoKpiPos2Seguro">2</span></td>
-                                <td class="kpiRegiaoValores kpiRegiaoLocal">Itapevi</td>
-                                <td class="kpiRegiaoValores kpiRegiaoQuantidade"><span id="idKpiQuantidade2">15</span>
-                                    <span class="kpiQuantidadePorCem">(<span
-                                            id="idKpiQuantidadePorCem2">2</span>%)</span></td>
+                                <td class="kpiRegiaoValores kpiRegiaoPosicao"><span class="regiaoKpiPos regiaoKpiPos2Seguro">2</span></td>
+                                <td class="kpiRegiaoValores kpiRegiaoLocal" id="idKpiMenosCarga2">-</td>
+                                <td class="kpiRegiaoValores kpiRegiaoQuantidade"><span id="idKpiMenosQtd2">0</span></td>
                             </tr>
                             <tr>
-                                <td class="kpiRegiaoValores kpiRegiaoPosicao"><span
-                                        class="regiaoKpiPos regiaoKpiPos3Seguro">3</span></td>
-                                <td class="kpiRegiaoValores kpiRegiaoLocal">Itatiba</td>
-                                <td class="kpiRegiaoValores kpiRegiaoQuantidade"><span id="idKpiQuantidade3">30</span>
-                                    <span class="kpiQuantidadePorCem">(<span
-                                            id="idKpiQuantidadePorCem3">4</span>%)</span></td>
+                                <td class="kpiRegiaoValores kpiRegiaoPosicao"><span class="regiaoKpiPos regiaoKpiPos3Seguro">3</span></td>
+                                <td class="kpiRegiaoValores kpiRegiaoLocal" id="idKpiMenosCarga3">-</td>
+                                <td class="kpiRegiaoValores kpiRegiaoQuantidade"><span id="idKpiMenosQtd3">0</span></td>
                             </tr>
                         </thead>
                     </table>
