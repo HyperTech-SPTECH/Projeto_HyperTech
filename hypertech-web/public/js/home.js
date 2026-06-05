@@ -18,7 +18,8 @@ async function loadComponent(fileName) {
         }
 
         if (fileName.includes('date-hour-dashboard.html')) {
-            if (typeof renderHeatmap === 'function') renderHeatmap();
+            if (typeof iniciarDashboardDiaHora === 'function') iniciarDashboardDiaHora();
+            
         }
 
         if(fileName.includes('region-dashboard.html')){

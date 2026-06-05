@@ -1,8 +1,36 @@
 var dashboardModel = require("../models/dashboardModel");
 
+function limparFiltros(body) {
+    var cidade = body.cidade;
+    var bairro = body.bairro;
+    var mes = body.mes;
+    var limite = body.limite;
+
+    if (cidade == "#" || cidade == "" || cidade == undefined) {
+        cidade = null;
+    }
+    if (bairro == "#" || bairro == "" || bairro == undefined) {
+        bairro = null;
+    }
+    if (mes == "#" || mes == "" || mes == undefined) {
+        mes = null;
+    } else {
+        mes = parseInt(mes);
+    }
+    if (limite != 6) {
+        limite = null;
+    }
+
+    return {
+        cidade: cidade,
+        bairro: bairro,
+        mes: mes,
+        limite: limite
+    };
+}
+
 
 function infoFiltrar(req, res) {
-
     dashboardModel.infoFiltrar()
         .then(function (resposta) {
             if (resposta.length > 0) {
@@ -15,6 +43,39 @@ function infoFiltrar(req, res) {
             console.log(erro);
             res.status(500).send(erro);
         });
+}
+
+function cargasMaisRoubadas(req, res) {
+    var filtros = limparFiltros(req.body);
+
+    dashboardModel.cargasMaisRoubadas(filtros.cidade, filtros.bairro, filtros.mes, filtros.limite)
+        .then(function (resposta) {
+            res.status(200).send(resposta);
+        })
+        .catch(function (erro) {
+            console.log(erro);
+            res.status(500).send(erro);
+        });
+}
+
+function periculosidadeDiaHorario(req, res) {
+    var filtros = limparFiltros(req.body);
+
+    dashboardModel.periculosidadeDiaHorario(filtros.cidade, filtros.bairro, filtros.mes)
+        .then(function (resposta) {
+            res.status(200).send(resposta);
+        })
+        .catch(function (erro) {
+            console.log(erro);
+            res.status(500).send(erro);
+        });
+}
+
+module.exports = {
+    infoFiltrar,
+    cargasMaisRoubadas,
+    periculosidadeDiaHorario
+
 }
 
 
@@ -57,7 +118,3 @@ function infoFiltrar(req, res) {
 //     }
 // }
 
-module.exports = {
-    infoFiltrar,
-    // cadastrar
-}
