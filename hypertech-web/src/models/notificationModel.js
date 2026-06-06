@@ -89,8 +89,68 @@ async function criar(id, email) {
     return await database.mysqlExecutar(instrucaoSql04);
 }
 
+async function alterarCurrentEmail(email, nDiaria, nSemanal, nAnual, enviarN) {
+
+    // PEGAR ID
+    var instrucaoSqlId = `
+    SELECT id, usuario_id FROM usuario_email_notificacao WHERE email = '${email}';
+    `;
+    console.log("Executando a instrução SQL: \n" + instrucaoSqlId);
+    let resultId = await database.mysqlExecutar(instrucaoSqlId);
+
+    // DIARIA
+    var instrucaoSqlDiaria = `
+    UPDATE preferencias_notificacao SET ativo = '${nDiaria}' WHERE usuario_email_id = '${resultId.id}' AND tipo = 'DIARIA';
+    `;
+    console.log("Executando a instrução SQL: \n" + instrucaoSqlDiaria);
+    let result01 = await database.mysqlExecutar(instrucaoSqlDiaria);
+
+    // SEMANAL
+    var instrucaoSqlSemanal = `
+    UPDATE preferencias_notificacao SET ativo = '${nSemanal}' WHERE usuario_email_id = '${resultId.id}' AND tipo = 'SEMANAL';
+    `;
+    console.log("Executando a instrução SQL: \n" + instrucaoSqlSemanal);
+    let result02 = await database.mysqlExecutar(instrucaoSqlSemanal);
+
+    // ANUAL
+    var instrucaoSqlAnual = `
+    UPDATE preferencias_notificacao SET ativo = '${nAnual}' WHERE usuario_email_id = '${resultId.id}' AND tipo = 'ANUAL';
+    `;
+    console.log("Executando a instrução SQL: \n" + instrucaoSqlAnual);
+    let result03 = await database.mysqlExecutar(instrucaoSqlAnual);
+
+    // ENVIAR EMAIL - TODOS
+    // DIARIA - ENVIAR EMAIL
+    var instrucaoSqlDiariaTodos = `
+    UPDATE preferencias_notificacao SET ativo = '${enviarN}' WHERE usuario_email_id = '${resultId.id}' AND tipo = 'DIARIA';
+    `;
+    console.log("Executando a instrução SQL: \n" + instrucaoSqlDiariaTodos);
+    let result01Todos = await database.mysqlExecutar(instrucaoSqlDiariaTodos);
+
+    // SEMANAL - ENVIAR EMAIL
+    var instrucaoSqlSemanalTodos = `
+    UPDATE preferencias_notificacao SET ativo = '${enviarN}' WHERE usuario_email_id = '${resultId.id}' AND tipo = 'SEMANAL';
+    `;
+    console.log("Executando a instrução SQL: \n" + instrucaoSqlSemanalTodos);
+    let result02Todos = await database.mysqlExecutar(instrucaoSqlSemanalTodos);
+
+    // ANUAL - ENVIAR EMAIL
+    var instrucaoSqlAnualTodos = `
+    UPDATE preferencias_notificacao SET ativo = '${enviarN}' WHERE usuario_email_id = '${resultId.id}' AND tipo = 'ANUAL';
+    `;
+    console.log("Executando a instrução SQL: \n" + instrucaoSqlAnualTodos);
+    let result03Todos = await database.mysqlExecutar(instrucaoSqlAnualTodos);
+
+    var instrucaoSqlSelect = `
+    SELECT eNotificacao.id as emailN_id, eNotificacao.email as emailN, preferencias.id as tipoNotificacao_id, preferencias.tipo as tipoNotificacao, preferencias.ativo as ativoTipoNotificacao FROM usuario JOIN usuario_email_notificacao as eNotificacao ON usuario.usuario_id = eNotificacao.usuario_id JOIN preferencias_notificacao as preferencias ON eNotificacao.id = preferencias.usuario_email_id WHERE usuario.usuario_id = '${resultId.usuario_id}';
+    `
+    console.log("Executando a instrução SQL: \n" + instrucaoSqlSelect);
+    return await database.mysqlExecutar(instrucaoSqlSelect);
+}
+
 module.exports = {
     criacao,
     remover,
-    criar
+    criar,
+    alterarCurrentEmail
 };

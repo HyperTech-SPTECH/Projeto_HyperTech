@@ -89,8 +89,48 @@ function criar(req, res) {
     }
 }
 
+function alterarCurrentEmail(req, res) {
+    var email = req.body.emailServer;
+    var nDiaria = req.body.nDiariaServer;
+    var nSemanal = req.body.nSemanalServer;
+    var nAnual = req.body.nAnualServer;
+    var enviarN = req.body.enviarNServer;
+
+    // Faça as validações dos valores
+    if (email == undefined) {
+        res.status(400).send("Seu email está undefined!");
+    } else if (nDiaria == undefined) {
+        res.status(400).send("Sua Notificação Diária está undefined!");
+    } else if (nSemanal == undefined) {
+        res.status(400).send("Sua Notificação Semanal está undefined!");
+    } else if (nAnual == undefined) {
+        res.status(400).send("Sua Notificação Anual está undefined!");
+    } else if (enviarN == undefined) {
+        res.status(400).send("Seu enviar Notificação está undefined!");
+    } else {
+
+        // Passe os valores como parâmetro e vá para o arquivo notificationModel.js
+        notificationModel.alterarCurrentEmail(email, nDiaria, nSemanal, nAnual, enviarN)
+            .then(
+                function (resultado) {
+                    res.json(resultado);
+                }
+            ).catch(
+                function (erro) {
+                    console.log(erro);
+                    console.log(
+                        "\nHouve um erro ao realizar a alteração de notificações de um Email! Erro: ",
+                        erro.sqlMessage
+                    );
+                    res.status(500).json(erro.sqlMessage);
+                }
+            );
+    }
+}
+
 module.exports = {
     criacao,
     remover,
-    criar
+    criar,
+    alterarCurrentEmail
 }

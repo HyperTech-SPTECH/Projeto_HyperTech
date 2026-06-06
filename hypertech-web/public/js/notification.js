@@ -496,8 +496,84 @@ function endpointCreateNewEmail() {
 }
 
 // U -> Update -> PUT
-function endpointUpdateNotificationEmail() {
+function endpointUpdateNotificationCurrentEmail(currentEmail) {
+    var emailVar = currentEmail
+    var nDiariaVar = document.getElementById('idSelectDiaria').value
+    var nSemanalVar = document.getElementById('idSelectSemanal').value
+    var nAnualVar = document.getElementById('idSelectAnual').value
+    var enviarNVar = document.getElementById('idSelectEnviarN').value
 
+    if (emailVar == '') {
+        alert('Email inválido')
+    } else if (nDiariaVar == '') {
+        alert('Notificação Diária inválida')
+    } else if (nSemanalVar == '') {
+        alert('Notificação Semanal inválida')
+    } else if (nAnualVar == '') {
+        alert('Notificação Anual inválida')
+    } else if (enviarNVar == '') {
+        alert('Enviar Notificação inválida')
+    } 
+
+    fetch("/notification/alterarCurrentEmail", {
+        method: "POST",
+        headers: {
+            "Content-Type": "application/json"
+        },
+        body: JSON.stringify({
+            emailServer: emailVar,
+            nDiariaServer: nDiariaVar,
+            nSemanalServer: nSemanalVar,
+            nAnualServer: nAnualVar,
+            enviarNServer: enviarNVar,
+        })
+    }).then(function (resposta) {
+    
+        if (resposta.ok) {
+            console.log(resposta);
+
+            resposta.json().then(json => {
+                console.log(json);
+                console.log("a")
+                console.log(JSON.stringify(json));
+                console.log("b")
+
+                let listNotification = []
+                    for (let i = 0; i < json.length; i++) {
+                        console.log(json[i])
+                        listNotification.push(
+                            {
+                                idEmailN: json[i].emailN_id,
+                                emailN: json[i].emailN,
+                                idTipoN: json[i].tipoNotificacao_id,
+                                tipoN: json[i].tipoNotificacao,
+                                ativoTipoN: json[i].ativoTipoNotificacao,
+                            }
+                        )
+                    }
+                sessionStorage.setItem('DADOS_NOTIFICACOES', JSON.stringify(listNotification));
+
+                setTimeout(function () {
+                    cancelEditCurrentEmail()
+                    organizerScreenNotification()
+                }, 1000); // apenas para exibir o loading
+
+            });
+
+        } else {
+
+            console.log("Houve um erro ao tentar realizar o cadastro do Email!");
+
+            resposta.text().then(texto => {
+                console.error(texto);
+            });
+        }
+
+    }).catch(function (erro) {
+        console.log(erro);
+    })
+
+    return false;
 }
 
 // D -> Delete -> Delete
@@ -736,3 +812,5 @@ function organizerScreenNotification() {
         containerEmails.appendChild(emailsCadastrados[i])
     }
 }
+
+// 

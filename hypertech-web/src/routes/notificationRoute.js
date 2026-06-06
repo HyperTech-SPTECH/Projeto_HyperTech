@@ -16,4 +16,8 @@ router.post("/criar", function (req, res) {
     notificationController.criar(req, res);
 });
 
+router.post("/alterarCurrentEmail", function (req, res) {
+    notificationController.alterarCurrentEmail(req, res);
+});
+
 module.exports = router;
