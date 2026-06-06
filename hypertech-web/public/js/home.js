@@ -99,6 +99,9 @@ function trocarProfileDash() {
 
 function trocarNotificationDash() {
     loadComponent('./dashboard/notification-dashboard.html');
+    setTimeout(() => {
+        organizerScreenNotification()
+    }, 50);
 }
 
 document.getElementById('button-menu').addEventListener('click', () => {

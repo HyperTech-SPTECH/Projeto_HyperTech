@@ -87,7 +87,7 @@ function cancelChangeNotification() {
     document.querySelector('.configuration-panel').removeChild(modal)
 }
 
-function confirmRemoveCurrentEmail(currentEmail) {
+function confirmRemoveCurrentEmail(idUser, idCurrentEmail, currentEmail) {
     if (document.getElementById('idModalEditCurrentEmail')) {
         console.log('aqui')
         return;
@@ -144,6 +144,7 @@ function confirmRemoveCurrentEmail(currentEmail) {
     let spanConfirmConfirmCurrentEmail = document.createElement('span')
     spanConfirmConfirmCurrentEmail.id = 'idConfirmConfirmNotification'
     spanConfirmConfirmCurrentEmail.textContent = 'Confirmar'
+    spanConfirmConfirmCurrentEmail.onclick = () => endpointDeleteEmail(idUser, idCurrentEmail)
     
     divButtonsCurrentEmail.appendChild(spanCancelConfirmCurrentEmail)
     divButtonsCurrentEmail.appendChild(spanConfirmConfirmCurrentEmail)
@@ -197,7 +198,7 @@ function modalCreateNewEmail() {
     let inputTextCreateEmail = document.createElement('input')
     inputTextCreateEmail.id = 'idTextCreateEmail'
     inputTextCreateEmail.type = 'text'
-    inputTextCreateEmail.oniput = valEmail
+    inputTextCreateEmail.oninput = valEmail
     let spanTextCreateEmail = document.createElement('span')
     spanTextCreateEmail.id = 'idMsgWarn'
 
@@ -216,6 +217,7 @@ function modalCreateNewEmail() {
     let spanConfirmConfirmCreateEmail = document.createElement('span')
     spanConfirmConfirmCreateEmail.id = 'idConfirmConfirmCreateEmail'
     spanConfirmConfirmCreateEmail.textContent = 'Adicionar'
+    spanConfirmConfirmCreateEmail.onclick = endpointCreateNewEmail
     
     divButtonsCreateEmail.appendChild(spanCancelConfirmCreateEmail)
     divButtonsCreateEmail.appendChild(spanConfirmConfirmCreateEmail)
@@ -411,5 +413,326 @@ function valEmail() {
     
     if (email[tamanho] == ' ' || email[tamanho] == ',' || email[tamanho] == ':' || email[tamanho] == ';') { // Não pode usar 'espaço', 'vírgula', ':', ';'
         idTextCreateEmail.value = idTextCreateEmail.value.slice(0, -1)
+    }
+}
+
+// CRUDS
+// C -> Create -> POST
+function endpointCreateNewEmail() {
+    var idVar = sessionStorage.getItem('ID_USUARIO')
+    var emailVar = document.getElementById('idTextCreateEmail').value
+
+    if (idVar.trim() == '') {
+        document.getElementById('idMsgWarn').textContent = 'Id de usuário inválido.'
+        return
+    } else if (emailVar.trim() == '') {
+        document.getElementById('idMsgWarn').textContent = 'Email inválido.'
+        return
+    }
+
+    fetch("/notification/criar", {
+        method: "POST",
+        headers: {
+            "Content-Type": "application/json"
+        },
+        body: JSON.stringify({
+            idServer: idVar,
+            emailServer: emailVar,
+        })
+    }).then(function (resposta) {
+    
+        if (resposta.ok) {
+            console.log(resposta);
+
+            resposta.json().then(json => {
+                console.log(json);
+                console.log("a")
+                console.log(JSON.stringify(json));
+                console.log("b")
+
+                document.getElementById('idMsgWarn').textContent = 'Email Cadastrado!'
+                document.getElementById('idMsgWarn').style.color = '#00ff00'
+
+                let listNotification = []
+                    for (let i = 0; i < json.length; i++) {
+                        console.log(json[i])
+                        listNotification.push(
+                            {
+                                idEmailN: json[i].emailN_id,
+                                emailN: json[i].emailN,
+                                idTipoN: json[i].tipoNotificacao_id,
+                                tipoN: json[i].tipoNotificacao,
+                                ativoTipoN: json[i].ativoTipoNotificacao,
+                            }
+                        )
+                    }
+                sessionStorage.setItem('DADOS_NOTIFICACOES', JSON.stringify(listNotification));
+
+                setTimeout(function () {
+                    document.getElementById('idMsgWarn').textContent = ''
+                    document.getElementById('idMsgWarn').style.color = '#000'
+                    cancelCreateNewEmail()
+                    organizerScreenNotification()
+                }, 1000); // apenas para exibir o loading
+
+            });
+
+        } else {
+
+            console.log("Houve um erro ao tentar realizar o cadastro do Email!");
+
+            resposta.text().then(texto => {
+                console.error(texto);
+                document.getElementById('idMsgWarn').textContent = 'Email inválido!'
+                document.getElementById('idMsgWarn').style.color = '#ff0000'
+            });
+        }
+
+    }).catch(function (erro) {
+        console.log(erro);
+    })
+
+    return false;
+}
+
+// U -> Update -> PUT
+function endpointUpdateNotificationEmail() {
+
+}
+
+// D -> Delete -> Delete
+function endpointDeleteEmail(userId, emailId) {
+    var userIdVar = userId
+    var emailIdVar = emailId
+
+    if (userIdVar == '') {
+        alert('userId inválido')
+        return
+    } else if (emailIdVar == '') {
+        alert('emailId inválido')
+        return
+    }
+
+    fetch("/notification/remover", {
+        method: "POST",
+        headers: {
+            "Content-Type": "application/json"
+        },
+        body: JSON.stringify({
+            userIdServer: userIdVar,
+            emailIdServer: emailIdVar,
+        })
+    }).then(function (resposta) {
+    
+        if (resposta.ok) {
+            console.log(resposta);
+
+            resposta.json().then(json => {
+                console.log(json);
+                console.log("a")
+                console.log(JSON.stringify(json));
+                console.log("b")
+
+                let listNotification = []
+                    for (let i = 0; i < json.length; i++) {
+                        console.log(json[i])
+                        listNotification.push(
+                            {
+                                idEmailN: json[i].emailN_id,
+                                emailN: json[i].emailN,
+                                idTipoN: json[i].tipoNotificacao_id,
+                                tipoN: json[i].tipoNotificacao,
+                                ativoTipoN: json[i].ativoTipoNotificacao,
+                            }
+                        )
+                    }
+                cancelRemoveCurrentEmail()
+                
+                setTimeout(() => {
+                    sessionStorage.setItem('DADOS_NOTIFICACOES', JSON.stringify(listNotification));
+                    organizerScreenNotification()
+                }, 1000);
+
+            });
+
+        } else {
+
+            console.log("Houve um erro ao tentar realizar a remoção do Email!");
+
+            resposta.text().then(texto => {
+                console.error(texto);
+                alert('Email inválido')
+            });
+        }
+
+    }).catch(function (erro) {
+        console.log(erro);
+    })
+
+    return false;
+}
+
+// Organizer
+function organizerScreenNotification() {
+    let fullDiaria = false
+    let fullSemanal = false
+    let fullAnual = false
+
+    let listNotificationEmail = []
+
+    let dadosNotifications = JSON.parse(sessionStorage.getItem('DADOS_NOTIFICACOES'))
+    console.log(dadosNotifications)
+
+    for (let i = 0; i < dadosNotifications.length; i++) {
+        if (dadosNotifications[i].tipoN == 'DIARIA' && dadosNotifications[i].ativoTipoN == 1) {
+            fullDiaria = true
+        } else if (dadosNotifications[i].tipoN == 'SEMANAL' && dadosNotifications[i].ativoTipoN == 1) {
+            fullSemanal = true
+        } else if (dadosNotifications[i].tipoN == 'ANUAL' && dadosNotifications[i].ativoTipoN == 1) {
+            fullAnual = true
+        }
+    }
+
+    for (let i = 0; i < dadosNotifications.length; i++) {
+        let existe = false
+        var atual = dadosNotifications[i]
+        for (let j = 0; j < listNotificationEmail.length; j++) {
+            if (atual.idEmailN == listNotificationEmail[j].idEmailN) {
+                existe = true
+            }
+        }
+        if (!existe) {
+            listNotificationEmail.push(
+                {
+                    idEmailN: atual.idEmailN,
+                    emailN: atual.emailN,
+                    notificacoes: [],
+                    ativo: false
+                }
+            )
+        }
+        for (let j = 0; j < listNotificationEmail.length; j++) {
+            if (listNotificationEmail[j].emailN == atual.emailN) {
+                listNotificationEmail[j].notificacoes.push([atual.tipoN, atual.ativoTipoN])
+            }
+        }
+    }
+
+    for (let i = 0; i < listNotificationEmail.length; i++) {
+        let emailAtivo = false
+        for (let j = 0; j < listNotificationEmail[i].notificacoes.length; j++) {
+            if (listNotificationEmail[i].notificacoes[j][1] == 1) {
+                emailAtivo = true
+            }
+        }
+
+        listNotificationEmail[i].ativo = emailAtivo
+    }
+
+    // Mudando HTML
+    // Full Diaria
+    document.getElementById('idStatusFullDiaria').textContent = (fullDiaria) ? 'Ativado' : 'Desativado'
+    let containerFullDiaria = document.getElementById('idContainerButtonsFullDiaria')
+    if (fullDiaria) {
+        containerFullDiaria.children[0].style.display = 'none'
+        containerFullDiaria.children[1].style.display = 'block'
+    } else {
+        containerFullDiaria.children[0].style.display = 'block'
+        containerFullDiaria.children[1].style.display = 'none'
+    }
+
+    // Full Semanal
+    document.getElementById('idStatusFullSemanal').textContent = (fullSemanal) ? 'Ativado' : 'Desativado'
+    let containerFullSemanal = document.getElementById('idContainerButtonsFullSemanal')
+    if (fullSemanal) {
+        containerFullSemanal.children[0].style.display = 'none'
+        containerFullSemanal.children[1].style.display = 'block'
+    } else {
+        containerFullSemanal.children[0].style.display = 'block'
+        containerFullSemanal.children[1].style.display = 'none'
+    }
+
+    // Full Anual
+    document.getElementById('idStatusFullAnual').textContent = (fullAnual) ? 'Ativado' : 'Desativado'
+    let containerFullAnual = document.getElementById('idContainerButtonsFullAnual')
+    if (fullAnual) {
+        containerFullAnual.children[0].style.display = 'none'
+        containerFullAnual.children[1].style.display = 'block'
+    } else {
+        containerFullAnual.children[0].style.display = 'block'
+        containerFullAnual.children[1].style.display = 'none'
+    }
+
+
+    // adicionar Emails
+    let containerEmails = document.getElementById('options-email')
+    containerEmails.replaceChildren()
+    let emailsCadastrados = []
+    for (let i = 0; i < listNotificationEmail.length; i++) {
+        let item = listNotificationEmail[i]
+        
+        let divContainerMax = document.createElement('div')
+        divContainerMax.classList.add('option-email')
+        
+
+        let containerEmailAtual = document.createElement('div')
+        containerEmailAtual.classList.add('width-email-email')
+
+        let emailAtual = document.createElement('span')
+        emailAtual.textContent = item.emailN
+
+        containerEmailAtual.appendChild(emailAtual)
+
+        
+        let containerStatusAtual = document.createElement('div')
+        containerStatusAtual.classList.add('width-status-email')
+
+        let statusAtual = document.createElement('span')
+        statusAtual.textContent = (item.ativo) ? 'Ativado' : 'Desativo'
+
+        
+        containerStatusAtual.appendChild(statusAtual)
+
+
+        let containerButtonsAtual = document.createElement('div')
+        containerButtonsAtual.classList.add('width-actions-email')
+
+        let spanButtonsAtual = document.createElement('span')
+        containerButtonsAtual.appendChild(spanButtonsAtual)
+
+        let divOptionsAtual = document.createElement('div')
+        divOptionsAtual.classList.add('options-edit-remove-email')
+
+        spanButtonsAtual.appendChild(divOptionsAtual)
+        
+        let divButtonEdit = document.createElement('div')
+        divButtonEdit.title = 'Editar notificações para esse Email'
+        divButtonEdit.onclick = () => modalEditCurrentEmail(item.emailN)
+        let imgButtonEdit = document.createElement('img')
+        imgButtonEdit.src = '../assets/Edit-blue.png'
+        imgButtonEdit.alt = 'Botão para editar o Email'
+        divButtonEdit.appendChild(imgButtonEdit)
+        
+        let divButtonRemove = document.createElement('div')
+        divButtonRemove.title = 'Remover este Email'
+        let userId = sessionStorage.getItem('ID_USUARIO')
+        divButtonRemove.onclick = () => confirmRemoveCurrentEmail(userId, item.idEmailN, item.emailN)
+        let imgButtonRemove = document.createElement('img')
+        imgButtonRemove.src = '../assets/Lixo-vermelho.png'
+        imgButtonRemove.alt = 'Botão para editar o Email'
+        divButtonRemove.appendChild(imgButtonRemove)
+
+        divOptionsAtual.appendChild(divButtonEdit)
+        divOptionsAtual.appendChild(divButtonRemove)
+
+        divContainerMax.appendChild(containerEmailAtual)
+        divContainerMax.appendChild(containerStatusAtual)
+        divContainerMax.appendChild(containerButtonsAtual)
+
+        emailsCadastrados.push(divContainerMax)
+    }
+
+    for (let i = 0; i < emailsCadastrados.length; i++) {
+        containerEmails.appendChild(emailsCadastrados[i])
     }
 }

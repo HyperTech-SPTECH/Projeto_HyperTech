@@ -8,8 +8,12 @@ router.post("/criacao", function (req, res) {
     notificationController.criacao(req, res);
 })
 
-// router.post("/remover", function (req, res) {
-//     profileController.remover(req, res);
-// });
+router.post("/remover", function (req, res) {
+    notificationController.remover(req, res);
+});
+
+router.post("/criar", function (req, res) {
+    notificationController.criar(req, res);
+});
 
 module.exports = router;
