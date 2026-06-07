@@ -61,7 +61,6 @@ function functionFilterCity(data) {
 // Colocar filtros da Cidade
 function functionIncludeDataInTheCityFilter(citys) {
     let containerFilter = document.getElementById('idContainerFiltroCidade')
-    console.log(containerFilter)
     let span = document.createElement('span')
     span.textContent = 'Cidade:'
     let filter = document.createElement('select')
@@ -208,7 +207,6 @@ function functionFilterMeses() {
 // Colocar filtros do Mes
 function functionIncludeDataInTheMonthFilter(meses) {
     let containerFilter = document.getElementById('idContainerFiltroMes')
-    console.log(containerFilter)
     let span = document.createElement('span')
     span.textContent = 'Mês:'
     let filter = document.createElement('select')
