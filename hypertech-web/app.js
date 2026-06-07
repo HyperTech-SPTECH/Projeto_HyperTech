@@ -20,6 +20,7 @@ var filtrosRouter = require("./src/routes/filtros");
 var rotasRouter = require("./src/routes/rotas");
 var dashboardRouter = require("./src/routes/dashboard")
 var notificationRouter = require("./src/routes/notificationRoute");
+var emailRouter = require("./src/routes/emailRoute");
 
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
@@ -36,6 +37,7 @@ app.use("/filtros", filtrosRouter);
 app.use("/rotas", rotasRouter);
 app.use("/dashboard", dashboardRouter);
 app.use("/notification", notificationRouter);
+app.use("/email", emailRouter);
 
 app.listen(PORTA_APP, function () {
     console.log(`

@@ -185,8 +185,8 @@
                         <span>Entre em contato para saber como nossas soluções podem fortalecer a gestão de risco da sua seguradora e proteger seus clientes.</span>
                     </div>
                     <div class="inserirInput-faleConosco">
-                        <input type="email" id="idEmail-faleConosco" placeholder="Digite seu Email">
-                        <input type="button" id="idButton-faleConosco" value="Enviar">
+                        <input type="email" id="idEmail-faleConosco" placeholder="Digite seu Email" oninput="valEmail()">
+                        <input type="button" id="idButton-faleConosco" value="Enviar" onclick="enviarEmail()">
                     </div>
                 </div>
             </div>
@@ -252,5 +252,88 @@
 <script>
     function resetSessao() {
         sessionStorage.clear()
+    }
+         
+    function valEmail() {
+        var email = document.getElementById('idEmail-faleConosco').value
+
+        var tamanho = email.length - 1
+        
+        // if (email.includes('@')) { // Não pode ter mais de 1 '@'
+        //     email = email.replace('@', '*')
+        //     if (email.includes('@')) {
+        //         res.innerHTML = 'Apenas 1 "@" é permitido'
+        //     } else {
+        //         res.innerHTML = ''
+        //     }    
+        // } else {
+        //     res.innerHTML = ''
+        // }    
+
+        if (email[0] == '.' || (email[tamanho] == '.' && email[(tamanho - 1)] == '.')) { // Não deixa começar com ponto e nem ter 2 pontos seguidos
+            document.getElementById('idEmail-faleConosco').value = document.getElementById('idEmail-faleConosco').value.slice(0, -1)
+        }
+        
+        if (email[tamanho] == ' ' || email[tamanho] == ',' || email[tamanho] == ':' || email[tamanho] == ';') { // Não pode usar 'espaço', 'vírgula', ':', ';'
+            document.getElementById('idEmail-faleConosco').value = document.getElementById('idEmail-faleConosco').value.slice(0, -1)
+        }
+    }
+
+    function enviarEmail() {
+        var emailVar = document.getElementById('idEmail-faleConosco').value
+
+        if (emailVar == '') {
+            alert('Email inválido!')
+        }
+
+        if (!emailVar.includes('@')) {
+            alert('E-mail deve conter pelo menos 1 @.')
+            return
+        }
+
+        var antesA = emailVar.split('@')
+
+        if (antesA[0].length < 3) {
+            alert('E-mail deve conter pelo menos 3 caracteres antes do @.')
+            return
+        }
+
+        if (antesA[1].length < 3) {
+            alert('E-mail deve conter pelo menos 3 caracteres depois do @.')
+            return
+        }
+
+        fetch("/email/enviar", {
+        method: "POST",
+        headers: {
+            "Content-Type": "application/json"
+        },
+        body: JSON.stringify({
+            emailServer: emailVar,
+        })
+        }).then(function (resposta) {
+        
+            if (resposta.ok) {
+                console.log(resposta);
+
+                resposta.json().then(json => {
+                    
+                    console.log('Email enviado.')
+                    alert('Email enviado!')
+
+                });
+
+            } else {
+
+                console.log("Houve um erro ao tentar realizar o envio do Email!");
+
+                resposta.text().then(texto => {
+                    console.error(texto);
+                });
+            }
+
+        }).catch(function (erro) {
+            console.log(erro);
+        })
     }
 </script>
