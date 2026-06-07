@@ -1,0 +1,234 @@
+<section class="configuration-panel">
+  <section class="nav-configuration">
+    <span class="option-nav no-current-screen" onclick="trocarPerfilDash()"
+      >Perfil</span
+    >
+    <span class="current-screen option-nav">Filtros</span>
+    <span
+      class="option-nav no-current-screen"
+      onclick="trocarNotificationDash()"
+      >Notificações</span
+    >
+  </section>
+
+  <section class="filter-management-data">
+    <div class="table-header-control">
+      <div class="title-filter-management">
+        <span>Filtros favoritos</span>
+      </div>
+      <button class="btn-primary-action" onclick="abrirModalNovoFiltro()">
+        <i class="fa-solid fa-plus"></i> Novo Filtro
+      </button>
+    </div>
+
+    <div class="table-container-filters">
+      <table class="table-filters">
+        <thead>
+          <tr>
+            <th>Nome do Filtro</th>
+            <th>Cidade</th>
+            <th>Bairro</th>
+            <th>Período / Mês</th>
+            <th class="text-center">Ações</th>
+          </tr>
+        </thead>
+        <tbody id="idTbodyFiltros"></tbody>
+      </table>
+    </div>
+  </section>
+</section>
+
+<div id="modalExcluirFiltro" class="custom-modal-overlay modal-danger">
+  <div class="modal-container">
+    <div class="modal-header">
+      <div class="modal-title">
+        <i class="fa-solid fa-triangle-exclamation"></i>
+        <span>Excluir Filtro</span>
+      </div>
+      <button
+        class="btn-close-modal"
+        onclick="fecharModal('modalExcluirFiltro')"
+      >
+        <i class="fa-solid fa-xmark"></i>
+      </button>
+    </div>
+
+    <div class="modal-body text-center-modal">
+      <div class="danger-icon-container">
+        <i class="fa-solid fa-trash-can"></i>
+      </div>
+      <h3>Tem certeza que deseja excluir?</h3>
+      <p>
+        Esta ação não poderá ser desfeita. O filtro selecionado será removido
+        permanentemente da sua lista de favoritos.
+      </p>
+    </div>
+
+    <div class="modal-footer">
+      <button
+        class="btn-modal-secondary"
+        onclick="fecharModal('modalExcluirFiltro')"
+      >
+        Cancelar
+      </button>
+      <button class="btn-modal-danger" onclick="confirmarExclusaoFiltro()">
+        Sim, Excluir
+      </button>
+    </div>
+  </div>
+</div>
+
+<div id="modalNovoFiltro" class="custom-modal-overlay">
+  <div class="modal-container">
+    <div class="modal-header">
+      <div class="modal-title">
+        <i class="fa-solid fa-plus"></i>
+        <span>Novo Filtro</span>
+      </div>
+      <button class="btn-close-modal" onclick="fecharModal('modalNovoFiltro')">
+        <i class="fa-solid fa-xmark"></i>
+      </button>
+    </div>
+
+    <div class="modal-body">
+      <div class="form-group">
+        <label for="novoNomeFiltro">Nome do Filtro</label>
+        <input
+          type="text"
+          id="novoNomeFiltro"
+          placeholder="Ex: Risco Alto - Zona Oeste"
+        />
+      </div>
+
+      <div class="form-row">
+        <div class="form-group">
+          <label for="novoCidadeFiltro">Cidade</label>
+          <select id="novoCidadeFiltro" onchange="tratarSelecaoCidade('Novo')">
+            <option value="#">Selecione a cidade...</option>
+            <option value="#">Todos</option>
+          </select>
+        </div>
+
+        <div class="form-group">
+          <label for="novoBairroFiltro">Bairro</label>
+          <select id="novoBairroFiltro" disabled>
+            <option value="#">Escolha a cidade primeiro</option>
+            <option value="#">Todos</option>
+          </select>
+        </div>
+      </div>
+
+      <div class="form-group">
+        <label for="novoMesFiltro">Período / Mês</label>
+        <select id="novoMesFiltro">
+          <option value="#" selected>Todos os Meses</option>
+          <option value="Janeiro">Janeiro</option>
+          <option value="2">Fevereiro</option>
+          <option value="3">Março</option>
+          <option value="4">Abril</option>
+          <option value="5">Maio</option>
+          <option value="6">Junho</option>
+          <option value="7">Julho</option>
+          <option value="8">Agosto</option>
+          <option value="9">Setembro</option>
+          <option value="10">Outubro</option>
+          <option value="11">Novembro</option>
+          <option value="12">Dezembro</option>
+        </select>
+      </div>
+    </div>
+
+    <div class="modal-footer">
+      <button
+        class="btn-modal-secondary"
+        onclick="fecharModal('modalNovoFiltro')"
+      >
+        Cancelar
+      </button>
+      <button class="btn-modal-primary" onclick="salvarNovoFiltro()">
+        Criar Filtro
+      </button>
+    </div>
+  </div>
+</div>
+
+<div id="modalEditarFiltro" class="custom-modal-overlay">
+  <div class="modal-container">
+    <div class="modal-header">
+      <div class="modal-title">
+        <i class="fa-solid fa-pen-to-square"></i>
+        <span>Editar Filtro</span>
+      </div>
+      <button
+        class="btn-close-modal"
+        onclick="fecharModal('modalEditarFiltro')"
+      >
+        <i class="fa-solid fa-xmark"></i>
+      </button>
+    </div>
+
+    <div class="modal-body">
+      <div class="form-group">
+        <label for="editNomeFiltro">Nome do Filtro</label>
+        <input
+          type="text"
+          id="editNomeFiltro"
+          placeholder="Ex: Zona Sul Noturno"
+        />
+      </div>
+
+      <div class="form-row">
+        <div class="form-group">
+          <label for="editCidadeFiltro">Cidade</label>
+          <select
+            id="editCidadeFiltro"
+            onchange="tratarSelecaoCidade('Editar')"
+          >
+            <option value="#">Todas as Cidades</option>
+          </select>
+        </div>
+
+        <div class="form-group">
+          <label for="editBairroFiltro">Bairro</label>
+          <select id="editBairroFiltro" disabled>
+            <option value="#">Todos os Bairros</option>
+          </select>
+        </div>
+      </div>
+
+      <div class="form-group">
+        <label for="editMesFiltro">Período / Mês</label>
+        <select id="editMesFiltro">
+          <option value="#" selected>Todos os Meses</option>
+          <option value="1">Janeiro</option>
+          <option value="2">Fevereiro</option>
+          <option value="3">Março</option>
+          <option value="4">Abril</option>
+          <option value="5">Maio</option>
+          <option value="6">Junho</option>
+          <option value="7">Julho</option>
+          <option value="8">Agosto</option>
+          <option value="9">Setembro</option>
+          <option value="10">Outubro</option>
+          <option value="11">Novembro</option>
+          <option value="12">Dezembro</option>
+        </select>
+      </div>
+    </div>
+
+    <div class="modal-footer">
+      <button
+        class="btn-modal-secondary"
+        onclick="fecharModal('modalEditarFiltro')"
+      >
+        Cancelar
+      </button>
+      <button
+        class="btn-modal-primary btn-save-edit"
+        onclick="salvarEdicaoFiltro()"
+      >
+        Salvar Alterações
+      </button>
+    </div>
+  </div>
+</div>

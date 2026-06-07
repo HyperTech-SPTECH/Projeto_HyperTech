@@ -21,32 +21,32 @@
                 
                 <div class="auth-formulario">
                     <div class="auth-grupo-input">
-                        <label>Nome</label>
+                        <label for="input_nome">Nome</label>
                         <input type="text" id="input_nome" value="Paulo" placeholder="Ex: Maria Antonia Oliveira">
                     </div>
                     
                     <div class="auth-grupo-input">
-                        <label>CNPJ</label>
-                        <input oninput="mascara()" type="text" id="input_cnpj" value="12.345.678-0123-45" maxlength="18" placeholder="Ex. XX.XXX.XXX/0001-XX">
+                        <label for="input_cnpj">CNPJ</label>
+                        <input oninput="valCnpj()" type="text" id="input_cnpj" value="12.345.678-0123-45" maxlength="18" placeholder="Ex. XX.XXX.XXX/0001-XX">
                     </div>
                     
                     <div class="auth-grupo-input">
-                        <label>E-mail</label>
-                        <input type="text" id="input_email" value="seguradora@gmail.com" placeholder="Ex. hypertech@gmail.com">
+                        <label for="input_email">E-mail</label>
+                        <input oninput="valEmail()" type="text" id="input_email" value="seguradora@gmail.com" placeholder="Ex. hypertech@gmail.com">
                     </div>
                     
                     <div class="auth-grupo-input">
-                        <label>Senha</label>
+                        <label for="input_senha">Senha</label>
                         <input type="password" id="input_senha" value="Abcd#1234" placeholder="******">
                     </div>
                     
                     <div class="auth-grupo-input">
-                        <label>Confirmar senha</label>
+                        <label for="input_confirmacao">Confirmar senha</label>
                         <input type="password" id="input_confirmacao" value="Abcd#1234" placeholder="******">
                     </div>
                 </div>
                 
-                <div id="res" class="auth-mensagem" style="display: none;">Preencher todos os campos!</div>
+                <div id="res" class="auth-mensagem">Preencher todos os campos!</div>
                 
                 <button class="auth-botao" onclick="criar()">Cadastrar</button>
                 <a class="auth-link" href="login.html">Já possui uma conta? <br />Faça login agora</a>
@@ -74,69 +74,162 @@
                 cnpj.value += "-"
             }
         }
+
+        function valCnpj() {
+            var cnpj = document.getElementById('input_cnpj').value
+            var tamanhoOri = cnpj.length
+            var tamanho = cnpj.length - 1
+            
+            if (!isNaN(cnpj[tamanho]) && !(cnpj[tamanho] == ' ')) { // Deixa digitar apenas números
+                if (tamanho == 2 || tamanho == 6) { // Coloca os pontos automaticamente no CNPJ
+                    input_cnpj.value = input_cnpj.value.slice(0, -1) + '.' + input_cnpj.value[tamanho]
+                } else if (tamanho == 10 && cnpj[10] != '/') { // Coloca a barra automaticamente no CNPJ
+                    input_cnpj.value = input_cnpj.value.slice(0, -1) + '/' + input_cnpj.value[tamanho]
+                } else if ((tamanho == 15 && cnpj[15] != '-')) { // Coloca o traço automaticamente no CNPJ
+                    input_cnpj.value = input_cnpj.value.slice(0, -1) + '-' + input_cnpj.value[tamanho]
+                }    
+            } else { // Apaga o caractere caso não seja um número
+                input_cnpj.value = input_cnpj.value.slice(0, -1)
+            }
+
+            if (tamanhoOri > 18) { // Não deixa colocar mais que 18 caracteres
+                input_cnpj.value = input_cnpj.value.slice(0, -1)
+            }
+        }
+         
+        function valEmail() {
+            var email = document.getElementById('input_email').value
+
+            var tamanho = email.length - 1
+            
+            if (email.includes('@')) { // Não pode ter mais de 1 '@'
+                email = email.replace('@', '*')
+                if (email.includes('@')) {
+                    res.innerHTML = 'Apenas 1 "@" é permitido'
+                } else {
+                    res.innerHTML = ''
+                }    
+            } else {
+                res.innerHTML = ''
+            }    
+
+            if (email[0] == '.' || (email[tamanho] == '.' && email[(tamanho - 1)] == '.')) { // Não deixa começar com ponto e nem ter 2 pontos seguidos
+                input_email.value = input_email.value.slice(0, -1)
+            }
+            
+            if (email[tamanho] == ' ' || email[tamanho] == ',' || email[tamanho] == ':' || email[tamanho] == ';') { // Não pode usar 'espaço', 'vírgula', ':', ';'
+                input_email.value = input_email.value.slice(0, -1)
+            }
+        }
         
         function criar() {
-            var nome = input_nome.value.trim();
-            var cnpj = input_cnpj.value.trim();
-            var email = input_email.value.trim();
-            var senha = input_senha.value;
-            var confirmacao = input_confirmacao.value;
+            var nomeVar = input_nome.value.trim();
+            var cnpjVar = input_cnpj.value.trim();
+            var emailVar = input_email.value.trim();
+            var senhaVar = input_senha.value;
+            var confirmSenhaVar = input_confirmacao.value;
 
-            var mensagem = "";
-
-            if (!(email.includes("@gmail.com") || email.includes("@sptech.school"))) {
-                mensagem += "Email deve ser @gmail.com ou @sptech.school<br>";
+            res.innerText = ''
+            document.getElementById('res').classList.remove('textRed')
+            document.getElementById('res').classList.remove('textGreen')
+            // Verificando se há algum campo em branco
+            if (nomeVar == '' ||
+                emailVar == '' ||
+                cnpjVar == '' ||
+                senhaVar == '' ||
+                confirmSenhaVar == ''
+            ) {
+                document.getElementById('res').textContent = 'Preencha todos os campos!'
+                document.getElementById('res').classList.add('textRed')
+                return false
+            }
+            
+            if (nomeVar.length < 3) {
+                res.innerText = 'Nome deve conter pelo menos 3 caracteres.'
+                document.getElementById('res').classList.add('textRed')
+                return
             }
 
-            var temLetra = false;
-            var temNumero = false;
-            var temEspecial = false;
+            if (!emailVar.includes('@')) {
+                res.innerText = 'E-mail deve conter pelo menos 1 @.'
+                document.getElementById('res').classList.add('textRed')
+                return
+            }
 
-            var letras = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ";
-            for (var i = 0; i < letras.length; i++) {
-                if (senha.includes(letras[i])) {
-                    temLetra = true;
-                    break;
+            var antesA = emailVar.split('@')
+
+            if (antesA[0].length < 3) {
+                res.innerText = 'E-mail deve conter pelo menos 3 caracteres antes do @.'
+                document.getElementById('res').classList.add('textRed')
+                return
+            }
+
+            if (antesA[1].length < 3) {
+                res.innerText = 'E-mail deve conter pelo menos 3 caracteres depois do @.'
+                document.getElementById('res').classList.add('textRed')
+                return
+            }
+            
+            if (cnpjVar.length != 18) {
+                res.innerText = 'CNPJ inválido.'
+                document.getElementById('res').classList.add('textRed')
+                return
+            }
+            
+            if (senhaVar.length < 8) {
+                res.innerText = 'A senha deve conter no minímo 8 caracteres.'
+                document.getElementById('res').classList.add('textRed')
+                return
+            }
+
+            var senhaNumber = false
+            for (var i = 0; i < senhaVar.length; i++) {
+                if (!isNaN(senhaVar[i])) {
+                    senhaNumber = true
+                }
+            }
+            
+            if (!senhaNumber) {
+                res.innerText = 'A senha deve conter no minímo 1 número.'
+                document.getElementById('res').classList.add('textRed')
+                return
+            }
+            
+            var especiais = `!@#$%&*()_.,;:+-/`
+            var temCEspecial = false
+            for (var i = 0; i < senhaVar.length; i++) {
+                if (especiais.includes(senhaVar[i])) {
+                    temCEspecial = true
                 }
             }
 
-            var numeros = "0123456789";
-            for (var i = 0; i < numeros.length; i++) {
-                if (senha.includes(numeros[i])) {
-                    temNumero = true;
-                    break;
-                }
+            if (!temCEspecial) {
+                // (! @ # $ % & * ( ) _ . , ; : + - / )
+                res.innerText = 'A senha deve conter no minímo 1 caracter especial.'
+                document.getElementById('res').classList.add('textRed')
+                return
+            }
+            
+            if (senhaVar == senhaVar.toLowerCase()) {
+                res.innerText = 'A senha deve conter no minímo uma letra maiúscula.'
+                document.getElementById('res').classList.add('textRed')
+                return    
+            }
+            
+            if (senhaVar == senhaVar.toUpperCase()) {
+                res.innerText = 'A senha deve conter no minímo uma letra minúscula.'
+                document.getElementById('res').classList.add('textRed')
+                return    
+            }
+            
+            if (senhaVar != confirmSenhaVar) {
+                res.innerText = 'O Campo Confirmar senha deve ser igual ao campo Senha'
+                document.getElementById('res').classList.add('textRed')
+                return        
             }
 
-            var especiais = "!@#%";
-            for (var i = 0; i < especiais.length; i++) {
-                if (senha.includes(especiais[i])) {
-                    temEspecial = true;
-                    break;
-                }
-            }
-
-            if (senha.length < 6) {
-                mensagem += "Senha deve ter no mínimo 6 caracteres<br>";
-            }
-
-            if (!temLetra || !temNumero || !temEspecial) {
-                mensagem += "Senha deve conter letras, números e caractere especial (! @ # %)<br>";
-            }
-
-            if (senha !== confirmacao) {
-                mensagem += "Senhas não conferem<br>";
-            }
-
-            if (mensagem === "") {
-                res.innerHTML = "Cadastro realizado com sucesso!";
-                res.style.color = "green";
-                res.style.display = "block";
-            } else {
-                res.innerHTML = mensagem;
-                res.style.color = "red";
-                res.style.display = "block";
-            }
+            res.innerText = ''
+            document.getElementById('res').classList.remove('textRed')
 
             
             fetch("/usuarios/cadastrar", {
@@ -146,27 +239,38 @@
             },
             body: JSON.stringify({
                 
-                nomeServer: nome,
-                emailServer: email,
-                cnpjServer: cnpj,
-                senhaServer: senha,
+                nomeServer: nomeVar,
+                emailServer: emailVar,
+                cnpjServer: cnpjVar,
+                senhaServer: senhaVar,
                 
             }),
             })
-            .then(function (resposta) {
+            .then(async function (resposta) {
                 console.log("resposta: ", resposta);
 
                 if (resposta.ok) {
 
-                // mensagem_erro.innerHTML =
-                //     "Cadastro realizado com sucesso! Redirecionando para tela de Login...";
+                    document.getElementById('res').classList.remove('textRed')
+                    res.textContent = "Cadastro realizado com sucesso! Redirecionando para tela de Login...";
+                    document.getElementById('res').classList.add('textGreen')
 
-                setTimeout(() => {
-                    window.location = "login.html";
-                }, "2000");
-
-              
+                    setTimeout(() => {
+                        window.location = "login.html";
+                    }, "2000");
                 }
+
+                let respostaVar = await resposta.json()
+                
+                if (respostaVar.erro === "EMAIL_DUPLICADO") {
+                    res.innerText = 'Este email já está cadastrado.'
+                    document.getElementById('res').classList.add('textRed')
+                    return        
+                }
+                // if (resposta.erro === "EMAIL_DUPLICADO") {
+                //     alert('Este email já está cadastrado.')
+                //     return
+                // }
             })
             .catch(function (resposta) {
                 console.log(`#ERRO: ${resposta}`);

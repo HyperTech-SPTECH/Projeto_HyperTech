@@ -1,7 +1,5 @@
 var contentArea = document.getElementById('main-content');
 
-// loadComponent("./dashboard/date-hour-dashboard.html")
-
 async function loadComponent(fileName) {
     try {
         contentArea.innerHTML = '<p>Carregando...</p>';
@@ -18,7 +16,8 @@ async function loadComponent(fileName) {
         }
 
         if (fileName.includes('date-hour-dashboard.html')) {
-            if (typeof renderHeatmap === 'function') renderHeatmap();
+            if (typeof iniciarDashboardDiaHora === 'function') iniciarDashboardDiaHora();
+            
         }
 
         if(fileName.includes('region-dashboard.html')){
@@ -70,6 +69,7 @@ document.getElementById('btn-rotas').addEventListener('click', handleNavClick);
 document.addEventListener('DOMContentLoaded', () => {
     loadComponent('./dashboard/date-hour-dashboard.html');
     pullInformationFromFilters()
+    listarFiltrosUsuario()
 });
 
 function trocarDashRegiao() {
@@ -79,5 +79,58 @@ function trocarDashRegiao() {
 
 function trocarDashHoraDia() {
     loadComponent('./dashboard/date-hour-dashboard.html');
+}
+
+function trocarProfileDash() {
+    loadComponent('./dashboard/profile-dashboard.html');
+    
+    setTimeout(() => {
+        document.getElementById('idInputNomeUser').value = sessionStorage.NOME_USUARIO
+        document.getElementById('idInputEmailUser').value = sessionStorage.EMAIL_USUARIO
+        document.getElementById('idInputSenhaUser').value = '**********'
+        let data = sessionStorage.getItem('DT_CRIACAO_USUARIO')
+        let novaData = new Date(data)
+        document.getElementById('idInputDtCricaoUser').value = novaData.toLocaleDateString('pt-BR');
+        document.getElementById('idInputNomeEmpresa').value = sessionStorage.NOME_EMPRESA
+        document.getElementById('idInputCnpjEmpresa').value = sessionStorage.CNPJ_EMPRESA
+        document.getElementById('idInputEmailEmpresa').value = sessionStorage.EMAIL_EMPRESA
+        document.getElementById('idInputTelefoneEmpresa').value = sessionStorage.TELEFONE_EMPRESA
+        let dataEmpresa = sessionStorage.getItem('DT_CADASTRO_EMPRESA')
+        let novaDataEmpresa = new Date(dataEmpresa)
+        document.getElementById('idInputDtCriadoEmpresa').value = novaDataEmpresa.toLocaleDateString('pt-BR');
+        document.getElementById('idButtons').style.display = 'none'
+
+    }, 20)
+}
+
+function trocarNotificationDash() {
+    loadComponent('./dashboard/notification-dashboard.html');
+}
+
+function trocarFiltroDash() {
+    loadComponent('./dashboard/filter-config.html');
+
+    console.log("Injetando rotinas e buscando dados do Postgres/MySQL...");
+    
+    if (typeof carregarOpcoesFiltros === 'function') {
+        carregarOpcoesFiltros();
+    } else {
+        console.error("Função carregarOpcoesFiltros não encontrada. Verifique se o filter.js está importado na home.html");
+    }
+
+    if (typeof atualizarTabelaFiltros === 'function') {
+        atualizarTabelaFiltros();
+    }
+}
+
+document.getElementById('button-menu').addEventListener('click', () => {
+    document.getElementById('dropdown-menu').classList.toggle('displayNone')
+})
+
+function logoutDashboard() {
+    sessionStorage.clear()
+    setTimeout(function () {
+        window.location = "./index.html";
+    }, 200); // apenas para exibir o loading
     pullInformationFromFilters()
 }

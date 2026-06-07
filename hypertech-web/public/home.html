@@ -9,9 +9,13 @@
     <link rel="stylesheet" href="css/home.css">
     <link rel="stylesheet" href="css/dashboard.css">
     <link rel="stylesheet" href="css/dashboardRegiao.css">
+    <link rel="stylesheet" href="css/profileDashboard.css">
+    <link rel="stylesheet" href="css/notificationDashboard.css">
+    <link rel="stylesheet" href="css/filter.css">
     <link rel="stylesheet" href="css/route.css">
     <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"/>
 
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap" rel="stylesheet">
@@ -19,11 +23,27 @@
     <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
     <script src="js/home.js" defer></script>
     <script src="js/dashboard.js" defer></script>
+    <script src="js/profile.js" defer></script>
+    <script src="js/filter.js" defer></script>
     <script src="js/route.js" defer></script>
 </head>
 <body onload="">
     <header>
         <h1>HyperTech</h1>
+        <div class="buttons-menu">
+            <div id="button-perfil" onclick="trocarProfileDash()">
+                <img src="./assets/Perfil.png" alt="Botão de perfil">
+            </div>
+            <div id="button-menu">
+                <img src="./assets/Menu.png" alt="Botão de Menu">
+                <div id="dropdown-menu" class="dropdown-menu displayNone">
+                    <span onclick="trocarProfileDash()">Perfil</span>
+                    <span onclick="trocarNotificationDash()">Notificações</span>
+                    <span onclick="trocarFiltroDash()">Filtros</span>
+                    <span class="dash-logout" onclick="logoutDashboard()">Logout</span>
+                </div>
+            </div>
+        </div>
     </header>
     
     <div class="app-container">
