@@ -28,6 +28,38 @@ function popularSelectFiltro(id, lista, placeholder, valorSelecionado = "") {
         option.textContent = item.nome_filtro; 
         select.appendChild(option);
     });
+
+    select.removeEventListener('change', aplicarFiltroFavorito);
+    select.addEventListener('change', aplicarFiltroFavorito)
+}
+
+function aplicarFiltroFavorito() {
+    const filtroIdSelecionado = this.value; // 'this' referencia o select disparador
+
+    // Se o usuário selecionou o placeholder (valor vazio), não faz nada
+    if (!filtroIdSelecionado) return;
+
+    // Busca o objeto completo na lista global
+    const filtroEncontrado = listaFiltrosUser.find(f => f.filtro_id == filtroIdSelecionado);
+
+    if (filtroEncontrado) {
+        console.log("Aplicando filtro:", filtroEncontrado);
+
+        const selectCidade = document.getElementById('idSelectFiltroCidade');
+        selectCidade.value = filtroEncontrado.cidade;
+
+        filterBairroAndMonth();
+
+        setTimeout(() => {
+            const selectBairro = document.getElementById('idSelectFiltroBairro');
+            const selectMes = document.getElementById('idSelectFiltroMes');
+
+            if (selectBairro) selectBairro.value = filtroEncontrado.bairro;
+            if (selectMes) selectMes.value = filtroEncontrado.mes;
+            
+            console.log("Valores aplicados nos campos dependentes.");
+        }, 100); 
+    }
 }
 
 
@@ -121,6 +153,24 @@ function salvarNovoFiltro() {
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(payload)
     }).then(() => { fecharModal("modalNovoFiltro"); atualizarTabelaFiltros(); });
+}
+
+function salvarNovoFiltroDash() {
+    const payload = {
+        idUsuario: idUsuarioLogado,
+        nomeFiltro: "Novo Filtro",
+        cidade: document.getElementById("idSelectFiltroCidade").value,
+        bairro: document.getElementById("idSelectFiltroBairro").value,
+        mes: document.getElementById("idSelectFiltroMes").value
+    }
+
+    fetch("/filtros/cadastrar", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(payload)
+    }).then(() => { 
+        alert("Novo filtro salvo com sucesso!"
+        )});
 }
 
 function salvarEdicaoFiltro() {

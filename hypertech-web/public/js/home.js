@@ -75,6 +75,7 @@ document.addEventListener('DOMContentLoaded', () => {
 function trocarDashRegiao() {
     loadComponent('./dashboard/region-dashboard.html');
     pullInformationFromFilters()
+    listarFiltrosUsuario();
 }
 
 function trocarDashHoraDia() {
