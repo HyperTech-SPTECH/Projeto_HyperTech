@@ -1,4 +1,4 @@
-function showConfirmChangeNotification(textMessage, activate = false) {
+function showConfirmChangeNotification(tipoN, textMessage, activate = false) {
     if (document.getElementById('idModalEditCurrentEmail')) {
         console.log('aqui')
         return;
@@ -47,6 +47,7 @@ function showConfirmChangeNotification(textMessage, activate = false) {
     let spanConfirmConfirmNotification = document.createElement('span')
     spanConfirmConfirmNotification.id = 'idConfirmConfirmNotification'
     spanConfirmConfirmNotification.textContent = 'Confirmar'
+    spanConfirmConfirmNotification.onclick = () => endpointChangeAllOfCurrentUser(tipoN, (activate) ? 1 : 0)
     
     divButtonsNotification.appendChild(spanCancelConfirmNotification)
     divButtonsNotification.appendChild(spanConfirmConfirmNotification)
@@ -59,27 +60,27 @@ function showConfirmChangeNotification(textMessage, activate = false) {
 }
 
 function pullDeactivateConfirmChangeNotificationDiaria() {
-    showConfirmChangeNotification('Realmente deseja desativar a Notificação Diária para todos os emails cadastrados')
+    showConfirmChangeNotification('DIARIA', 'Realmente deseja desativar a Notificação Diária para todos os emails cadastrados')
 }
 
 function pullActivateConfirmChangeNotificationDiaria() {
-    showConfirmChangeNotification('Realmente deseja ativar a Notificação Diária para todos os emails cadastrados', true)
+    showConfirmChangeNotification('DIARIA', 'Realmente deseja ativar a Notificação Diária para todos os emails cadastrados', true)
 }
 
 function pullDeactivateConfirmChangeNotificationSemanal() {
-    showConfirmChangeNotification('Realmente deseja desativar a Notificação Semanal para todos os emails cadastrados')
+    showConfirmChangeNotification('SEMANAL', 'Realmente deseja desativar a Notificação Semanal para todos os emails cadastrados')
 }
 
 function pullActivateConfirmChangeNotificationSemanal() {
-    showConfirmChangeNotification('Realmente deseja ativar a Notificação Semanal para todos os emails cadastrados', true)
+    showConfirmChangeNotification('SEMANAL', 'Realmente deseja ativar a Notificação Semanal para todos os emails cadastrados', true)
 }
 
 function pullDeactivateConfirmChangeNotificationAnual() {
-    showConfirmChangeNotification('Realmente deseja desativar a Notificação Anual para todos os emails cadastrados')
+    showConfirmChangeNotification('ANUAL', 'Realmente deseja desativar a Notificação Anual para todos os emails cadastrados')
 }
 
 function pullActivateConfirmChangeNotificationAnual() {
-    showConfirmChangeNotification('Realmente deseja ativar a Notificação Anual para todos os emails cadastrados', true)
+    showConfirmChangeNotification('ANUAL', 'Realmente deseja ativar a Notificação Anual para todos os emails cadastrados', true)
 }
 
 function cancelChangeNotification() {
@@ -253,6 +254,28 @@ function modalEditCurrentEmail(currentEmail) {
 
     }
 
+    let dadosNotification = JSON.parse(sessionStorage.getItem('DADOS_NOTIFICACOES'))
+    let ativoDiaria = 0
+    let ativoSemanal = 0
+    let ativoAnual = 0
+    let ativoEnviarN = 0
+
+    for (let i = 0; i < dadosNotification.length; i++) {
+        let atual = dadosNotification[i]
+        if (atual.emailN == currentEmail && atual.tipoN == 'DIARIA' && atual.ativoTipoN == 1) {
+            ativoDiaria = 1
+        }
+        if (atual.emailN == currentEmail && atual.tipoN == 'SEMANAL' && atual.ativoTipoN == 1) {
+            ativoSemanal = 1
+        }
+        if (atual.emailN == currentEmail && atual.tipoN == 'ANUAL' && atual.ativoTipoN == 1) {
+            ativoAnual = 1
+        }
+        if (ativoDiaria == 1 || ativoSemanal == 1 || ativoAnual == 1) {
+            ativoEnviarN = 1
+        }
+    }
+
     let modal = document.createElement('section')
     modal.id = 'idModalEditCurrentEmail'
 
@@ -292,6 +315,11 @@ function modalEditCurrentEmail(currentEmail) {
     let option2OptionSelectEditCurrentEmail1 = document.createElement('option')
     option2OptionSelectEditCurrentEmail1.value = 0
     option2OptionSelectEditCurrentEmail1.textContent = 'Desativado'
+    if (ativoDiaria == 1) {
+        option1OptionSelectEditCurrentEmail1.selected = true
+    } else {
+        option2OptionSelectEditCurrentEmail1.selected = true
+    }
     selectOptionSelectEditCurrentEmail1.appendChild(option1OptionSelectEditCurrentEmail1)
     selectOptionSelectEditCurrentEmail1.appendChild(option2OptionSelectEditCurrentEmail1)
     
@@ -311,6 +339,11 @@ function modalEditCurrentEmail(currentEmail) {
     let option2OptionSelectEditCurrentEmail2 = document.createElement('option')
     option2OptionSelectEditCurrentEmail2.value = 0
     option2OptionSelectEditCurrentEmail2.textContent = 'Desativado'
+    if (ativoSemanal == 1) {
+        option1OptionSelectEditCurrentEmail2.selected = true
+    } else {
+        option2OptionSelectEditCurrentEmail2.selected = true
+    }
     selectOptionSelectEditCurrentEmail2.appendChild(option1OptionSelectEditCurrentEmail2)
     selectOptionSelectEditCurrentEmail2.appendChild(option2OptionSelectEditCurrentEmail2)
     
@@ -330,6 +363,11 @@ function modalEditCurrentEmail(currentEmail) {
     let option2OptionSelectEditCurrentEmail3 = document.createElement('option')
     option2OptionSelectEditCurrentEmail3.value = 0
     option2OptionSelectEditCurrentEmail3.textContent = 'Desativado'
+    if (ativoAnual == 1) {
+        option1OptionSelectEditCurrentEmail3.selected = true
+    } else {
+        option2OptionSelectEditCurrentEmail3.selected = true
+    }
     selectOptionSelectEditCurrentEmail3.appendChild(option1OptionSelectEditCurrentEmail3)
     selectOptionSelectEditCurrentEmail3.appendChild(option2OptionSelectEditCurrentEmail3)
     
@@ -349,6 +387,11 @@ function modalEditCurrentEmail(currentEmail) {
     let option2OptionSelectEditCurrentEmail4 = document.createElement('option')
     option2OptionSelectEditCurrentEmail4.value = 0
     option2OptionSelectEditCurrentEmail4.textContent = 'Desativado'
+    if (ativoEnviarN == 1) {
+        option1OptionSelectEditCurrentEmail4.selected = true
+    } else {
+        option2OptionSelectEditCurrentEmail4.selected = true
+    }
     selectOptionSelectEditCurrentEmail4.appendChild(option1OptionSelectEditCurrentEmail4)
     selectOptionSelectEditCurrentEmail4.appendChild(option2OptionSelectEditCurrentEmail4)
     
@@ -372,6 +415,7 @@ function modalEditCurrentEmail(currentEmail) {
     let spanConfirmConfirmEditCurrentEmail = document.createElement('span')
     spanConfirmConfirmEditCurrentEmail.id = 'idConfirmConfirmEditCurrentEmail'
     spanConfirmConfirmEditCurrentEmail.textContent = 'Salvar'
+    spanConfirmConfirmEditCurrentEmail.onclick = () => endpointUpdateNotificationCurrentEmail(currentEmail)
     
     divButtonsEditCurrentEmail.appendChild(spanCancelConfirmEditCurrentEmail)
     divButtonsEditCurrentEmail.appendChild(spanConfirmConfirmEditCurrentEmail)
@@ -813,4 +857,81 @@ function organizerScreenNotification() {
     }
 }
 
-// 
+// change all of current user
+function endpointChangeAllOfCurrentUser(tipoN, ativoN) {
+    var userIdVar = sessionStorage.getItem('ID_USUARIO')
+    var tipoNVar = tipoN
+    var ativoNVar = ativoN
+    
+    if (userIdVar == '') {
+        alert('userId inválido')
+        return
+    } else if (tipoNVar == '') {
+        alert('tipoN inválido')
+        return
+    } else if (ativoNVar != 1 && ativoNVar != 0) {
+        alert('ativoN inválido')
+        return
+    }
+
+    fetch("/notification/alterarN", {
+        method: "POST",
+        headers: {
+            "Content-Type": "application/json"
+        },
+        body: JSON.stringify({
+            userIdServer: userIdVar,
+            tipoNServer: tipoNVar,
+            ativoNServer: ativoNVar,
+        })
+    }).then(function (resposta) {
+
+        console.log(resposta)
+    
+        if (resposta.ok) {
+            console.log(resposta);
+
+            resposta.json().then(json => {
+                console.log(json);
+                console.log("a")
+                console.log(JSON.stringify(json));
+                console.log("b")
+
+                let listNotification = []
+                    for (let i = 0; i < json.length; i++) {
+                        console.log(json[i])
+                        listNotification.push(
+                            {
+                                idEmailN: json[i].emailN_id,
+                                emailN: json[i].emailN,
+                                idTipoN: json[i].tipoNotificacao_id,
+                                tipoN: json[i].tipoNotificacao,
+                                ativoTipoN: json[i].ativoTipoNotificacao,
+                            }
+                        )
+                    }
+                cancelChangeNotification()
+                
+                setTimeout(() => {
+                    sessionStorage.setItem('DADOS_NOTIFICACOES', JSON.stringify(listNotification));
+                    organizerScreenNotification()
+                }, 1000);
+
+            });
+
+        } else {
+
+            console.log("Houve um erro ao tentar realizar a alteração de notificações para todos os Emails!");
+
+            resposta.text().then(texto => {
+                console.error(texto);
+                alert('Alteração não concluída')
+            });
+        }
+
+    }).catch(function (erro) {
+        console.log(erro);
+    })
+
+    return false;
+}

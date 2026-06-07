@@ -20,4 +20,8 @@ router.post("/alterarCurrentEmail", function (req, res) {
     notificationController.alterarCurrentEmail(req, res);
 });
 
+router.post("/alterarN", function (req, res) {
+    notificationController.alterarN(req, res);
+});
+
 module.exports = router;

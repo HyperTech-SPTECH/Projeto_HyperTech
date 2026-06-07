@@ -24,21 +24,20 @@ async function remover(id) {
     `;
     let resultSelect = await database.mysqlExecutar(instrucaoSqlSelect)
     
-    var instrucaoSqlTabela02 = `
-        DELETE FROM preferencias_notificacao WHERE usuario_email_id = '${resultSelect[0].id}';
-    `
-    database.mysqlExecutar(instrucaoSqlTabela02)
+    for (let i = 0; i < resultSelect.length; i++) {
+        await database.mysqlExecutar(`DELETE FROM preferencias_notificacao WHERE usuario_email_id = '${resultSelect[i].id}'`)
+    }
 
     var instrucaoSqlTabela01 = `
         DELETE FROM usuario_email_notificacao WHERE usuario_id = '${id}';
     `
-    database.mysqlExecutar(instrucaoSqlTabela01)
+    await database.mysqlExecutar(instrucaoSqlTabela01)
 
     var instrucaoSql = `
         DELETE FROM usuario WHERE usuario_id = '${id}';
     `;
     console.log("Executando a instrução SQL: \n" + instrucaoSql);
-    return database.mysqlExecutar(instrucaoSql);
+    return await database.mysqlExecutar(instrucaoSql);
 }
 
 

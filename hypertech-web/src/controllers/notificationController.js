@@ -128,9 +128,44 @@ function alterarCurrentEmail(req, res) {
     }
 }
 
+function alterarN(req, res) {
+    console.log('aquiiiiii')
+    var userId = req.body.userIdServer;
+    var tipoN = req.body.tipoNServer;
+    var ativoN = req.body.ativoNServer;
+
+    // Faça as validações dos valores
+    if (userId == undefined) {
+        res.status(400).send("Seu userId está undefined!");
+    } else if (tipoN == undefined) {
+        res.status(400).send("Sua tipoN está undefined!");
+    } else if (ativoN == undefined) {
+        res.status(400).send("Sua ativoN está undefined!");
+    } else {
+
+        // Passe os valores como parâmetro e vá para o arquivo notificationModel.js
+        notificationModel.alterarN(userId, tipoN, ativoN)
+            .then(
+                function (resultado) {
+                    res.json(resultado);
+                }
+            ).catch(
+                function (erro) {
+                    console.log(erro);
+                    console.log(
+                        "\nHouve um erro ao realizar a alteração de notificações de um Email! Erro: ",
+                        erro.sqlMessage
+                    );
+                    res.status(500).json(erro.sqlMessage);
+                }
+            );
+    }
+}
+
 module.exports = {
     criacao,
     remover,
     criar,
-    alterarCurrentEmail
+    alterarCurrentEmail,
+    alterarN
 }
