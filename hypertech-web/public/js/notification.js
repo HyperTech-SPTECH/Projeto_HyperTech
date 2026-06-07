@@ -808,7 +808,7 @@ function organizerScreenNotification() {
         containerStatusAtual.classList.add('width-status-email')
 
         let statusAtual = document.createElement('span')
-        statusAtual.textContent = (item.ativo) ? 'Ativado' : 'Desativo'
+        statusAtual.textContent = (item.ativo) ? 'Ativado' : 'Desativado'
 
         
         containerStatusAtual.appendChild(statusAtual)
