@@ -1,10 +1,6 @@
-<<<<<<< HEAD
 // var ambiente_processo = 'producao';
-var ambiente_processo = 'producao';
-
-=======
 var ambiente_processo = 'desenvolvimento';
->>>>>>> f20a643e68a929612790afb043765f885946b0e5
+
 var caminho_env = ambiente_processo === 'producao' ? '.env' : '.env.dev';
 
 require("dotenv").config({ path: caminho_env });

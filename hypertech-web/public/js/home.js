@@ -83,6 +83,11 @@ function trocarDashHoraDia() {
 
 function trocarProfileDash() {
     loadComponent('./dashboard/profile-dashboard.html');
+
+    var navBar = document.querySelector('.sidebar-nav');
+    for (var i = 0; i < navBar.children.length; i++) {
+        navBar.children[i].classList.remove('nav-button--selected');
+    }
     
     setTimeout(() => {
         document.getElementById('idInputNomeUser').value = sessionStorage.NOME_USUARIO
@@ -105,10 +110,20 @@ function trocarProfileDash() {
 
 function trocarNotificationDash() {
     loadComponent('./dashboard/notification-dashboard.html');
+
+    var navBar = document.querySelector('.sidebar-nav');
+    for (var i = 0; i < navBar.children.length; i++) {
+        navBar.children[i].classList.remove('nav-button--selected');
+    }
 }
 
 function trocarFiltroDash() {
     loadComponent('./dashboard/filter-config.html');
+
+    var navBar = document.querySelector('.sidebar-nav');
+    for (var i = 0; i < navBar.children.length; i++) {
+        navBar.children[i].classList.remove('nav-button--selected');
+    }
 
     console.log("Injetando rotinas e buscando dados do Postgres/MySQL...");
     
@@ -132,5 +147,4 @@ function logoutDashboard() {
     setTimeout(function () {
         window.location = "./index.html";
     }, 200); // apenas para exibir o loading
-    pullInformationFromFilters()
 }
