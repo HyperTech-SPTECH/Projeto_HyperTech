@@ -130,6 +130,9 @@ function trocarNotificationDash() {
     for (var i = 0; i < navBar.children.length; i++) {
         navBar.children[i].classList.remove('nav-button--selected');
     }
+    setTimeout(() => {
+        organizerScreenNotification()
+    }, 200);
 }
 
 function trocarFiltroDash() {
