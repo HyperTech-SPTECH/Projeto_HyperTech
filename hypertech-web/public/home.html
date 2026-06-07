@@ -13,6 +13,7 @@
     <link rel="stylesheet" href="css/notificationDashboard.css">
     <link rel="stylesheet" href="css/filter.css">
     <link rel="stylesheet" href="css/route.css">
+    <link rel="stylesheet" href="css/newUser.css">
     <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"/>
 
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
@@ -28,8 +29,9 @@
     <script src="js/filter.js" defer></script>
     <script src="js/route.js" defer></script>
     <script src="js/notification.js" defer></script>
+    <script src="js/addUser.js" defer></script>
 </head>
-<body onload="">
+<body onload="verifyRole()">
     <header>
         <h1>HyperTech</h1>
         <div class="buttons-menu">
@@ -40,8 +42,8 @@
                 <img src="./assets/Menu.png" alt="Botão de Menu">
                 <div id="dropdown-menu" class="dropdown-menu displayNone">
                     <span onclick="trocarProfileDash()">Perfil</span>
-                    <span onclick="trocarNotificationDash()">Notificações</span>
                     <span onclick="trocarFiltroDash()">Filtros</span>
+                    <span onclick="trocarNotificationDash()">Notificações</span>
                     <span class="dash-logout" onclick="logoutDashboard()">Logout</span>
                 </div>
             </div>
@@ -59,10 +61,10 @@
                     <img src="./assets/rotas_preta_transparente.png" alt="" aria-hidden="true">
                     <span>Rotas</span>
                 </button>
-                <!-- <button class="nav-button" id="btn-cad-func" type="button">
-                    <img src="./assets/Quadro-Cinza.png" alt="" aria-hidden="true">
+                <button class="nav-button" id="btn-cad-func" type="button">
+                    <img src="./assets/cadastrarUser_preta_transparente.png" alt="" aria-hidden="true">
                     <span>Cadastrar Funcionário</span>
-                </button> -->
+                </button>
             </nav>
         </aside>
         

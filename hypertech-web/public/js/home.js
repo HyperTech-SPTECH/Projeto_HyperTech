@@ -67,7 +67,10 @@ function handleNavClick(ev) {
 
 document.getElementById('btn-dashboard').addEventListener('click', handleNavClick);
 document.getElementById('btn-rotas').addEventListener('click', handleNavClick);
-// document.getElementById('btn-cad-func').addEventListener('click', handleNavClick);
+document.getElementById('btn-cad-func').addEventListener('click', (ev) => {
+    handleNavClick(ev)
+    podeEstarAqui()
+});
 
 document.addEventListener('DOMContentLoaded', () => {
     loadComponent('./dashboard/date-hour-dashboard.html');
@@ -156,6 +159,14 @@ function trocarFiltroDash() {
 document.getElementById('button-menu').addEventListener('click', () => {
     document.getElementById('dropdown-menu').classList.toggle('displayNone')
 })
+
+function verifyRole() {
+    let role = sessionStorage.getItem('CARGO_USUARIO')
+
+    if (role != 1) {
+        document.getElementById('btn-cad-func').style.display = 'none'
+    }
+}
 
 function logoutDashboard() {
     sessionStorage.clear()

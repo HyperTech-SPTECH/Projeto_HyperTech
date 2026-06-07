@@ -27,7 +27,7 @@
                     
                     <div class="auth-grupo-input">
                         <label for="input_cnpj">CNPJ</label>
-                        <input oninput="valCnpj()" type="text" id="input_cnpj" value="12.345.678-0123-45" maxlength="18" placeholder="Ex. XX.XXX.XXX/0001-XX">
+                        <input oninput="valCnpj()" type="text" id="input_cnpj" value="12.345.678/0123-45" maxlength="18" placeholder="Ex. XX.XXX.XXX/0001-XX">
                     </div>
                     
                     <div class="auth-grupo-input">
@@ -264,7 +264,12 @@
 
                 let respostaVar = await resposta.json()
                 
-                if (respostaVar.erro === "EMAIL_DUPLICADO") {
+
+                if (respostaVar.erro === "EMAIL_JA_EXISTE") {
+                    res.innerText = 'Este CNPJ já possui um Email Gerente cadastrado. Peça para ele te cadastrar'
+                    document.getElementById('res').classList.add('textRed')
+                    return        
+                } else if (respostaVar.erro === "EMAIL_DUPLICADO") {
                     res.innerText = 'Este email já está cadastrado.'
                     document.getElementById('res').classList.add('textRed')
                     return        

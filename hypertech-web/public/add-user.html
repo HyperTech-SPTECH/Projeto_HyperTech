@@ -1,1 +1,31 @@
-<h1>ADICIONAR FUNCIONARIO</h1>
+<section class="boxNewUser">
+    <div class="containerBoxNewUser">
+        <h1 class="newUser-title">Cadastre um Novo Funcionário</h1>
+                        
+        <div class="newUser-formulario">
+            <div class="newUser-grupo-input">
+                <label for="input_nome">Nome</label>
+                <input type="text" id="input_nome" value="Eduardo" placeholder="Ex: Maria Antonia Oliveira">
+            </div>
+            
+            <div class="newUser-grupo-input">
+                <label for="input_email">E-mail</label>
+                <input oninput="valEmail()" type="text" id="input_email" value="jorge@gmail.com" placeholder="Ex. hypertech@gmail.com">
+            </div>
+            
+            <div class="newUser-grupo-input">
+                <label for="input_senha">Senha</label>
+                <input type="password" id="input_senha" value="Abcd#1234" placeholder="******">
+            </div>
+            
+            <div class="newUser-grupo-input">
+                <label for="input_confirmacao">Confirmar senha</label>
+                <input type="password" id="input_confirmacao" value="Abcd#1234" placeholder="******">
+            </div>
+        </div>
+        
+        <div id="res" class="newUser-mensagem">Preencher todos os campos!</div>
+        
+        <button class="newUser-botao" onclick="criarUser()">Cadastrar</button>
+    </div>
+</section>

@@ -145,12 +145,12 @@
         if (email.includes('@')) { // Não pode ter mais de 1 '@'
             email = email.replace('@', '*')
             if (email.includes('@')) {
-                div_mensagemEmail.innerHTML = 'Apenas 1 "@" é permitido'
+                email_input.innerHTML = 'Apenas 1 "@" é permitido'
             } else {
-                div_mensagemEmail.innerHTML = ''
+                email_input.innerHTML = ''
             }    
         } else {
-            div_mensagemEmail.innerHTML = ''
+            email_input.innerHTML = ''
         }    
 
         if (email[0] == '.' || (email[tamanho] == '.' && email[(tamanho - 1)] == '.')) { // Não deixa começar com ponto e nem ter 2 pontos seguidos

@@ -17,9 +17,39 @@ async function cadastrar(nome, email, cnpj, senha) {
     //  e na ordem de inserção dos dados.
    var idEmpresa = await database.mysqlExecutar(`Select empresa_id from empresa where cnpj = '${cnpj}'`);
     console.log("Estou aqui" + idEmpresa);
+
+    // Verificar se já existe um usuário Gerente
+    let result00 = await database.mysqlExecutar(`SELECT usuario_id FROM usuario JOIN empresa ON empresa.empresa_id = usuario.empresa_id WHERE cnpj = '${cnpj}' AND cargo_id = 1;`)
+    
+    if (result00.length == 0) {
+        if(idEmpresa.length > 0){
+               var instrucaoSql = `
+             INSERT INTO usuario (nome, email, senha, empresa_id, cargo_id) VALUES ('${nome}', '${email}', '${senha}', '${idEmpresa[0].empresa_id}', 1);
+         `;
+         console.log("Executando a instrução SQL: \n" + instrucaoSql);
+         return database.mysqlExecutar(instrucaoSql);
+        } else {
+         console.log("cnpj não existe");
+         throw new Error("EMAIL_DUPLICADO");
+        }
+    } else {
+        console.log('Já existe um cadastro Gerente neste CNPJ.')
+        throw new Error("CONTA_GERENTE_EXISTE");
+    }
+  
+}
+
+// Coloque os mesmos parâmetros aqui. Vá para a var instrucaoSql
+async function cadastrarUser(nome, email, cnpj, senha) {
+    console.log("ACESSEI O USUARIO MODEL \n \n\t\t >> Se aqui der erro de 'Error: connect ECONNREFUSED',\n \t\t >> verifique suas credenciais de acesso ao banco\n \t\t >> e se o servidor de seu BD está rodando corretamente. \n\n function cadastrarUser():", nome, email, senha);
+    
+    // Insira exatamente a query do banco aqui, lembrando da nomenclatura exata nos valores
+    //  e na ordem de inserção dos dados.
+   var idEmpresa = await database.mysqlExecutar(`Select empresa_id from empresa where cnpj = '${cnpj}'`);
+    console.log("Estou aqui" + idEmpresa);
    if(idEmpresa.length > 0){
           var instrucaoSql = `
-        INSERT INTO usuario (nome, email, senha, empresa_id, cargo_id) VALUES ('${nome}', '${email}', '${senha}', '${idEmpresa[0].empresa_id}', 1);
+        INSERT INTO usuario (nome, email, senha, empresa_id, cargo_id) VALUES ('${nome}', '${email}', '${senha}', '${idEmpresa[0].empresa_id}', 2);
     `;
     console.log("Executando a instrução SQL: \n" + instrucaoSql);
     return database.mysqlExecutar(instrucaoSql);
@@ -32,5 +62,6 @@ async function cadastrar(nome, email, cnpj, senha) {
 
 module.exports = {
     autenticar,
-    cadastrar
+    cadastrar,
+    cadastrarUser
 };
