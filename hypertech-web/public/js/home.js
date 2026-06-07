@@ -136,6 +136,9 @@ function trocarFiltroDash() {
     if (typeof atualizarTabelaFiltros === 'function') {
         atualizarTabelaFiltros();
     }
+    setTimeout(() => {
+        organizerScreenNotification()
+    }, 50);
 }
 
 document.getElementById('button-menu').addEventListener('click', () => {
