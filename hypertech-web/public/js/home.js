@@ -57,7 +57,10 @@ function handleNavClick(ev) {
     if(targetFile) {
         loadComponent(targetFile);
         if (dashboardFilters) {
-            pullInformationFromFilters()
+            setTimeout(() => {
+                includeFiltersInDash()
+                listarFiltrosUsuario()
+            }, 200);
         }
     }
 }
@@ -68,18 +71,26 @@ document.getElementById('btn-rotas').addEventListener('click', handleNavClick);
 
 document.addEventListener('DOMContentLoaded', () => {
     loadComponent('./dashboard/date-hour-dashboard.html');
-    pullInformationFromFilters()
-    listarFiltrosUsuario()
+    setTimeout(() => {
+        includeFiltersInDash()
+        listarFiltrosUsuario()
+    }, 200);
 });
 
 function trocarDashRegiao() {
     loadComponent('./dashboard/region-dashboard.html');
-    pullInformationFromFilters()
-    listarFiltrosUsuario();
+    setTimeout(() => {
+        includeFiltersInDash()
+        listarFiltrosUsuario();
+    }, 200);
 }
 
 function trocarDashHoraDia() {
     loadComponent('./dashboard/date-hour-dashboard.html');
+    setTimeout(() => {
+        includeFiltersInDash();
+        listarFiltrosUsuario();
+    }, 200);
 }
 
 function trocarProfileDash() {

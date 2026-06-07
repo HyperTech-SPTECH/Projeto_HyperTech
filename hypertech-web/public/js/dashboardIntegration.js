@@ -1,29 +1,10 @@
-// let allTheDataAll = []
+// var allTheDataAll = []
 // let cityFilters = []
 // let monthFilters = []
 
-async function pullInformationFromFilters() {
-    await fetch('dashboard/infoFiltrar', {
-        method: 'POST',
-        headers: {
-            'Content-Type': 'application/json',
-        }        
-    })
-        .then(function (resposta) {
-            if (resposta.ok) {
-                console.log("Dados chegou ok!");
-                resposta.json().then(json => {
-                    sessionStorage.DATA_FILTERS = JSON.stringify(json)
-                })
-            } else {
-                alert('Houve um erro para chegar dados de filtros')
-                console.log('Houve um erro para chegar dados de filtros')
-            }
-        })
-        .catch(function (resposta) {
-            console.log(`#ERRO: ${resposta}`)
-        })
 
+function includeFiltersInDash() {
+    console.log('ele veioooo')
     // Colocar dados nos filtros
     // Cidades
     let allTheData = JSON.parse(sessionStorage.DATA_FILTERS)
@@ -36,8 +17,6 @@ async function pullInformationFromFilters() {
 
     // Month
     monthFilters = functionFilterMeses()
-
-    return false
 }
 
 // Filtros de Cidade

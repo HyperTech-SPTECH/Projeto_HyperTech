@@ -6,7 +6,9 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Login</title>
     <link rel="stylesheet" href="css/styles.css">
-    <link rel="stylesheet" href="css/auth.css"> </head>
+    <link rel="stylesheet" href="css/auth.css"> 
+    <script src="js/dashboardIntegration.js" defer></script>
+</head>
 
 <body onload="resetSessao()">
     <div class="auth-recipiente">
@@ -106,6 +108,7 @@
 
                     document.getElementById('res').textContent = 'Login efetuado!'
                     document.getElementById('res').style.color = '#00ff00'
+                    pullInformationFromFilters();
                     setTimeout(function () {
                         window.location = "./home.html";
                     }, 1000); // apenas para exibir o loading
@@ -157,5 +160,32 @@
         if (email[tamanho] == ' ' || email[tamanho] == ',' || email[tamanho] == ':' || email[tamanho] == ';') { // Não pode usar 'espaço', 'vírgula', ':', ';'
             email_input.value = email_input.value.slice(0, -1)
         }
+    }
+    
+    function pullInformationFromFilters() {
+        console.log('aqui veio?')
+        fetch('dashboard/infoFiltrar', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            }        
+        })
+            .then(function (resposta) {
+                if (resposta.ok) {
+                    console.log("Dados chegou ok!");
+                    resposta.json().then(json => {
+                        sessionStorage.DATA_FILTERS = JSON.stringify(json)
+                    })
+                } else {
+                    alert('Houve um erro para chegar dados de filtros')
+                    console.log('Houve um erro para chegar dados de filtros')
+                }
+            })
+            .catch(function (resposta) {
+                console.log(`#ERRO: ${resposta}`)
+            })
+
+
+        return false
     }
 </script>
