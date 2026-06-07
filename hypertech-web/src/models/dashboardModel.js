@@ -27,7 +27,7 @@ function infoFiltrar() {
         GROUP BY cidade, bairro, mes
         ORDER BY mes;
     `;
-    console.log("Executando a instrução SQL: \n" + instrucaoSql);
+    // console.log("Executando a instrução SQL: \n" + instrucaoSql);
     return database.executar(instrucaoSql);
 }
 
@@ -46,7 +46,7 @@ function cargasMaisRoubadas(cidade, bairro, mes, limite) {
         GROUP BY grupo_carga
         ORDER BY quantidade DESC${limiteSql};
     `;
-    console.log("Executando a instrução SQL: \n" + instrucaoSql);
+    // console.log("Executando a instrução SQL: \n" + instrucaoSql);
     return database.executar(instrucaoSql);
 }
 
@@ -72,7 +72,7 @@ function periculosidadeDiaHorario(cidade, bairro, mes) {
         GROUP BY dia_semana, 2
         ORDER BY dia_semana, faixa_horario;
     `;
-    console.log("Executando a instrução SQL: \n" + instrucaoSql);
+    // console.log("Executando a instrução SQL: \n" + instrucaoSql);
     return database.executar(instrucaoSql);
 }
 

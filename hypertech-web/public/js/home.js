@@ -105,7 +105,7 @@ function trocarProfileDash() {
         document.getElementById('idInputDtCriadoEmpresa').value = novaDataEmpresa.toLocaleDateString('pt-BR');
         document.getElementById('idButtons').style.display = 'none'
 
-    }, 20)
+    }, 500)
 }
 
 function trocarNotificationDash() {
