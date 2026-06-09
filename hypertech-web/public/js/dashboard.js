@@ -39,14 +39,17 @@ function pegarRisco(total, minimo, maximo) {
         return "B";
     }
 
-    var parte = (maximo - minimo) / 3;
+    var parte = (maximo - minimo) / 56;
+
+
+    if (total <= minimo + parte * 15 && total > minimo + parte) {
+        return "M";
+    }
 
     if (total <= minimo + parte) {
         return "B";
     }
-    if (total <= minimo + parte * 2) {
-        return "M";
-    }
+  
     return "A";
 }
 
