@@ -107,6 +107,13 @@ function confirmRemoveCurrentEmail(idUser, idCurrentEmail, currentEmail) {
 
     }
 
+    let emailUsuario = sessionStorage.getItem("EMAIL_USUARIO")
+    if (currentEmail == emailUsuario) {
+        alert("Você não pode remover este Email, pois é seu Email principal.")
+        cancelRemoveCurrentEmail()
+        return;
+    }
+
     let modal = document.createElement('section')
     modal.id = 'idModalConfirmRemoveCurrentEmail'
 
