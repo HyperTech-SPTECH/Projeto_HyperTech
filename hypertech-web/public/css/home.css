@@ -137,7 +137,7 @@ header .buttons-menu #button-menu .dropdown-menu .dash-logout:hover {
     height: var(--altura-leftBar-e-conteudo);
     display: flex;
     justify-content: center;
-    align-items: stretch;
+    align-items: center;
     overflow: hidden;
 }
 
