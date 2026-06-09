@@ -18,20 +18,17 @@ var usuarioRouter = require("./src/routes/usuarios");
 var profileRouter = require("./src/routes/profileRoute");
 var filtrosRouter = require("./src/routes/filtros");
 var rotasRouter = require("./src/routes/rotas");
-var dashboardRouter = require("./src/routes/dashboard")
+var dashboardRouter = require("./src/routes/dashboard");
 var notificationRouter = require("./src/routes/notificationRoute");
 var emailRouter = require("./src/routes/emailRoute");
 
-app.use(express.json());
-app.use(express.urlencoded({ extended: false }));
-// app.use(express.static(path.join(__dirname, "public")));
+// Aumentando o limite de tráfego da API para comportar payloads GeoJSON de até 100 MB
+app.use(express.json({ limit: '100mb' }));
+app.use(express.urlencoded({ limit: '100mb', extended: true }));
+
 app.use(express.static(path.join(__dirname, "public"), { index: 'index.html' }));
 
 app.use(cors());
-
-// Aumentando o limite de tráfego da API para comportar payloads GeoJSON de até 500 MB, preicsa disso para o editar rotas favoritas funcionar
-app.use(express.json({ limit: '500mb' }));
-app.use(express.urlencoded({ limit: '500mb', extended: true }));
 
 app.use("/", indexRouter);
 app.use("/usuarios", usuarioRouter);
@@ -44,15 +41,15 @@ app.use("/email", emailRouter);
 
 app.listen(PORTA_APP, function () {
     console.log(`
-    ##   ##  ######   #####             ####       ##     ######     ##              ##  ##    ####    ######  
-    ##   ##  ##       ##  ##            ## ##     ####      ##      ####             ##  ##     ##         ##  
-    ##   ##  ##       ##  ##            ##  ##   ##  ##     ##     ##  ##            ##  ##     ##        ##   
-    ## # ##  ####     #####    ######   ##  ##   ######     ##     ######   ######   ##  ##     ##       ##    
-    #######  ##       ##  ##            ##  ##   ##  ##     ##     ##  ##            ##  ##     ##      ##     
-    ### ###  ##       ##  ##            ## ##    ##  ##     ##     ##  ##             ####      ##     ##      
-    ##   ##  ######   #####             ####     ##  ##     ##     ##  ##              ##      ####    ######  
-    \n\n\n                                                                                                 
+    ##  ##  ######   #####            ####       ##     ######     ##             ##  ##    ####    ######  
+    ##  ##  ##       ##  ##           ## ##     ####      ##       ####             ##  ##     ##        ##  
+    ##  ##  ##       ##  ##           ##  ##   ##  ##     ##       ##  ##           ##  ##     ##        ##   
+    ## # ##  ####     #####    ######   ##  ##   ######     ##       ######   ######   ##  ##     ##       ##    
+    #######  ##       ##  ##            ##  ##   ##  ##     ##       ##  ##            ##  ##     ##       ##     
+    ### ###  ##       ##  ##            ## ##    ##  ##     ##       ##  ##             ####      ##     ##      
+    ##   ##  ######   #####            ####     ##  ##     ##       ##  ##              ##      ####    ######  
+    \n\n\n                                                                                                     
     Servidor do seu site já está rodando! Acesse o caminho a seguir para visualizar .: http://${HOST_APP}:${PORTA_APP} :. \n\n
     Você está rodando sua aplicação em ambiente de .:${process.env.AMBIENTE_PROCESSO}:. \n\n
-    `)
+    `);
 });
