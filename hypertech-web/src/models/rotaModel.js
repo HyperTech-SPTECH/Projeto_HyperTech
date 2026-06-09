@@ -8,10 +8,10 @@ function buscarNoMaisProximo(lng, lat) {
             FROM (
                 SELECT 
                     source, target,
-                    ST_Distance(ST_StartPoint(geom), ST_SetSRID(ST_MakePoint($1,$2),4326)) AS dist_source,
-                    ST_Distance(ST_EndPoint(geom),   ST_SetSRID(ST_MakePoint($1,$2),4326)) AS dist_target
+                    ST_Distance(ST_StartPoint(the_geom), ST_SetSRID(ST_MakePoint($1,$2),4326)) AS dist_source,
+                    ST_Distance(ST_EndPoint(the_geom),   ST_SetSRID(ST_MakePoint($1,$2),4326)) AS dist_target
                 FROM public.ways
-                ORDER BY geom <-> ST_SetSRID(ST_MakePoint($1,$2),4326)
+                ORDER BY the_geom <-> ST_SetSRID(ST_MakePoint($1,$2),4326)
                 LIMIT 5
             ) t
             ORDER BY LEAST(dist_source, dist_target)
@@ -21,14 +21,12 @@ function buscarNoMaisProximo(lng, lat) {
     });
 }
 
-// Antes toda vez ele varria a tabela ways (que tem 1.750.500 registros), isso leva muito tempo.
-// Isso faz com que invés de carregar todas as arestas, ele carrega somente as próximas às coordenadas passadas.
 // Bounding box é um retângulo no mapa que envolve todas as coordenadas necessárias para ir da origem ao destino.
 function calcularRotas(idOrigem, idDestino, origemLng, origemLat, destLng, destLat) {
     var bboxSubquery = (costCol, revCostCol) => `
-        SELECT id, source, target, ${costCol} AS cost, ${revCostCol} AS reverse_cost
+        SELECT gid AS id, source, target, ${costCol} AS cost, ${revCostCol} AS reverse_cost
         FROM public.ways
-        WHERE geom && ST_Expand(
+        WHERE the_geom && ST_Expand(
             ST_Envelope(ST_Collect(
                 ST_SetSRID(ST_MakePoint(${destLng},  ${destLat}),  4326),
                 ST_SetSRID(ST_MakePoint(${origemLng}, ${origemLat}), 4326)
@@ -40,29 +38,29 @@ function calcularRotas(idOrigem, idDestino, origemLng, origemLat, destLng, destL
         WITH calc_padrao AS (
             SELECT 
                 CASE 
-                    WHEN rota.node = ruas.source THEN ruas.geom
-                    ELSE ST_Reverse(ruas.geom)
+                    WHEN rota.node = ruas.source THEN ruas.the_geom
+                    ELSE ST_Reverse(ruas.the_geom)
                 END AS geom,
                 rota.seq
             FROM pgr_bdDijkstra(
                 '${bboxSubquery('cost', 'reverse_cost')}',
                 ${idOrigem}, ${idDestino}, true
             ) AS rota
-            JOIN public.ways AS ruas ON rota.edge = ruas.id
+            JOIN public.ways AS ruas ON rota.edge = ruas.gid
             WHERE rota.edge != -1
         ),
         calc_seguro AS (
             SELECT 
                 CASE 
-                    WHEN rota.node = ruas.source THEN ruas.geom
-                    ELSE ST_Reverse(ruas.geom)
+                    WHEN rota.node = ruas.source THEN ruas.the_geom
+                    ELSE ST_Reverse(ruas.the_geom)
                 END AS geom,
                 rota.seq
             FROM pgr_bdDijkstra(
                 '${bboxSubquery('custo_risco', 'custo_risco_reverso')}',
                 ${idOrigem}, ${idDestino}, true
             ) AS rota
-            JOIN public.ways AS ruas ON rota.edge = ruas.id
+            JOIN public.ways AS ruas ON rota.edge = ruas.gid
             WHERE rota.edge != -1
         ),
         resumo_padrao AS (
@@ -80,7 +78,7 @@ function calcularRotas(idOrigem, idDestino, origemLng, origemLat, destLng, destL
         ),
         poligonos_relevantes AS (
             SELECT jsonb_agg(ST_AsGeoJSON(p.geom_poligono)::jsonb) AS lista_poligonos
-            FROM public.poligonos_risco_2025 p
+            FROM public.poligono_risco_2025 p
             JOIN resumo_seguro rs ON ST_Intersects(p.geom_poligono, ST_Expand(rs.caixa_envolvente, 0.02))
         )
         SELECT jsonb_build_object(
@@ -92,9 +90,6 @@ function calcularRotas(idOrigem, idDestino, origemLng, origemLat, destLng, destL
 
     return pool.query(query);
 }
-
-module.exports = { buscarNoMaisProximo, calcularRotas };
-
 
 function buscarFavoritosPorUsuario(idUsuario) {
     return pool.query({
