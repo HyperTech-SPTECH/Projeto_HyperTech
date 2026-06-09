@@ -29,9 +29,9 @@ app.use(express.static(path.join(__dirname, "public"), { index: 'index.html' }))
 
 app.use(cors());
 
-// Aumentando o limite de tráfego da API para comportar payloads GeoJSON de até 50 MB, preicsa disso para o editar rotas favoritas funcionar
-app.use(express.json({ limit: '50mb' }));
-app.use(express.urlencoded({ limit: '50mb', extended: true }));
+// Aumentando o limite de tráfego da API para comportar payloads GeoJSON de até 500 MB, preicsa disso para o editar rotas favoritas funcionar
+app.use(express.json({ limit: '500mb' }));
+app.use(express.urlencoded({ limit: '500mb', extended: true }));
 
 app.use("/", indexRouter);
 app.use("/usuarios", usuarioRouter);
