@@ -1,29 +1,10 @@
-let allTheDataAll = []
-let cityFilters = []
-let monthFilters = []
+// var allTheDataAll = []
+// let cityFilters = []
+// let monthFilters = []
 
-async function pullInformationFromFilters() {
-    await fetch('dashboard/infoFiltrar', {
-        method: 'POST',
-        headers: {
-            'Content-Type': 'application/json',
-        }        
-    })
-        .then(function (resposta) {
-            if (resposta.ok) {
-                console.log("Dados chegou ok!");
-                resposta.json().then(json => {
-                    sessionStorage.DATA_FILTERS = JSON.stringify(json)
-                })
-            } else {
-                alert('Houve um erro para chegar dados de filtros')
-                console.log('Houve um erro para chegar dados de filtros')
-            }
-        })
-        .catch(function (resposta) {
-            console.log(`#ERRO: ${resposta}`)
-        })
 
+function includeFiltersInDash() {
+    console.log('ele veioooo')
     // Colocar dados nos filtros
     // Cidades
     let allTheData = JSON.parse(sessionStorage.DATA_FILTERS)
@@ -36,8 +17,6 @@ async function pullInformationFromFilters() {
 
     // Month
     monthFilters = functionFilterMeses()
-
-    return false
 }
 
 // Filtros de Cidade
@@ -61,7 +40,6 @@ function functionFilterCity(data) {
 // Colocar filtros da Cidade
 function functionIncludeDataInTheCityFilter(citys) {
     let containerFilter = document.getElementById('idContainerFiltroCidade')
-    console.log(containerFilter)
     let span = document.createElement('span')
     span.textContent = 'Cidade:'
     let filter = document.createElement('select')
@@ -74,8 +52,9 @@ function functionIncludeDataInTheCityFilter(citys) {
     option.value = '#'
     option.textContent = 'Todas as Cidades'
     option.selected = true
-    option.disabled = true
+    // option.disabled = true
     filter.appendChild(option)
+    let listAuxiliar = []
     for (let i = 0; i < citys.length; i++) {
         option = document.createElement('option')
         option.value = citys[i]
@@ -100,13 +79,19 @@ function functionIncludeDataInTheCityFilter(citys) {
             newItem += cityAtual[i]
         }
         option.textContent = newItem
-        filter.appendChild(option)
+        listAuxiliar.push(option)
     }
 
-    // while (containerFilter.firstElementChild) {
-    //     containerFilter.removeChild(containerFilter.firstElementChild)
-    // }
-    containerFilter.innerHTML = ''
+    listAuxiliar.sort((a, b) => a.textContent.localeCompare(b.textContent, 'pt-BR', { sensitivity: 'base'}))
+
+    for (let i = 0; i < listAuxiliar.length; i++) {
+        filter.appendChild(listAuxiliar[i])
+    }
+
+    while (containerFilter.children.length > 0) {
+        containerFilter.removeChild(containerFilter.children[0])
+    }
+    // containerFilter.innerHTML = ''
     containerFilter.appendChild(span)
     containerFilter.append(filter)
 }
@@ -142,8 +127,9 @@ function functionIncludeDataInTheBairroFilter(bairros) {
     option.value = '#'
     option.textContent = 'Todos os Bairros'
     option.selected = true
-    option.disabled = true
+    // option.disabled = true
     filter.appendChild(option)
+    let listAuxiliar = []
     for (let i = 0; i < bairros.length; i++) {
         option = document.createElement('option')
         option.value = bairros[i]
@@ -169,11 +155,29 @@ function functionIncludeDataInTheBairroFilter(bairros) {
                 newItem += bairroAtual[i]
             }
             option.textContent = newItem
-            filter.appendChild(option)
+
+            let bairroExist = false
+            for (let i = 0; i < listAuxiliar.length; i++) {
+                if (listAuxiliar[i].textContent.localeCompare(option.textContent, 'pt-BR', { sensitivity: 'base'}) == 0) {
+                    bairroExist = true
+                }
+            }
+            if (!bairroExist) {
+                listAuxiliar.push(option)
+            }
         }
     }
 
-    containerFilter.innerHTML = ''
+    listAuxiliar.sort((a, b) => a.textContent.localeCompare(b.textContent, 'pt-BR', { sensitivity: 'base'}))
+
+    for (let i = 0; i < listAuxiliar.length; i++) {
+        filter.appendChild(listAuxiliar[i])
+    }
+
+    while (containerFilter.children.length > 0) {
+        containerFilter.removeChild(containerFilter.children[0])
+    }
+    // containerFilter.innerHTML = ''
     containerFilter.appendChild(span)
     containerFilter.append(filter)
 }
@@ -208,7 +212,6 @@ function functionFilterMeses() {
 // Colocar filtros do Mes
 function functionIncludeDataInTheMonthFilter(meses) {
     let containerFilter = document.getElementById('idContainerFiltroMes')
-    console.log(containerFilter)
     let span = document.createElement('span')
     span.textContent = 'Mês:'
     let filter = document.createElement('select')
@@ -220,7 +223,7 @@ function functionIncludeDataInTheMonthFilter(meses) {
     option.value = '#'
     option.textContent = 'Todos os Meses'
     option.selected = true
-    option.disabled = true
+    // option.disabled = true
     filter.appendChild(option)
     for (let i = 0; i < meses.length; i++) {
         option = document.createElement('option')
@@ -229,7 +232,10 @@ function functionIncludeDataInTheMonthFilter(meses) {
         filter.appendChild(option)
     }
 
-    containerFilter.innerHTML = ''
+    while (containerFilter.children.length > 0) {
+        containerFilter.removeChild(containerFilter.children[0])
+    }
+    // containerFilter.innerHTML = ''
     containerFilter.appendChild(span)
     containerFilter.append(filter)
     functionPadronizarMeses()

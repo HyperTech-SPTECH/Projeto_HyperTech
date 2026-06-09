@@ -126,6 +126,11 @@
     margin-top: -0.5rem;
 }
 
+.textRed {
+    color: rgb(148, 0, 0);
+    
+}
+
 /* Lado Direito */
 
 .auth-lateral-dir {
