@@ -24,6 +24,8 @@ async function remover(id) {
     `;
     let resultSelect = await database.mysqlExecutar(instrucaoSqlSelect)
 
+    await database.mysqlExecutar(`DELETE FROM favorito_rota WHERE id_usuario = '${id}';`)
+
     await database.mysqlExecutar(`DELETE FROM filtro_favorito WHERE usuario_id = '${id}';`)
     
     for (let i = 0; i < resultSelect.length; i++) {
