@@ -60,7 +60,7 @@ function handleNavClick(ev) {
             setTimeout(() => {
                 includeFiltersInDash()
                 listarFiltrosUsuario()
-            }, 200);
+            }, 500);
         }
     }
 }
@@ -77,7 +77,7 @@ document.addEventListener('DOMContentLoaded', () => {
     setTimeout(() => {
         includeFiltersInDash()
         listarFiltrosUsuario()
-    }, 200);
+    }, 500);
 });
 
 function trocarDashRegiao() {
@@ -85,7 +85,7 @@ function trocarDashRegiao() {
     setTimeout(() => {
         includeFiltersInDash()
         listarFiltrosUsuario();
-    }, 200);
+    }, 500);
 }
 
 function trocarDashHoraDia() {
@@ -93,7 +93,7 @@ function trocarDashHoraDia() {
     setTimeout(() => {
         includeFiltersInDash();
         listarFiltrosUsuario();
-    }, 200);
+    }, 500);
 }
 
 function trocarProfileDash() {
@@ -132,7 +132,7 @@ function trocarNotificationDash() {
     }
     setTimeout(() => {
         organizerScreenNotification()
-    }, 200);
+    }, 500);
 }
 
 function trocarFiltroDash() {
