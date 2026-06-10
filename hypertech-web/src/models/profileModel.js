@@ -23,6 +23,8 @@ async function remover(id) {
         SELECT id FROM usuario_email_notificacao WHERE usuario_id = '${id}';
     `;
     let resultSelect = await database.mysqlExecutar(instrucaoSqlSelect)
+
+    await database.mysqlExecutar(`DELETE FROM filtro_favorito WHERE usuario_id = '${id}';`)
     
     for (let i = 0; i < resultSelect.length; i++) {
         await database.mysqlExecutar(`DELETE FROM preferencias_notificacao WHERE usuario_email_id = '${resultSelect[i].id}'`)
