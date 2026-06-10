@@ -1,0 +1,221 @@
+<div class="dashboard-panel">
+    <h2 class="dashboard-panel__title">Dashboard de Periculosidade Por Dia e Horário</h2>
+    
+    <div class="dashboard-panel__row">
+        <div class="dashboard-card dashboard-card--filters">
+    <div class="dashboard-card__header">Filtrar</div>
+    <div class="dashboard-card__body-Region dashboard-sketch-layout">
+    
+        <div class="filter-grid-container">
+    
+            <div class="miniContainerFiltro" id="idContainerFiltroCidade">
+                <span>Cidade:</span>
+                <select id="idSelectFiltroCidade">
+                    <option value="#" selected disabled>Todas Cidades</option>
+                </select>
+            </div>
+    
+            <div class="miniContainerFiltro" id="idContainerFiltroBairro">
+                <span>Bairro:</span>
+                <select id="idSelectFiltroBairro">
+                    <option value="#" selected>Escolha uma cidade antes</option>
+                </select>
+            </div>
+    
+            <div class="miniContainerFiltro" id="idContainerFiltroMes">
+                <span>Mês:</span>
+                <select id="idSelectFiltroMes">
+                    <option value="#" selected>Todos os Meses</option>
+                    <option value="1">Janeiro</option>
+                    <option value="2">Fevereiro</option>
+                    <option value="3">Março</option>
+                </select>
+            </div>
+    
+            <div class="miniContainerFiltro">
+                <span>Favorito:</span>
+                <select id="idSelectFiltroFavorito">
+                    <option value="#" selected>Favoritos Salvos...</option>
+                </select>
+            </div>
+    
+        </div>
+    
+        <div class="filter-actions-row">
+            <button type="button" class="btn-sketch-aplicar" id="idAplicarFiltros">Aplicar Filtros</button>
+            <button type="button" class="btn-sketch-salvar" id="idSalvarFiltro" onclick="salvarNovoFiltroDash()">Salvar</button>
+        </div>
+    
+    </div>
+    </div>
+        
+        <div id="cardResumoDashHoraDia" class="dashboard-card dashboard-card--summary dashboard-button-changeScreen ativo" onclick="trocarDashRegiao()">
+            <div class="dashboard-card__header">
+                <span>Resumo de Cargas</span>
+                <span class="textAlterAba">Trocar!</span>
+            </div>
+            <div class="dashboard-card__body">
+                <div class="rank-item">
+                    <span></span>
+                    <span class="tag-diaSeguro">Cargas Menos Roubadas</span>
+                    <span></span>
+                    <span></span>
+                    
+                    <span class="tag-diaPerigoso">Cargas Mais Roubadas</span>
+                    <span></span>
+                    <span></span>
+                </div>
+                <div class="rank-item">
+                    <span class="rank rank-green">1</span>
+                    <span id="idResumoMenosCarga1">-</span>
+                    <span><span id="idResumoMenosQtd1">0</span> (<span id="idResumoMenosPct1">0</span>%)</span>
+
+                    <span class="rank rank-red ml">1</span>
+                    <span id="idResumoMaisCarga1">-</span>
+                    <span><span id="idResumoMaisQtd1">0</span> (<span id="idResumoMaisPct1">0</span>%)</span>
+                </div>
+                <div class="rank-item">
+                    <span class="rank rank-yellow">2</span>
+                    <span id="idResumoMenosCarga2">-</span>
+                    <span><span id="idResumoMenosQtd2">0</span> (<span id="idResumoMenosPct2">0</span>%)</span>
+
+                    <span class="rank rank-orange ml">2</span>
+                    <span id="idResumoMaisCarga2">-</span>
+                    <span><span id="idResumoMaisQtd2">0</span> (<span id="idResumoMaisPct2">0</span>%)</span>
+                </div>
+                <div class="rank-item">
+                    <span class="rank rank-yellow">3</span>
+                    <span id="idResumoMenosCarga3">-</span>
+                    <span><span id="idResumoMenosQtd3">0</span> (<span id="idResumoMenosPct3">0</span>%)</span>
+
+                    <span class="rank rank-orange ml">3</span>
+                    <span id="idResumoMaisCarga3">-</span>
+                    <span><span id="idResumoMaisQtd3">0</span> (<span id="idResumoMaisPct3">0</span>%)</span>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="dashboard-panel__row">
+        
+        <div class="dashboard-card dashboard-card--heatmap">
+            <div class="dashboard-card__header">
+                Gráfico de Periculosidade (Dia da Semana x Horários)
+            </div>
+            <div class="dashboard-card__body">
+                <div class="heatmap">
+                    <div class="heatmap__grid" id="heatmap-grid"></div>
+                    <div class="heatmap__legend">
+                        <div class="heatmap__legend-item">
+                            <span class="heatmap__block heatmap__block--baixo">B</span> 
+                            Baixo Risco
+                        </div>
+                        <div class="heatmap__legend-item">
+                            <span class="heatmap__block heatmap__block--medio">M</span> 
+                            Médio Risco
+                        </div>
+                        <div class="heatmap__legend-item">
+                            <span class="heatmap__block heatmap__block--alto">A</span> 
+                            Alto Risco
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="dashboard-panel__kpi-column">
+            <div class="dashboard-card dashboard-card--kpi">
+                <div class="dashboard-card__header dashboard-card__header--danger">
+                    Dias Mais Perigosos da Semana
+                </div>
+                <div class="dashboard-card__body">
+                    <div class="rank-item">
+                        <span class="rank rank-red">1</span>
+                        <span id="idKpiDiaPerigoso1">-</span>
+                        <span id="idKpiDiaPerigosoInfo1">0 (0%)</span>
+                    </div>
+
+                   <div class="rank-item">
+                        <span class="rank rank-orange">2</span>
+                        <span id="idKpiDiaPerigoso2">-</span>
+                        <span id="idKpiDiaPerigosoInfo2">0 (0%)</span>
+                    </div>
+                    <div class="rank-item">
+                        <span class="rank rank-orange">3</span>
+                        <span id="idKpiDiaPerigoso3">-</span>
+                        <span id="idKpiDiaPerigosoInfo3">0 (0%)</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="dashboard-card dashboard-card--kpi">
+                <div class="dashboard-card__header dashboard-card__header--safe">
+                    Dias Mais Seguros da Semana
+                </div>
+                <div class="dashboard-card__body">
+                    <div class="rank-item">
+                        <span class="rank rank-green">1</span>
+                        <span id="idKpiDiaSeguro1">-</span>
+                        <span id="idKpiDiaSeguroInfo1">0 (0%)</span>
+                    </div>
+                    <div class="rank-item">
+                        <span class="rank rank-yellow">2</span>
+                        <span id="idKpiDiaSeguro2">-</span>
+                        <span id="idKpiDiaSeguroInfo2">0 (0%)</span>
+                    </div>
+                    <div class="rank-item">
+                        <span class="rank rank-yellow">3</span>
+                        <span id="idKpiDiaSeguro3">-</span>
+                        <span id="idKpiDiaSeguroInfo3">0 (0%)</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="dashboard-card dashboard-card--kpi">
+                <div class="dashboard-card__header dashboard-card__header--danger">
+                    Horários Mais Perigosos da Semana
+                </div>
+                <div class="dashboard-card__body">
+                    <div class="rank-item">
+                        <span class="rank rank-red">1</span>
+                        <span id="idKpiHoraPerigoso1">-</span>
+                        <span id="idKpiHoraPerigosoInfo1">0 (0%)</span>
+                    </div>
+                    <div class="rank-item">
+                        <span class="rank rank-orange">2</span>
+                        <span id="idKpiHoraPerigoso2">-</span>
+                        <span id="idKpiHoraPerigosoInfo2">0 (0%)</span>
+                    </div>
+                    <div class="rank-item">
+                        <span class="rank rank-orange">3</span>
+                        <span id="idKpiHoraPerigoso3">-</span>
+                        <span id="idKpiHoraPerigosoInfo3">0 (0%)</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="dashboard-card dashboard-card--kpi">
+                <div class="dashboard-card__header dashboard-card__header--safe">
+                    Horários Mais Seguros da Semana
+                </div>
+                <div class="dashboard-card__body">
+                    <div class="rank-item">
+                        <span class="rank rank-green">1</span>
+                        <span id="idKpiHoraSeguro1">-</span>
+                        <span id="idKpiHoraSeguroInfo1">0 (0%)</span>
+                    </div>
+                    <div class="rank-item">
+                        <span class="rank rank-yellow">2</span>
+                        <span id="idKpiHoraSeguro2">-</span>
+                        <span id="idKpiHoraSeguroInfo2">0 (0%)</span>
+                    </div>
+                    <div class="rank-item">
+                        <span class="rank rank-yellow">3</span>
+                        <span id="idKpiHoraSeguro3">-</span>
+                        <span id="idKpiHoraSeguroInfo3">0 (0%)</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

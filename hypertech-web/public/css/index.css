@@ -273,6 +273,93 @@ header .recipiente {
     padding: 0 clamp(1.5rem, 3vw, 2.5rem);
 }
 
+/* Fale Conosco */
+.faleConosco-footer {
+    color: var(--bg-primary);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+}
+
+.containerTituloFaleConosco-footer {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+}
+
+.faleConosco-footer .linha {
+    flex: 1;
+    height: 2px;
+    background: var(--bg-primary);
+    /* background: linear-gradient(to right, black, var(--bg-primary)); */
+}
+
+.faleConosco-footer h2 {
+    margin: 2rem;
+}
+
+.faleConosco-footer .conteudo-faleConosco {
+    width: 60%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+}
+
+.conteudo-faleConosco .subTitle-faleConosco {
+    display: flex;
+    justify-content: center;
+    margin: 3rem;
+}
+
+.conteudo-faleConosco img {
+    width: 200px;
+}
+
+.conteudo-faleConosco span {
+    font-size: 1.5rem;
+    margin: 1rem;
+}
+
+.conteudo-faleConosco .inserirInput-faleConosco {
+    background-color: var(--bg-primary);
+    border: 1px solid #000;
+    width: 60%;
+    margin-bottom: 2rem;
+    height: 3rem;
+    display: flex;
+}
+
+.conteudo-faleConosco .inserirInput-faleConosco #idEmail-faleConosco {
+    height: 3rem;
+    width: 70%;
+    font-size: 1.5rem;
+    border: 1px solid var(--bg-primary);
+    padding-left: 1rem;
+}
+
+.conteudo-faleConosco .inserirInput-faleConosco #idButton-faleConosco {
+    height: 3rem;
+    width: 30%;
+    font-size: 1.5rem;
+    background-color: var(--bg-secondary);
+    color: var(--bg-primary);
+    border: 1px solid var(--bg-primary);
+    cursor: pointer;
+}
+
+.conteudo-faleConosco .inserirInput-faleConosco #idButton-faleConosco:hover {
+    transform: scale(1.05);
+}
+
+/* Fim Fale Conosco */
+
+.recipiente-footer hr {
+    margin: 3rem 0;
+}
+
 .equipe-footer { margin-bottom: 0; }
 
 .titulo-equipe {

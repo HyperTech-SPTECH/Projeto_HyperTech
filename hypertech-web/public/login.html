@@ -6,9 +6,11 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Login</title>
     <link rel="stylesheet" href="css/styles.css">
-    <link rel="stylesheet" href="css/auth.css"> </head>
+    <link rel="stylesheet" href="css/auth.css"> 
+    <script src="js/dashboardIntegration.js" defer></script>
+</head>
 
-<body>
+<body onload="resetSessao()">
     <div class="auth-recipiente">
         
         <div class="auth-lateral-esq">
@@ -23,16 +25,16 @@
                 <div class="auth-formulario">
                     <div class="auth-grupo-input">
                         <label>Email</label>
-                        <input type="text" value="fernanda@gmail.com" id="email_input" placeholder="Ex: hypertech@gmail.com" />
+                        <input type="text" id="email_input" value="seguradora@gmail.com" placeholder="Ex: hypertech@gmail.com" oninput="valEmail()"/>
                     </div>
                     
                     <div class="auth-grupo-input">
                         <label>Senha</label>
-                        <input type="password" value="Fer@12" id="senha_input" placeholder="**********" />
+                        <input type="password" id="senha_input" value="Abcd#1234" placeholder="**********" />
                     </div>
                 </div>
                 
-                <p class="auth-mensagem" style="color: #3b82f6;">Os campos devem ser preenchidos.</p>
+                <p id="res" class="auth-mensagem" style="color: #3b82f6;">Os campos devem ser preenchidos.</p>
                 
                 <button class="auth-botao" onclick="entrar()" id="br_entrar">Entrar</button>
                 
@@ -73,14 +75,42 @@
 
                 resposta.json().then(json => {
                     console.log(json);
+                    console.log("a")
                     console.log(JSON.stringify(json));
-                    sessionStorage.EMAIL_USUARIO = json.email;
-                    sessionStorage.NOME_USUARIO = json.nome;
-                    sessionStorage.ID_USUARIO = json.id;
+                    console.log("b")
+                    sessionStorage.EMAIL_USUARIO = json[0].email;
+                    sessionStorage.NOME_USUARIO = json[0].nome;
+                    sessionStorage.ID_USUARIO = json[0].usuario_id;
+                    sessionStorage.CARGO_USUARIO = json[0].cargo_id;
+                    sessionStorage.setItem('DT_CRIACAO_USUARIO', json[0].data_criacao);
+                    
+                    sessionStorage.EMAIL_EMPRESA = json[0].email_empresa;
+                    sessionStorage.NOME_EMPRESA = json[0].nome_empresa;
+                    sessionStorage.CNPJ_EMPRESA = json[0].cnpj;
+                    sessionStorage.TELEFONE_EMPRESA = json[0].telefone;
+                    sessionStorage.setItem('DT_CADASTRO_EMPRESA', json[0].data_cadastro);
+
+                    let listNotification = []
+                    for (let i = 0; i < json.length; i++) {
+                        console.log(json[i])
+                        listNotification.push(
+                            {
+                                idEmailN: json[i].emailN_id,
+                                emailN: json[i].emailN,
+                                idTipoN: json[i].tipoNotificacao_id,
+                                tipoN: json[i].tipoNotificacao,
+                                ativoTipoN: json[i].ativoTipoNotificacao,
+                            }
+                        )
+                    }
+                    sessionStorage.setItem('DADOS_NOTIFICACOES', JSON.stringify(listNotification));
                     
 
+                    document.getElementById('res').textContent = 'Login efetuado!'
+                    document.getElementById('res').style.color = '#00ff00'
+                    pullInformationFromFilters();
                     setTimeout(function () {
-                        window.location = "./dashboard/quiz.html"; 
+                        window.location = "./home.html";
                     }, 1000); // apenas para exibir o loading
 
                 });
@@ -91,7 +121,8 @@
 
                 resposta.text().then(texto => {
                     console.error(texto);
-                    finalizarAguardar(texto);
+                    document.getElementById('res').textContent = 'Email ou senha incorretos!'
+                    document.getElementById('res').style.color = '#ff0000'
                 });
             }
 
@@ -102,5 +133,59 @@
         return false;
     }
 
+    function resetSessao() {
+        sessionStorage.clear()
+    }
+    
+    function valEmail() {
+        var email = document.getElementById('email_input').value
 
+        var tamanho = email.length - 1
+        
+        if (email.includes('@')) { // Não pode ter mais de 1 '@'
+            email = email.replace('@', '*')
+            if (email.includes('@')) {
+                email_input.innerHTML = 'Apenas 1 "@" é permitido'
+            } else {
+                email_input.innerHTML = ''
+            }    
+        } else {
+            email_input.innerHTML = ''
+        }    
+
+        if (email[0] == '.' || (email[tamanho] == '.' && email[(tamanho - 1)] == '.')) { // Não deixa começar com ponto e nem ter 2 pontos seguidos
+            email_input.value = email_input.value.slice(0, -1)
+        }
+        
+        if (email[tamanho] == ' ' || email[tamanho] == ',' || email[tamanho] == ':' || email[tamanho] == ';') { // Não pode usar 'espaço', 'vírgula', ':', ';'
+            email_input.value = email_input.value.slice(0, -1)
+        }
+    }
+    
+    function pullInformationFromFilters() {
+        console.log('aqui veio?')
+        fetch('dashboard/infoFiltrar', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            }        
+        })
+            .then(function (resposta) {
+                if (resposta.ok) {
+                    console.log("Dados chegou ok!");
+                    resposta.json().then(json => {
+                        sessionStorage.DATA_FILTERS = JSON.stringify(json)
+                    })
+                } else {
+                    alert('Houve um erro para chegar dados de filtros')
+                    console.log('Houve um erro para chegar dados de filtros')
+                }
+            })
+            .catch(function (resposta) {
+                console.log(`#ERRO: ${resposta}`)
+            })
+
+
+        return false
+    }
 </script>

@@ -1,0 +1,468 @@
+.notification-options,
+    .registered-emails {
+    width: 90%;
+    margin: auto;
+    margin-top: 2rem;
+    height: 35%;
+}
+
+.title-div {
+    font-size: 1.3rem;
+    font-weight: bold;
+    display: flex;
+    margin-bottom: 1rem;
+}
+
+.box-infos {
+    border: #ccc 1px solid;
+    border-radius: 2rem;
+    padding-bottom: 2rem;
+    max-height: 100%;
+    overflow-y: auto;
+}
+
+.box-infos .row-titles-emails,
+    .box-infos .row-titles-notifications,
+    .box-infos .option-notification,
+    .box-infos .option-email {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.box-infos .row-titles-emails span,
+    .box-infos .row-titles-notifications span {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 1rem 0rem;
+    font-weight: bold;
+}
+
+.box-infos .width-name-notification-general {
+    width: 15%;
+}
+
+.box-infos .width-description-notification-general {
+    width: 55%;
+}
+
+.box-infos .width-status-notification-general {
+    width: 15%;
+}
+
+.box-infos .width-actions-notification-general {
+    width: 15%;
+}
+
+.box-infos .option-notification span {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: .5rem;
+}
+
+.box-infos .option-notification span .options-active-deactivate-notification {
+    width: 60%;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+}
+
+.box-infos .option-notification span .options-active-deactivate-notification img {
+    width: 30px;
+    cursor: pointer;
+}
+
+.box-infos .option-notification span .options-active-deactivate-notification img:hover {
+    transform: scale(1.1);
+}
+
+.box-infos .row-titles-emails {
+    border-bottom: 1px solid black;
+}
+
+.box-infos .width-email-email {
+    width: 50%;
+}
+
+.box-infos .width-status-email {
+    width: 25%;
+}
+
+.box-infos .width-actions-email {
+    width: 25%;
+}
+
+.box-infos #options-email {
+    width: 100%;
+}
+
+.box-infos .option-email {
+    border-bottom: 1px solid black;
+}
+
+.box-infos .option-email span {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: .5rem;
+}
+
+.box-infos .option-email span .options-edit-remove-email {
+    width: 60%;
+    display: flex;
+    justify-content: space-around;
+}
+
+.box-infos .option-email span .options-edit-remove-email img {
+    width: 30px;
+    cursor: pointer;
+}
+
+.box-infos .option-email span .options-edit-remove-email img:hover {
+    transform: scale(1.1);
+}
+
+.box-infos .option-add-email {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-bottom: 1px solid black;
+}
+
+.box-infos .option-add-email #idAddNewEmail {
+    display: flex;
+    align-items: center;
+    color: #34C759;
+    padding: .5rem;
+    cursor: pointer;
+}
+
+.box-infos .option-add-email #idAddNewEmail img {
+    width: 30px;
+    margin-left: 1rem;
+}
+
+/* modal para confirmar a ativação ou desativação da notificação geral */
+.configuration-panel #idModalConfirmActiveDeactivateNotification {
+    width: 30vw;
+    height: 20rem;
+    background-color: white;
+    position: absolute;
+    right: 30vw;
+    top: 20vh;
+    border-radius: 2rem;
+    border: 3px #ccc solid;
+}
+
+.configuration-panel #idModalConfirmActiveDeactivateNotification .zoneNotification {
+    width: 100%;
+    height: 10%;
+    border-radius: 2rem 2rem 0 0;
+}
+
+.configuration-panel #idModalConfirmActiveDeactivateNotification .zoneNotificationDeactivate {
+    background-color: var(--bg-secondary);
+}
+
+.configuration-panel #idModalConfirmActiveDeactivateNotification .zoneNotificationActivate {
+    background-color: var(--bg-secondary);
+}
+
+.configuration-panel #idModalConfirmActiveDeactivateNotification .textNotification {
+    width: 100%;
+    height: 70%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.configuration-panel #idModalConfirmActiveDeactivateNotification .textNotification span {
+    width: 90%;
+    font-weight: bold;
+    font-size: 1.5rem;
+}
+
+.configuration-panel #idModalConfirmActiveDeactivateNotification .buttons-remove-cancel {
+    width: 100%;
+    display: flex;
+    justify-content: space-around;
+}
+
+.configuration-panel #idModalConfirmActiveDeactivateNotification .buttons-remove-cancel span {
+    color: var(--bg-primary);
+    padding: .5rem 2rem;
+    border-radius: 2rem;
+    transition: .5s;
+    cursor: pointer;
+}
+
+.configuration-panel #idModalConfirmActiveDeactivateNotification .buttons-remove-cancel span:hover {
+    transform: scale(1.1);
+}
+
+.configuration-panel #idModalConfirmActiveDeactivateNotification .buttons-remove-cancel #idCancelConfirmNotification {
+    background-color: rgb(78, 78, 78);
+}
+
+.configuration-panel #idModalConfirmActiveDeactivateNotification .buttons-remove-cancel #idConfirmConfirmNotification {
+    background-color: var(--bg-secondary);
+}
+
+/* Modal confirmar remoção do Email Atual */
+.configuration-panel #idModalConfirmRemoveCurrentEmail {
+    width: 30vw;
+    height: 20rem;
+    background-color: white;
+    position: absolute;
+    right: 30vw;
+    top: 20vh;
+    border-radius: 2rem;
+    border: 3px #ccc solid;
+}
+
+.configuration-panel #idModalConfirmRemoveCurrentEmail .containerModalConfirmRemoveCurrentEmail {
+    width: 100%;
+    height: 100%;
+    position: relative;
+}
+
+.configuration-panel #idModalConfirmRemoveCurrentEmail .zoneCurrentEmail {
+    width: 100%;
+    height: 10%;
+    border-radius: 2rem 2rem 0 0;
+    background-color: rgb(255, 0, 0);
+}
+
+.configuration-panel #idModalConfirmRemoveCurrentEmail .textTitleCurrentEmail {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 2rem;
+}
+
+.configuration-panel #idModalConfirmRemoveCurrentEmail .textTitleCurrentEmail span {
+    font-weight: bold;
+    font-size: 1.5rem;
+    margin: 1rem 0;
+}
+
+.configuration-panel #idModalConfirmRemoveCurrentEmail .textEmailCurrentEmail {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 1.5rem;
+}
+
+.configuration-panel #idModalConfirmRemoveCurrentEmail .textEmailCurrentEmail span {
+    font-size: 1.3rem;
+    margin-bottom: 1rem;
+}
+
+.configuration-panel #idModalConfirmRemoveCurrentEmail .buttons-remove-cancel {
+    width: 100%;
+    display: flex;
+    justify-content: space-around;
+    position: absolute;
+    bottom: 30px;
+}
+
+.configuration-panel #idModalConfirmRemoveCurrentEmail .buttons-remove-cancel span {
+    color: var(--bg-primary);
+    padding: .5rem 2rem;
+    border-radius: 2rem;
+    transition: .5s;
+    cursor: pointer;
+}
+
+.configuration-panel #idModalConfirmRemoveCurrentEmail .buttons-remove-cancel span:hover {
+    transform: scale(1.1);
+}
+
+.configuration-panel #idModalConfirmRemoveCurrentEmail .buttons-remove-cancel #idCancelConfirmCurrentEmail {
+    background-color: rgb(78, 78, 78);
+}
+
+.configuration-panel #idModalConfirmRemoveCurrentEmail .buttons-remove-cancel #idConfirmConfirmNotification {
+    background-color: var(--bg-secondary);
+}
+
+/* Modal Criar novo Email */
+.configuration-panel #idModalCreateNewEmail {
+    width: 40vw;
+    height: 20rem;
+    background-color: white;
+    position: absolute;
+    right: 25vw;
+    top: 20vh;
+    border-radius: 2rem;
+    border: 3px #ccc solid;
+}
+
+.configuration-panel #idModalCreateNewEmail .zoneCreateEmail {
+    width: 100%;
+    height: 10%;
+    border-radius: 2rem 2rem 0 0;
+    background-color: var(--bg-secondary);
+}
+
+.configuration-panel #idModalCreateNewEmail .textCreateEmail {
+    width: 100%;
+    height: 70%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.configuration-panel #idModalCreateNewEmail .textCreateEmail label {
+    font-weight: bold;
+    font-size: 1.5rem;
+    margin-bottom: 2.5rem;
+}
+
+.configuration-panel #idModalCreateNewEmail .textCreateEmail input {
+    width: 80%;
+    height: 2.5rem;
+    font-size: 1.1rem;
+    padding: 0 2rem;
+    border-radius: 2rem;
+    border: #919191 2px solid;
+}
+
+.configuration-panel #idModalCreateNewEmail .buttons-remove-cancel {
+    width: 100%;
+    display: flex;
+    justify-content: space-around;
+}
+
+.configuration-panel #idModalCreateNewEmail .buttons-remove-cancel span {
+    color: var(--bg-primary);
+    padding: .5rem 2rem;
+    border-radius: 2rem;
+    transition: .5s;
+    cursor: pointer;
+}
+
+.configuration-panel #idModalCreateNewEmail .buttons-remove-cancel span:hover {
+    transform: scale(1.1);
+}
+
+.configuration-panel #idModalCreateNewEmail .buttons-remove-cancel #idCancelConfirmCreateEmail {
+    background-color: rgb(78, 78, 78);
+}
+
+.configuration-panel #idModalCreateNewEmail .buttons-remove-cancel #idConfirmConfirmCreateEmail {
+    background-color: var(--bg-secondary);
+}
+
+/* Modal Editar Email atual */
+.configuration-panel #idModalEditCurrentEmail {
+    width: 50vw;
+    height: 25rem;
+    background-color: white;
+    position: absolute;
+    right: 20vw;
+    top: 20vh;
+    border-radius: 2rem;
+    border: 3px #ccc solid;
+}
+
+.configuration-panel #idModalEditCurrentEmail .containerModalEditCurrentEmail {
+    width: 100%;
+    height: 100%;
+    position: relative;
+}
+
+.configuration-panel #idModalEditCurrentEmail .zoneEditCurrentEmail {
+    width: 100%;
+    height: 10%;
+    border-radius: 2rem 2rem 0 0;
+    background-color: var(--bg-secondary);
+}
+
+.configuration-panel #idModalEditCurrentEmail .textTitleEditCurrentEmail {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.configuration-panel #idModalEditCurrentEmail .textTitleEditCurrentEmail span {
+    font-weight: bold;
+    font-size: 1.5rem;
+    margin: 1rem 0;
+}
+
+.configuration-panel #idModalEditCurrentEmail .textEmailEditCurrentEmail {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.configuration-panel #idModalEditCurrentEmail .textEmailEditCurrentEmail span {
+    font-size: 1.3rem;
+    margin-bottom: 1rem;
+}
+
+.configuration-panel #idModalEditCurrentEmail .containerEditCurrentEmail {
+    width: 100%;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    flex-wrap: wrap;
+}
+
+.configuration-panel #idModalEditCurrentEmail .containerEditCurrentEmail .optionSelect {
+    width: 30%;
+    margin: 0 5%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.configuration-panel #idModalEditCurrentEmail .containerEditCurrentEmail .optionSelect span {
+    margin: 0.5rem;
+}
+
+.configuration-panel #idModalEditCurrentEmail .containerEditCurrentEmail .optionSelect select {
+    width: 100%;
+    height: 2rem;
+    text-align: center;
+    font-size: 1.4rem;
+}
+
+.configuration-panel #idModalEditCurrentEmail .buttons-remove-cancel {
+    width: 100%;
+    display: flex;
+    justify-content: space-around;
+    position: absolute;
+    bottom: 30px;
+}
+
+.configuration-panel #idModalEditCurrentEmail .buttons-remove-cancel span {
+    color: var(--bg-primary);
+    padding: .5rem 2rem;
+    border-radius: 2rem;
+    transition: .5s;
+    cursor: pointer;
+}
+
+.configuration-panel #idModalEditCurrentEmail .buttons-remove-cancel span:hover {
+    transform: scale(1.1);
+}
+
+.configuration-panel #idModalEditCurrentEmail .buttons-remove-cancel #idCancelConfirmEditCurrentEmail {
+    background-color: rgb(78, 78, 78);
+}
+
+.configuration-panel #idModalEditCurrentEmail .buttons-remove-cancel #idConfirmConfirmEditCurrentEmail {
+    background-color: var(--bg-secondary);
+}

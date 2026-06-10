@@ -1,0 +1,122 @@
+<section class="configuration-panel">
+    <section class="nav-configuration">
+        <span class="option-nav no-current-screen" onclick="trocarProfileDash()">Perfil</span>
+        <span class="no-current-screen option-nav" onclick="trocarFiltroDash()">Filtros</span>
+        <span class="current-screen option-nav no-current-screen">Notificações</span>
+    </section>
+
+    <section class="notification-options">
+        <span class="title-div">Opções de Notificação</span>
+        <div class="box-infos">
+            <section class="row-titles-notifications">
+                <div class="width-name-notification-general">
+                    <span>Nome</span>
+                </div>
+                <div class="width-description-notification-general">
+                    <span>Descrição</span>
+                </div>
+                <div class="width-status-notification-general">
+                    <span>Status</span>
+                </div>
+                <div class="width-actions-notification-general">
+                    <span>Ações</span>
+                </div>
+            </section>
+            <div class="option-notification">
+                <div class="width-name-notification-general">
+                    <span>Diária</span>
+                </div>
+                <div class="width-description-notification-general">
+                    <span>Alterar a notificação Diaria para todos os Emails cadastrados</span>
+                </div>
+                <div class="width-status-notification-general">
+                    <span id="idStatusFullDiaria">Desativado</span>
+                </div>
+                <div class="width-actions-notification-general">
+                    <span>
+                        <div class="options-active-deactivate-notification" id="idContainerButtonsFullDiaria">
+                            <div id="idActiveNotificationDiaria" onclick="pullActivateConfirmChangeNotificationDiaria()" title="Ativar a Notificação">
+                                <img src="../assets/activate-green.png" alt="Botão para ativar a notificação">
+                            </div>
+                            <div id="idDeactivateNotificationDiaria" onclick="pullDeactivateConfirmChangeNotificationDiaria()" title="Desativar a Notificação" style="display: none;">
+                                <img src="../assets/deactivate-red.png" alt="Botão para desativar a notificação">
+                            </div>
+                        </div>
+                    </span>
+                </div>
+            </div>
+            <div class="option-notification">
+                <div class="width-name-notification-general">
+                    <span>Semanal</span>
+                </div>
+                <div class="width-description-notification-general">
+                    <span>Alterar a notificação Semanal para todos os Emails cadastrados</span>
+                </div>
+                <div class="width-status-notification-general">
+                    <span id="idStatusFullSemanal">Desativado</span>
+                </div>
+                <div class="width-actions-notification-general">
+                    <span>
+                        <div class="options-active-deactivate-notification" id="idContainerButtonsFullSemanal">
+                            <div id="idActiveNotificationSemanal" onclick="pullActivateConfirmChangeNotificationSemanal()" title="Ativar a Notificação">
+                                <img src="../assets/activate-green.png" alt="Botão para ativar a notificação">
+                            </div>
+                            <div id="idDeactivateNotificationSemanal" onclick="pullDeactivateConfirmChangeNotificationSemanal()" title="Desativar a Notificação" style="display: none;">
+                                <img src="../assets/deactivate-red.png" alt="Botão para desativar a notificação">
+                            </div>
+                        </div>
+                    </span>
+                </div>
+            </div>
+            <div class="option-notification">
+                <div class="width-name-notification-general">
+                    <span>Anual</span>
+                </div>
+                <div class="width-description-notification-general">
+                    <span>Alterar a notificação Anual para todos os Emails cadastrados</span>
+                </div>
+                <div class="width-status-notification-general">
+                    <span id="idStatusFullAnual">Ativado</span>
+                </div>
+                <div class="width-actions-notification-general">
+                    <span>
+                        <div class="options-active-deactivate-notification" id="idContainerButtonsFullAnual">
+                            <div id="idActiveNotificationAnual" onclick="pullActivateConfirmChangeNotificationAnual()" title="Ativar a Notificação" style="display: none;">
+                                <img src="../assets/activate-green.png" alt="Botão para ativar a notificação">
+                            </div>
+                            <div id="idDeactivateNotificationAnual" onclick="pullDeactivateConfirmChangeNotificationAnual()" title="Desativar a Notificação">
+                                <img src="../assets/deactivate-red.png" alt="Botão para desativar a notificação">
+                            </div>
+                        </div>
+                    </span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="registered-emails">
+        <span class="title-div">Emails cadastrados para receber Notificações</span>
+        <div class="box-infos">
+            <section class="row-titles-emails">
+                <div class="width-email-email">
+                    <span>Email</span>
+                </div>
+                <div class="width-status-email">
+                    <span>Status</span>
+                </div>
+                <div class="width-actions-email">
+                    <span>Ações</span>
+                </div>
+            </section>
+            <section id="options-email">
+                
+            </section>
+            <div class="option-add-email">
+                <div id="idAddNewEmail"title="Adicionar um novo Email" onclick="modalCreateNewEmail()">
+                    <span>Adicionar um novo Email</span>
+                    <img src="../assets/activate-green.png" alt="Botão para adicionar um novo Email">
+                </div>
+            </div>
+        </div>
+    </section>
+</section>

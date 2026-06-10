@@ -2,8 +2,6 @@
 var ambiente_processo = 'desenvolvimento';
 
 var caminho_env = ambiente_processo === 'producao' ? '.env' : '.env.dev';
-// Acima, temos o uso do operador ternário para definir o caminho do arquivo .env
-// A sintaxe do operador ternário é: condição ? valor_se_verdadeiro : valor_se_falso
 
 require("dotenv").config({ path: caminho_env });
 
@@ -17,37 +15,41 @@ var app = express();
 
 var indexRouter = require("./src/routes/index");
 var usuarioRouter = require("./src/routes/usuarios");
-var avisosRouter = require("./src/routes/avisos");
-var medidasRouter = require("./src/routes/medidas");
-var aquariosRouter = require("./src/routes/aquarios");
-var empresasRouter = require("./src/routes/empresas");
+var profileRouter = require("./src/routes/profileRoute");
+var filtrosRouter = require("./src/routes/filtros");
+var rotasRouter = require("./src/routes/rotas");
+var dashboardRouter = require("./src/routes/dashboard");
+var notificationRouter = require("./src/routes/notificationRoute");
+var emailRouter = require("./src/routes/emailRoute");
 
-app.use(express.json());
-app.use(express.urlencoded({ extended: false }));
-app.use(express.static(path.join(__dirname, "public")));
+// Aumentando o limite de tráfego da API para comportar payloads GeoJSON de até 100 MB
+app.use(express.json({ limit: '100mb' }));
+app.use(express.urlencoded({ limit: '100mb', extended: true }));
+
+app.use(express.static(path.join(__dirname, "public"), { index: 'index.html' }));
 
 app.use(cors());
 
 app.use("/", indexRouter);
 app.use("/usuarios", usuarioRouter);
-app.use("/avisos", avisosRouter);
-app.use("/medidas", medidasRouter);
-app.use("/aquarios", aquariosRouter);
-app.use("/empresas", empresasRouter);
+app.use("/profile", profileRouter);
+app.use("/filtros", filtrosRouter);
+app.use("/rotas", rotasRouter);
+app.use("/dashboard", dashboardRouter);
+app.use("/notification", notificationRouter);
+app.use("/email", emailRouter);
 
 app.listen(PORTA_APP, function () {
     console.log(`
-    ##   ##  ######   #####             ####       ##     ######     ##              ##  ##    ####    ######  
-    ##   ##  ##       ##  ##            ## ##     ####      ##      ####             ##  ##     ##         ##  
-    ##   ##  ##       ##  ##            ##  ##   ##  ##     ##     ##  ##            ##  ##     ##        ##   
-    ## # ##  ####     #####    ######   ##  ##   ######     ##     ######   ######   ##  ##     ##       ##    
-    #######  ##       ##  ##            ##  ##   ##  ##     ##     ##  ##            ##  ##     ##      ##     
-    ### ###  ##       ##  ##            ## ##    ##  ##     ##     ##  ##             ####      ##     ##      
-    ##   ##  ######   #####             ####     ##  ##     ##     ##  ##              ##      ####    ######  
-    \n\n\n                                                                                                 
+    ##  ##  ######   #####            ####       ##     ######     ##             ##  ##    ####    ######  
+    ##  ##  ##       ##  ##           ## ##     ####      ##       ####             ##  ##     ##        ##  
+    ##  ##  ##       ##  ##           ##  ##   ##  ##     ##       ##  ##           ##  ##     ##        ##   
+    ## # ##  ####     #####    ######   ##  ##   ######     ##       ######   ######   ##  ##     ##       ##    
+    #######  ##       ##  ##            ##  ##   ##  ##     ##       ##  ##            ##  ##     ##       ##     
+    ### ###  ##       ##  ##            ## ##    ##  ##     ##       ##  ##             ####      ##     ##      
+    ##   ##  ######   #####            ####     ##  ##     ##       ##  ##              ##      ####    ######  
+    \n\n\n                                                                                                     
     Servidor do seu site já está rodando! Acesse o caminho a seguir para visualizar .: http://${HOST_APP}:${PORTA_APP} :. \n\n
     Você está rodando sua aplicação em ambiente de .:${process.env.AMBIENTE_PROCESSO}:. \n\n
-    \tSe .:desenvolvimento:. você está se conectando ao banco local. \n
-    \tSe .:producao:. você está se conectando ao banco remoto. \n\n
-    \t\tPara alterar o ambiente, comente ou descomente as linhas 1 ou 2 no arquivo 'app.js'\n\n`);
+    `);
 });

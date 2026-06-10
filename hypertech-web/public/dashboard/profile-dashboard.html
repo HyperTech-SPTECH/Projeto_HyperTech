@@ -1,0 +1,88 @@
+<section class="configuration-panel">
+    <section class="nav-configuration">
+        <span class="current-screen option-nav no-current-screen">Perfil</span>
+        <span class="no-current-screen option-nav" onclick="trocarFiltroDash()">Filtros</span>
+        <span class="option-nav no-current-screen" onclick="trocarNotificationDash()">Notificações</span>
+    </section>
+
+    <section class="profile-data">
+
+        <section class="profile-data-user">
+            <div class="title-profile-data">
+                <span>Dados da Conta</span>
+            </div>
+            
+            <div class="changeable-profile-data-user">
+                <span>Nome:</span>
+                <input type="text" value="NomeAtual" disabled id="idInputNomeUser">
+            </div>
+            <div class="changeable-profile-data-user">
+                <span>Email:</span>
+                <input type="text" value="EmailAtual" disabled id="idInputEmailUser" oninput="valEmail()">
+            </div>
+            <div class="changeable-profile-data-user">
+                <span>Senha:</span>
+                <input type="password" value="**********" disabled id="idInputSenhaUser">
+            </div>
+            <div class="createdAt-profile-data-user">
+                <span>Criado:</span>
+                <input type="text" value="dataCriacao" disabled id="idInputDtCricaoUser">
+            </div>
+
+            <div class="textWarn">
+                <span id="idTextWarnProfile"></span>
+            </div>
+            
+            <div class="button-edit-profile-data-user">
+                <span id="idEditFields" onclick="editFields()">Editar</span>
+                <div id="idRemoveAccount" onclick="confirmRemoveAccount()">
+                    <img src="../assets/Lixo-vermelho.png" alt="imagem do botão para remover conta">
+                </div>
+            </div>
+        </section>
+        
+        <section class="profile-data-enterprise">
+            <div class="title-profile-data">
+                <span>Dados da Empresa</span>
+            </div>
+
+            <div class="field-profile-data-enterprise">
+                <span>Nome:</span>
+                <input type="text" value="NomeAtual" disabled id="idInputNomeEmpresa">
+            </div>
+            <div class="field-profile-data-enterprise">
+                <span>CNPJ:</span>
+                <input type="text" value="CNPJ" disabled id="idInputCnpjEmpresa">
+            </div>
+            <div class="field-profile-data-enterprise">
+                <span>Email:</span>
+                <input type="text" value="EmailAtual" disabled id="idInputEmailEmpresa">
+            </div>
+            <div class="field-profile-data-enterprise">
+                <span>Telefone:</span>
+                <input type="text" value="TelefoneAtual" disabled id="idInputTelefoneEmpresa">
+            </div>
+            <div class="field-profile-data-enterprise">
+                <span>Criado:</span>
+                <input type="text" value="dataCriacao" disabled id="idInputDtCriadoEmpresa">
+            </div>
+
+        </section>
+    </section>
+
+    <section id="idButtons" class="buttons-confirm-cancel" style="display: none;">
+        <span id="idCancel" class="button-confirm-cancel" onclick="cancelEditFields()">Cancelar</span>
+        <span id="idConfirm" class="button-confirm-cancel" onclick="alterarInformacoesPerfil()">Confirmar</span>
+    </section>
+
+    <section id="idModalConfirmRemoveAccount" style="display: none;">
+        <div class="zone"></div>
+        <div class="text">
+            <span>Realmente deseja remover essa conta?</span>
+        </div>
+        <div class="buttons-remove-cancel">
+            <span id="idRemoveAccountCancel" onclick="cancelConfirmRemoveAccount()">Cancelar</span>
+            <span id="idRemoveAccountConfirm" onclick="removerInformacoesPerfil()">Confirmar</span>
+        </div>
+    </section>
+</section>

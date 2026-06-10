@@ -1,0 +1,179 @@
+<div class="dashboard-panel">
+    <h2 class="dashboard-panel__title">Dashboard de Periculosidade por Região e Carga</h2>
+
+    <div class="dashboard-panel__row">
+        <div id="cardResumoDashRegiao" class="dashboard-card dashboard-card--summary dashboard-button-changeScreen ativo" onclick="trocarDashHoraDia()">
+            <div class="dashboard-card__header">
+                <span>Resumo por Dia e Horário </span>
+                <span class="textAlterAba">Trocar!</span>
+            </div>
+            <div class="dashboard-card__body">
+                <div class="rank-item">
+                    <span></span>
+                    <span class="tag-diaSeguro">Dias mais Seguros</span>
+                    <span></span>
+                    <span></span>
+                    <span class="tag-diaPerigoso">Dias mais Perigosos</span>
+                    <span></span>
+                    <span></span>
+                </div>
+                <div class="rank-item">
+                    <span class="rank rank-green">1</span>
+                    <span id="idResumoDiaSeguro1">-</span>
+                    <span id="idResumoDiaSeguroInfo1">0 (0%)</span>
+                    
+                    <span class="rank rank-red ml">1</span>
+                    <span id="idResumoDiaPerigoso1">-</span>
+                    <span id="idResumoDiaPerigosoInfo1">0 (0%)</span>
+                </div>
+                <div class="rank-item">
+                    <span class="rank rank-yellow">2</span>
+                    <span id="idResumoDiaSeguro2">-</span>
+                    <span id="idResumoDiaSeguroInfo2">0 (0%)</span>
+
+                    <span class="rank rank-orange ml">2</span>
+                    <span id="idResumoDiaPerigoso2">-</span>
+                    <span id="idResumoDiaPerigosoInfo2">0 (0%)</span>
+                </div>
+                <div class="rank-item">
+                    <span class="rank rank-yellow">3</span>
+                    <span id="idResumoDiaSeguro3">-</span>
+                    <span id="idResumoDiaSeguroInfo3">0 (0%)</span>
+
+                    <span class="rank rank-orange ml">3</span>
+                    <span id="idResumoDiaPerigoso3">-</span>
+                    <span id="idResumoDiaPerigosoInfo3">0 (0%)</span>
+                </div>
+            </div>
+        </div>
+
+        <div class="dashboard-card dashboard-card--filters">
+            <div class="dashboard-card__header">Filtrar</div>
+            <div class="dashboard-card__body-Region dashboard-sketch-layout">
+            
+                <div class="filter-grid-container">
+            
+                    <div class="miniContainerFiltro" id="idContainerFiltroCidade">
+                        <span>Cidade:</span>
+                        <select id="idSelectFiltroCidade">
+                            <option value="#" selected disabled>Todas Cidades</option>
+                        </select>
+                    </div>
+            
+                    <div class="miniContainerFiltro" id="idContainerFiltroBairro">
+                        <span>Bairro:</span>
+                        <select id="idSelectFiltroBairro">
+                            <option value="#" selected>Escolha uma cidade antes</option>
+                        </select>
+                    </div>
+            
+                    <div class="miniContainerFiltro" id="idContainerFiltroMes">
+                        <span>Mês:</span>
+                        <select id="idSelectFiltroMes">
+                            <option value="#" selected>Todos os Meses</option>
+                            <option value="1">Janeiro</option>
+                            <option value="2">Fevereiro</option>
+                            <option value="3">Março</option>
+                        </select>
+                    </div>
+            
+                    <div class="miniContainerFiltro">
+                        <span>Favorito:</span>
+                        <select id="idSelectFiltroFavorito">
+                            <option value="#" selected>Favoritos Salvos...</option>
+                        </select>
+                    </div>
+            
+                </div>
+            
+                <div class="filter-actions-row">
+                    <button type="button" class="btn-sketch-salvar" id="idSalvarFiltro">Salvar</button>
+                    <button type="button" class="btn-sketch-aplicar" id="idAplicarFiltros" onclick="salvarNovoFiltroDash" >Aplicar Filtros</button>
+                </div>
+            
+            </div>
+        </div>
+    </div> <div class="dashboard-main-content-row" style="display: flex; gap: 20px;">
+
+        <div class="dashboard-chart-container" style="flex: 2;">
+            <div class="dashboard-card__header"
+                style="background-color: #00478f; color: white; padding: 10px 15px; border-radius: 8px 8px 0 0; font-weight: bold;">
+                <span>Cargas mais Visadas</span>
+            </div>
+            <div id="dash-card-content" class="dashboard-card__body" style="height: 100%;">
+                <div style="position: relative; height: 100%; width: 100%; padding: 20px; border-radius: 8px;">
+                    <canvas id="graficoCargas"></canvas>
+                </div>
+            </div>
+        </div>
+
+        <div class="dashboard-kpi-column" style="flex: 1; display: flex; flex-direction: column; gap: 20px;">
+
+            <div class="containerKpiRegiao containerKpiPerigo" style="width: 100%;">
+                <div class="faixaRegiaoKpi dashboard-card__header--danger">
+                    <div class="titleKpiRegiao titleKpiPerigo">Cargas Mais Roubadas</div>
+                </div>
+                
+                <div class="miniTitlesKpisRegiao">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th class="kpiRegiaoValores kpiRegiaoPosicao"></th>
+                                <th class="kpiRegiaoValores kpiRegiaoLocal">Carga</th>
+                                <th class="kpiRegiaoValores kpiRegiaoQuantidade">Quantidade</th>
+                            </tr>
+                            <tr>
+                                <td class="kpiRegiaoValores kpiRegiaoPosicao"><span class="regiaoKpiPos regiaoKpiPos1">1</span></td>
+                                <td class="kpiRegiaoValores kpiRegiaoLocal" id="idKpiMaisCarga1">-</td>
+                                <td class="kpiRegiaoValores kpiRegiaoQuantidade"><span id="idKpiMaisQtd1">0</span></td>
+                            </tr>
+                            <tr>
+                                <td class="kpiRegiaoValores kpiRegiaoPosicao"><span class="regiaoKpiPos regiaoKpiPos2">2</span></td>
+                                <td class="kpiRegiaoValores kpiRegiaoLocal" id="idKpiMaisCarga2">-</td>
+                                <td class="kpiRegiaoValores kpiRegiaoQuantidade"><span id="idKpiMaisQtd2">0</span></td>
+                            </tr>
+                            <tr>
+                                <td class="kpiRegiaoValores kpiRegiaoPosicao"><span class="regiaoKpiPos regiaoKpiPos3">3</span></td>
+                                <td class="kpiRegiaoValores kpiRegiaoLocal" id="idKpiMaisCarga3">-</td>
+                                <td class="kpiRegiaoValores kpiRegiaoQuantidade"><span id="idKpiMaisQtd3">0</span></td>
+                            </tr>
+                        </thead>
+                    </table>
+                </div>
+            </div>
+
+            <div class="containerKpiRegiao containerKpiSeguro" style="width: 100%;">
+                <div class="faixaRegiaoKpi dashboard-card__header--safe">
+                    <div class="titleKpiRegiao titleKpiSeguro">Cargas Menos Roubadas</div>
+                </div>
+                
+                <div class="miniTitlesKpisRegiao">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th class="kpiRegiaoValores kpiRegiaoPosicao"></th>
+                                <th class="kpiRegiaoValores kpiRegiaoLocal">Carga</th>
+                                <th class="kpiRegiaoValores kpiRegiaoQuantidade">Quantidade</th>
+                            </tr>
+                            <tr>
+                                <td class="kpiRegiaoValores kpiRegiaoPosicao"><span class="regiaoKpiPos regiaoKpiPos1Seguro">1</span></td>
+                                <td class="kpiRegiaoValores kpiRegiaoLocal" id="idKpiMenosCarga1">-</td>
+                                <td class="kpiRegiaoValores kpiRegiaoQuantidade"><span id="idKpiMenosQtd1">0</span></td>
+                            </tr>
+                            <tr>
+                                <td class="kpiRegiaoValores kpiRegiaoPosicao"><span class="regiaoKpiPos regiaoKpiPos2Seguro">2</span></td>
+                                <td class="kpiRegiaoValores kpiRegiaoLocal" id="idKpiMenosCarga2">-</td>
+                                <td class="kpiRegiaoValores kpiRegiaoQuantidade"><span id="idKpiMenosQtd2">0</span></td>
+                            </tr>
+                            <tr>
+                                <td class="kpiRegiaoValores kpiRegiaoPosicao"><span class="regiaoKpiPos regiaoKpiPos3Seguro">3</span></td>
+                                <td class="kpiRegiaoValores kpiRegiaoLocal" id="idKpiMenosCarga3">-</td>
+                                <td class="kpiRegiaoValores kpiRegiaoQuantidade"><span id="idKpiMenosQtd3">0</span></td>
+                            </tr>
+                        </thead>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
