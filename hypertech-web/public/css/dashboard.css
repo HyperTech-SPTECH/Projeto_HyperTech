@@ -47,6 +47,7 @@
     display: flex;
     flex-direction: column;
     min-height: auto;
+    min-height: auto;
 }
 
 .dashboard-card--filters { flex: 1; }
@@ -59,8 +60,8 @@
     color: #ffffff;
     padding: 7px 12px;
     font-family: 'Poppins', sans-serif;
-    font-weight: 500;
-    font-size: .82rem;
+    font-weight: 700; /* NEGRITO */
+    font-size: 1.1rem; /* PADRONIZADO */
     margin-top: -3px;
 }
 
@@ -78,6 +79,37 @@
     padding: 8px;
     flex: 1;
 }
+
+/* === Indicador de Aba Ativa === */
+
+.dashboard-card--summary {
+    border: 2px solid transparent;
+    transition: border-color 0.2s, box-shadow 0.2s;
+    position: relative;
+}
+
+.dashboard-card--summary.ativo {
+    border-color: #00418B;
+    box-shadow: 0 0 0 3px rgba(0, 65, 139, 0.18);
+}
+
+.dashboard-card--summary.ativo::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 4px;
+    background: #00aaff;
+    border-radius: 8px 8px 0 0;
+    z-index: 1;
+}
+
+.dashboard-card--summary.ativo .dashboard-card__header {
+    background-color: #002f6c;
+}
+
+/* ================================ */
 
 /* ==========================================================================
    3. CONFIGURAÇÃO DE FILTROS COMPACTOS (ALTURA REDUZIDA V2)
@@ -247,7 +279,7 @@
 
 .heatmap__block--baixo { background-color: #6B8E23; }
 .heatmap__block--medio { background-color: #B8860B; }
-.heatmap__block--alto { background-color: #A52A2A; }
+.heatmap__block--alto  { background-color: #A52A2A; }
 
 .heatmap__legend {
     display: flex;
@@ -274,6 +306,52 @@
    5. RESUMO DE REGIÕES & COMPONENTES DE RANKING
    ========================================================================== */
 
+/* Filtro */
+
+.dashboard-card--filters .dashboard-card__body {
+    padding: 10px;
+}
+
+.filter-row {
+    display: flex;
+    gap: 10px;
+}
+
+.filter-group {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+}
+
+.filter-group label {
+    font-size: 0.9rem; /* PADRONIZADO */
+    font-weight: 500;
+    line-height: 1;
+}
+
+.filter-group input {
+    height: 28px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    font-size: 0.9rem; /* PADRONIZADO */
+}
+
+.btn-filter {
+    flex: 1;
+    height: 28px;
+    border: none;
+    border-radius: 4px;
+    background: #00418B;
+    color: #fff;
+    font-size: 0.9rem; /* PADRONIZADO */
+    font-weight: 500;
+    cursor: pointer;
+    margin-top: 15px;
+}
+
+/* Resumo de Regiões */
+
 .dashboard-card--summary .dashboard-card__body {
     padding: 2px 0;
 }
@@ -285,14 +363,14 @@
     padding: 6px 10px;
     border-bottom: 1px solid #eee;
     align-items: center;
-    font-size: .72rem;
+    font-size: 0.9rem; /* PADRONIZADO */
 }
 
 .rank {
     width: 16px;
     height: 16px;
     border-radius: 50%;
-    font-size: .58rem;
+    font-size: 0.9rem; /* PADRONIZADO */
     color: #fff;
     display: flex;
     align-items: center;
@@ -303,6 +381,20 @@
     margin-left: 4px;
 }
 
+.rank-green  { background: #149A1E; }
+.rank-yellow { background: #9a9608; }
+.rank-orange { background: #F4A23F; }
+.rank-red    { background: #ff4141; }
+
+/* KPIs */
+
+.dashboard-panel__kpi-column {
+    gap: 8px;
+}
+
+.dashboard-card--kpi {
+    border-radius: 8px;
+}
 .rank-green { background: #149A1E; }
 .rank-yellow { background: #9a9608; }
 .rank-orange { background: #F4A23F; }
@@ -314,7 +406,8 @@
 
 .dashboard-card--kpi .dashboard-card__header {
     padding: 6px 10px;
-    font-size: .78rem;
+    font-size: 1.1rem; /* PADRONIZADO */
+    font-weight: 700; /* NEGRITO */
     min-height: 30px;
 }
 
@@ -329,10 +422,27 @@
 }
 
 .dashboard-card--kpi .rank-item span {
-    font-size: .70rem;
+    font-size: 0.9rem; /* PADRONIZADO */
 }
 
 .dashboard-card--kpi .rank-item span:last-child {
-    font-size: .68rem;
+    font-size: 0.9rem; /* PADRONIZADO */
     font-weight: 500;
+}
+
+/* Voltar para site institucional */
+
+.back-site__link {
+    width: 90%;
+    height: 2rem;
+    background-color: var(--bg-secondary);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: .8rem 0;
+    color: var(--bg-primary);
+    border-radius: .4rem;
+    cursor: pointer;
+    margin-top: 305%;
+    font-size: 0.9rem; /* PADRONIZADO */
 }

@@ -2,7 +2,7 @@
     <h2 class="dashboard-panel__title">Dashboard de Periculosidade por Região e Carga</h2>
 
     <div class="dashboard-panel__row">
-        <div class="dashboard-card dashboard-card--summary dashboard-button-changeScreen" onclick="trocarDashHoraDia()">
+        <div id="cardResumoDashRegiao" class="dashboard-card dashboard-card--summary dashboard-button-changeScreen ativo" onclick="trocarDashHoraDia()">
             <div class="dashboard-card__header">
                 <span>Resumo por Dia e Horário </span>
                 <span class="textAlterAba">Trocar!</span>
@@ -13,7 +13,6 @@
                     <span class="tag-diaSeguro">Dias mais Seguros</span>
                     <span></span>
                     <span></span>
-                    
                     <span class="tag-diaPerigoso">Dias mais Perigosos</span>
                     <span></span>
                     <span></span>
@@ -27,7 +26,6 @@
                     <span id="idResumoDiaPerigoso1">-</span>
                     <span id="idResumoDiaPerigosoInfo1">0 (0%)</span>
                 </div>
-
                 <div class="rank-item">
                     <span class="rank rank-yellow">2</span>
                     <span id="idResumoDiaSeguro2">-</span>
@@ -37,7 +35,6 @@
                     <span id="idResumoDiaPerigoso2">-</span>
                     <span id="idResumoDiaPerigosoInfo2">0 (0%)</span>
                 </div>
-
                 <div class="rank-item">
                     <span class="rank rank-yellow">3</span>
                     <span id="idResumoDiaSeguro3">-</span>

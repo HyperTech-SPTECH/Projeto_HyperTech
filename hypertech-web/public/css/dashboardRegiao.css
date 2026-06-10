@@ -1,4 +1,7 @@
-/* --- Container Filtro (Mantido) --- */
+/* =========================
+   CONTAINER FILTRO
+========================= */
+
 .dashboard-button-changeScreen {
     cursor: pointer;
 }
@@ -11,7 +14,7 @@
 
 .textAlterAba {
     align-items: end;
-    font-size: .6rem;
+    font-size: 0.9rem;
 }
 
 .dashboard-card__body-Region {
@@ -33,11 +36,13 @@
     justify-content: space-between;
     margin: .8rem 0;
     align-items: center;
+    font-size: 0.9rem;
 }
 
 .dashboard-card__body-Region select {
     width: 70%;
     height: 2rem;
+    font-size: 0.9rem;
 }
 
 .dashboard-card__body-Region .containerSideRightFiltro {
@@ -59,41 +64,52 @@
     color: var(--bg-primary);
     border-radius: .4rem;
     cursor: pointer;
+    font-size: 0.9rem;
 }
 
-/* Resumo */
+/* =========================
+   RESUMO
+========================= */
+
 .tag-diaSeguro {
     color: #008000;
     font-weight: bold;
+    font-size: 0.9rem;
 }
 
 .tag-diaPerigoso {
     color: #c00000;
     font-weight: bold;
+    font-size: 0.9rem;
 }
 
-/* --- Novo Layout Principal (Gráfico Esq / KPIs Dir) --- */
+/* =========================
+   LAYOUT PRINCIPAL
+========================= */
 
 .dashboard-main-content-row {
     display: flex;
     gap: 20px;
     margin-top: 20px;
-    align-items: stretch; /* Faz as duas colunas terem a mesma altura */
+    align-items: stretch;
 }
+
+/* =========================
+   GRÁFICO (MANTIDO)
+========================= */
 
 .dashboard-chart-container {
     flex: 1.5;
     background-color: #ffffff;
-    border-radius: 8px;
+    border-radius: 16px;
     box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
     border: 1px solid #f0f0f0;
-    overflow: hidden; /* Importante para a faixa azul respeitar o arredondamento */
+    overflow: hidden;
     display: flex;
     flex-direction: column;
-    padding: 0px !important; /* Remove o padding para a faixa azul ocupar o topo */
+    padding: 0px !important;
 }
 
-/* Garante que o canvas não tenha fundo próprio */
 #graficoCargas {
     background-color: transparent !important;
 }
@@ -106,100 +122,187 @@
     padding: 0 !important;
 }
 
+/* =========================
+   KPI COLUMN (+25%)
+========================= */
+
 .dashboard-kpi-column {
-    flex: 1; /* Proporção menor para as KPIs lateralizadas */
+    flex: 0.95;
     display: flex;
-    flex-direction: column; /* Empilha as KPIs verticalmente */
-    gap: 20px; /* Espaço entre a KPI de cima e a de baixo */
+    flex-direction: column;
+    gap: 15px;
 }
 
-/* --- Container KPIs (Ajustado para o novo layout) --- */
+/* =========================
+   KPIs AJUSTADAS (+25%)
+========================= */
 
-.dashboard-panelKPIs {
-    border-radius: .3rem;
-}
-
-/* Removido o width: 50% anterior para ocupar a coluna inteira */
 .containerKpiRegiao {
-    width: 100%; 
-    background-color: var(--bg-primary);
-    margin-top: 15px;
-    border-radius: .3rem;
-    overflow: hidden; /* Garante que a faixa colorida respeite o border-radius */
+    width: 100%;
+    background: #f7f7f7;
+    border-radius: 15px;
+    overflow: hidden;
+    border: 2px solid #d9d9d9;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.08);
 }
+
+/* HEADER */
 
 .faixaRegiaoKpi {
-    height: .6rem;
+    padding: 12px 16px;
+    font-size: 1.35rem;
+    font-weight: 800;
+    color: white;
+    display: flex;
+    align-items: center;
 }
 
-.titleKpiRegiao {
-    margin: .5rem;    
-    font-weight: bold;
+/* CORES */
+
+.dashboard-card__header--danger {
+    background: #d50000;
 }
 
-.titleKpiPerigo {
-    color: #c00000;
+.dashboard-card__header--safe {
+    background: #008a00;
 }
 
-.titleKpiSeguro {
-    color: #008000;
+/* TABELA */
+
+.miniTitlesKpisRegiao {
+    width: 100%;
+    background: #f7f7f7;
 }
 
-/* Estilização das Tabelas de KPI */
-
-.miniTitlesKpisRegiao, 
 .miniTitlesKpisRegiao table {
     width: 100%;
+    border-collapse: collapse;
 }
 
-.miniTitlesKpisRegiao thead tr {
-    display: flex;
-    width: 100%;
-    border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+/* REMOVE CABEÇALHO ANTIGO */
+
+.miniTitlesKpisRegiao thead tr:first-child {
+    display: none;
 }
 
-.miniTitlesKpisRegiao th, 
+/* LINHAS */
+
+.miniTitlesKpisRegiao tr {
+    border-bottom: 1px solid #dddddd;
+    height: 52px;
+}
+
+.miniTitlesKpisRegiao tr:last-child {
+    border-bottom: none;
+}
+
+/* TEXTOS */
+
 .miniTitlesKpisRegiao td {
-    padding: 8px 4px;
+    padding: 0 15px;
+    font-size: 1rem;
+    font-weight: 500;
+    color: #111;
 }
 
-.miniTitlesKpisRegiao .kpiRegiaoValores {
-    display: flex;
-    justify-content: flex-start;
-    align-items: center;
+/* POSIÇÃO */
+
+.kpiRegiaoPosicao {
+    width: 60px;
 }
 
-/* Proporções das colunas na tabela lateral */
-.miniTitlesKpisRegiao .kpiRegiaoPosicao { width: 15%; }
-.miniTitlesKpisRegiao .kpiRegiaoLocal { width: 50%; }
-.miniTitlesKpisRegiao .kpiRegiaoQuantidade { width: 35%; }
+/* LOCAL */
 
-/* Medalhas/Posições */
-.miniTitlesKpisRegiao .kpiRegiaoPosicao .regiaoKpiPos {
+.kpiRegiaoLocal {
+    width: 55%;
+    font-size: 1rem;
+    font-weight: 600;
+}
+
+/* QUANTIDADE */
+
+.kpiRegiaoQuantidade {
+    width: 35%;
+    text-align: right;
+    font-size: 1rem;
+    font-weight: 700;
+    white-space: nowrap;
+}
+
+/* MEDALHAS */
+
+.regiaoKpiPos {
+    width: 35px;
+    height: 35px;
     border-radius: 50%;
     display: flex;
-    justify-content: center;
     align-items: center;
-    width: 1.7rem;
-    height: 1.7rem;
+    justify-content: center;
     color: white;
-    font-size: 0.8rem;
+    font-weight: 800;
+    font-size: 1.1rem;
 }
 
-.regiaoKpiPos1 { background-color: #c00000; }
-.regiaoKpiPos2 { background-color: #c43131; }
-.regiaoKpiPos3 { background-color: #ce5b5b; }
+/* PERIGOSOS */
 
-.regiaoKpiPos1Seguro { background-color: #008000; }
-.regiaoKpiPos2Seguro { background-color: #339133; }
-.regiaoKpiPos3Seguro { background-color: #6ae66a; }
-
-.kpiRegiaoQuantidade .kpiQuantidadePorCem {
-    font-size: 0.75rem;
-    color: #666;
-    margin-left: 4px;
+.regiaoKpiPos1 {
+    background: #ff3d3d;
 }
 
-/* --- Finalização --- */
-.dashboard-panelLeft { flex: 2; }
-.dashboard-panelRight { flex: 1; }
+.regiaoKpiPos2 {
+    background: #f0a13b;
+}
+
+.regiaoKpiPos3 {
+    background: #e6a23c;
+}
+
+/* SEGUROS */
+
+.regiaoKpiPos1Seguro {
+    background: #16a516;
+}
+
+.regiaoKpiPos2Seguro {
+    background: #9b9800;
+}
+
+.regiaoKpiPos3Seguro {
+    background: #b59b00;
+}
+
+/* PORCENTAGEM */
+
+.kpiQuantidadePorCem {
+    color: #111;
+    font-weight: 700;
+    margin-left: 2px;
+}
+
+/* =========================
+   FINALIZAÇÃO
+========================= */
+
+.dashboard-panelLeft {
+    flex: 2;
+}
+
+.dashboard-panelRight {
+    flex: 1;
+}
+
+/* =========================
+   RESPONSIVO
+========================= */
+
+@media screen and (max-width: 1100px) {
+
+    .dashboard-main-content-row {
+        flex-direction: column;
+    }
+
+    .dashboard-kpi-column {
+        width: 100%;
+    }
+
+}
