@@ -110,6 +110,13 @@ header .buttons-menu #button-menu .dropdown-menu .dash-logout:hover {
     width: 100%;
 }
 
+.nav-button span {
+    white-space: normal;      
+    line-height: 1.1;
+    word-break: break-word;
+    text-align: left;
+}
+
 .nav-button:hover {
     background-color: rgba(0, 65, 139, 0.2);
 } 
