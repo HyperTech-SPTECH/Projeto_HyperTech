@@ -92,54 +92,31 @@ function calcularRotas(idOrigem, idDestino, origemLng, origemLat, destLng, destL
 }
 
 function buscarFavoritosPorUsuario(idUsuario) {
-    // return pool.query({
-    //     text: `
-    //         SELECT id_favorito, nome, origem, destino,
-    //                origemlat, origemlng, destinolat, destinolng, rota
-    //         FROM public.favorito_rota
-    //         WHERE id_usuario = $1
-    //         ORDER BY id_favorito ASC
-    //     `,
-    //     values: [idUsuario]
-    // });
-    return database.mysqlExecutar(`SELECT id_favorito, nome, origem, destino, origemLat, origemLng, destinoLat, destinoLng, rota FROM favorito_rota WHERE id_usuario = '${idUsuario}' ORDER BY id_favorito ASC`)
+    return mysqlExecutar(
+        `SELECT id_favorito, nome, origem, destino, origemLat, origemLng, destinoLat, destinoLng, rota FROM favorito_rota WHERE id_usuario = ? ORDER BY id_favorito ASC`,
+        [idUsuario]
+    );
 }
 
 function inserirFavorito(idUsuario, nome, origem, destino, origemLat, origemLng, destinoLat, destinoLng, rota) {
-    // return pool.query({
-    //     text: `
-    //         INSERT INTO public.favorito_rota
-    //             (id_usuario, nome, origem, destino, origemlat, origemlng, destinolat, destinolng, rota)
-    //         VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9)
-    //         RETURNING id_favorito
-    //     `,
-    //     values: [idUsuario, nome, origem, destino, origemLat, origemLng, destinoLat, destinoLng, JSON.stringify(rota)]
-    // });
-    return database.mysqlExecutar(`INSERT INTO favorito_rota (id_usuario, nome, origem, destino, origemLat, origemLng, destinoLat, destinoLng, rota) VALUES ('${idUsuario}', '${nome}', '${origem}', '${destino}', '${origemLat}', '${origemLng}', '${destinoLat}', '${destinoLng}', '${JSON.stringify(rota)}') RETURNING id_favorito;`)
+    return mysqlExecutar(
+        `INSERT INTO favorito_rota (id_usuario, nome, origem, destino, origemLat, origemLng, destinoLat, destinoLng, rota) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)`,
+        [idUsuario, nome, origem, destino, origemLat, origemLng, destinoLat, destinoLng, JSON.stringify(rota)]
+    );
 }
 
 function atualizarFavorito(idFavorito, idUsuario, nome, origem, destino, origemLat, origemLng, destinoLat, destinoLng, rota) {
-    // return pool.query({
-    //     text: `
-    //         UPDATE public.favorito_rota
-    //         SET nome = $1, origem = $2, destino = $3,
-    //             origemlat = $4, origemlng = $5, destinolat = $6, destinolng = $7, rota = $8
-    //         WHERE id_favorito = $9 AND id_usuario = $10
-    //     `,
-    //     values: [nome, origem, destino, origemLat, origemLng, destinoLat, destinoLng, JSON.stringify(rota), idFavorito, idUsuario]
-    // });
-    return database.mysqlExecutar(`UPDATE favorito_rota SET nome = '${nome}', origem = '${origem}', destino = '${destino}', origemLat = '${origemLat}', origemLng = '${origemLng}', destinoLat = '${destinoLat}', destinoLng = '${destinoLng}', rota = '${JSON.stringify(rota)}' WHERE id_favorito = '${idFavorito}' AND id_usuario = '${idUsuario}';`)
+    return mysqlExecutar(
+        `UPDATE favorito_rota SET nome = ?, origem = ?, destino = ?, origemLat = ?, origemLng = ?, destinoLat = ?, destinoLng = ?, rota = ? WHERE id_favorito = ? AND id_usuario = ?`,
+        [nome, origem, destino, origemLat, origemLng, destinoLat, destinoLng, JSON.stringify(rota), idFavorito, idUsuario]
+    );
 }
 
 function excluirFavorito(idFavorito, idUsuario) {
-    // return pool.query({
-    //     text: `
-    //         DELETE FROM public.favorito_rota 
-    //         WHERE id_favorito = $1 AND id_usuario = $2
-    //     `,
-    //     values: [idFavorito, idUsuario]
-    // });
-    return database.mysqlExecutar(`DELETE FROM favorito_rota WHERE id_favorito = '${idFavorito}' AND id_usuario = '${idUsuario}';`)
+    return mysqlExecutar(
+        `DELETE FROM favorito_rota WHERE id_favorito = ? AND id_usuario = ?`,
+        [idFavorito, idUsuario]
+    );
 }
 
 module.exports = { buscarNoMaisProximo, calcularRotas, buscarFavoritosPorUsuario, inserirFavorito, atualizarFavorito, excluirFavorito };

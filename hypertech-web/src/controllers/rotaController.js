@@ -81,7 +81,7 @@ async function buscarFavoritos(req, res) {
     
     try {
         var resultado = await rotaModel.buscarFavoritosPorUsuario(idUsuario);
-        return res.json(resultado.rows);
+        return res.json(resultado);
     } catch (err) {
         console.error("Erro ao buscar favoritos:", err.message);
         return res.status(500).json({ erro: "Erro ao buscar favoritos.", detalhe: err.message });
@@ -108,7 +108,7 @@ async function salvarFavorito(req, res) {
             rota ?? null
         );
         
-        return res.status(201).json({ id_favorito: resultado.rows[0].id_favorito });
+        return res.status(201).json({ id_favorito: resultado.insertId });
     } catch (err) {
         console.error("Erro ao salvar favorito:", err.message);
         return res.status(500).json({ erro: "Erro ao salvar favorito.", detalhe: err.message });
@@ -139,7 +139,7 @@ async function editarFavorito(req, res) {
             rota ?? null
         );
         
-        if (resultado.rowCount === 0) {
+        if (resultado.affectedRows === 0) {
             return res.status(404).json({erro: "Favorito não encontrado ou sem permissão."});
         }
         
@@ -161,7 +161,7 @@ async function deletarFavorito(req, res) {
     try {
         var resultado = await rotaModel.excluirFavorito(idFavorito, idUsuario);
         
-        if (resultado.rowCount === 0) {
+        if (resultado.affectedRows === 0) {
             return res.status(404).json({ erro: "Favorito não encontrado ou sem permissão." });
         }
         
