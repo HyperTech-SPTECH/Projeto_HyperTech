@@ -1,4 +1,4 @@
-var { pool, database } = require("../database/config.js");
+var { pool, mysqlExecutar } = require("../database/config.js");
 
 function buscarNoMaisProximo(lng, lat) {
     return pool.query({
