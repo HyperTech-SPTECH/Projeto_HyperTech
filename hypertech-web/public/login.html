@@ -52,13 +52,11 @@
 
 
 <script>
-
-
     function entrar() {
         var emailVar = email_input.value;
         var senhaVar = senha_input.value;
-
-
+        
+        
         fetch("/usuarios/autenticar", {
             method: "POST",
             headers: {
@@ -69,10 +67,10 @@
                 senhaServer: senhaVar
             })
         }).then(function (resposta) {
-        
+            
             if (resposta.ok) {
                 console.log(resposta);
-
+                
                 resposta.json().then(json => {
                     console.log(json);
                     console.log("a")
@@ -89,22 +87,22 @@
                     sessionStorage.CNPJ_EMPRESA = json[0].cnpj;
                     sessionStorage.TELEFONE_EMPRESA = json[0].telefone;
                     sessionStorage.setItem('DT_CADASTRO_EMPRESA', json[0].data_cadastro);
-
+                    
                     let listNotification = []
                     for (let i = 0; i < json.length; i++) {
                         console.log(json[i])
                         listNotification.push(
-                            {
-                                idEmailN: json[i].emailN_id,
-                                emailN: json[i].emailN,
-                                idTipoN: json[i].tipoNotificacao_id,
-                                tipoN: json[i].tipoNotificacao,
-                                ativoTipoN: json[i].ativoTipoNotificacao,
-                            }
+                        {
+                            idEmailN: json[i].emailN_id,
+                            emailN: json[i].emailN,
+                            idTipoN: json[i].tipoNotificacao_id,
+                            tipoN: json[i].tipoNotificacao,
+                            ativoTipoN: json[i].ativoTipoNotificacao,
+                        }
                         )
                     }
                     sessionStorage.setItem('DADOS_NOTIFICACOES', JSON.stringify(listNotification));
-
+                    
                     document.getElementById('res').textContent = 'Login efetuado!'
                     document.getElementById('res').style.color = '#00ff00'
                     pullInformationFromFilters();
@@ -112,80 +110,81 @@
                     setTimeout(function () {
                         window.location = "./home.html";
                     }, 1000); // apenas para exibir o loading
-
+                    
                 });
-
+                
             } else {
-
+                
                 console.log("Houve um erro ao tentar realizar o login!");
-
+                
                 resposta.text().then(texto => {
                     console.error(texto);
                     document.getElementById('res').textContent = 'Email ou senha incorretos!'
                     document.getElementById('res').style.color = '#ff0000'
                 });
             }
-
+            
         }).catch(function (erro) {
             console.log(erro);
         })
-
+        
         return false;
     }
-
+    
     function resetSessao() {
         sessionStorage.clear()
     }
     
     function valEmail() {
         var email = document.getElementById('email_input').value
-
+        
         var tamanho = email.length - 1
         
         if (email.includes('@')) { // Não pode ter mais de 1 '@'
-            email = email.replace('@', '*')
-            if (email.includes('@')) {
-                email_input.innerHTML = 'Apenas 1 "@" é permitido'
-            } else {
-                email_input.innerHTML = ''
-            }    
+        email = email.replace('@', '*')
+        if (email.includes('@')) {
+            email_input.innerHTML = 'Apenas 1 "@" é permitido'
         } else {
             email_input.innerHTML = ''
         }    
-
-        if (email[0] == '.' || (email[tamanho] == '.' && email[(tamanho - 1)] == '.')) { // Não deixa começar com ponto e nem ter 2 pontos seguidos
-            email_input.value = email_input.value.slice(0, -1)
-        }
-        
-        if (email[tamanho] == ' ' || email[tamanho] == ',' || email[tamanho] == ':' || email[tamanho] == ';') { // Não pode usar 'espaço', 'vírgula', ':', ';'
-            email_input.value = email_input.value.slice(0, -1)
-        }
+    } else {
+        email_input.innerHTML = ''
+    }    
+    
+    if (email[0] == '.' || (email[tamanho] == '.' && email[(tamanho - 1)] == '.')) { // Não deixa começar com ponto e nem ter 2 pontos seguidos
+        email_input.value = email_input.value.slice(0, -1)
     }
     
-    function pullInformationFromFilters() {
-        console.log('entrou no pullInformationFromFilters')
-        fetch('dashboard/infoFiltrar', {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json',
-            }        
-        })
-            .then(function (resposta) {
-                if (resposta.ok) {
-                    console.log("Dados chegou ok!");
-                    resposta.json().then(json => {
-                        sessionStorage.DATA_FILTERS = JSON.stringify(json)
-                    })
-                } else {
-                    alert('Houve um erro para chegar dados de filtros')
-                    console.log('Houve um erro para chegar dados de filtros')
-                }
-            })
-            .catch(function (resposta) {
-                console.log(`#ERRO: ${resposta}`)
-            })
+    if (email[tamanho] == ' ' || email[tamanho] == ',' || email[tamanho] == ':' || email[tamanho] == ';') { // Não pode usar 'espaço', 'vírgula', ':', ';'
+    email_input.value = email_input.value.slice(0, -1)
+}
+}
 
-
-        return false
-    }
+function pullInformationFromFilters() {
+    console.log('entrou no pullInformationFromFilters')
+    fetch('dashboard/infoFiltrar', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json',
+        }        
+    })
+    .then(function (resposta) {
+        if (resposta.ok) {
+            console.log("Dados chegou ok!");
+            resposta.json().then(json => {
+                sessionStorage.DATA_FILTERS = JSON.stringify(json)
+                console.log('sessionStorage.DATA_FILTERS: ' + sessionStorage.DATA_FILTERS)
+            })
+        } else {
+            alert('Houve um erro para chegar dados de filtros')
+            console.log('Houve um erro para chegar dados de filtros')
+        }
+    })
+    .catch(function (resposta) {
+        console.log(`#ERRO: ${resposta}`)
+    })
+    
+    console.log('saiu do fetch de pullInformationFromFilters')
+    return false
+}
 </script>
