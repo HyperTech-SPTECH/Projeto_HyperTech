@@ -71,7 +71,7 @@
             if (resposta.ok) {
                 console.log(resposta);
                 
-                resposta.json().then(json => {
+                resposta.json().then(async json => {
                     console.log(json);
                     console.log("a")
                     console.log(JSON.stringify(json));
@@ -105,11 +105,9 @@
                     
                     document.getElementById('res').textContent = 'Login efetuado!'
                     document.getElementById('res').style.color = '#00ff00'
-                    pullInformationFromFilters();
+                    await pullInformationFromFilters();
                     console.log('saiu do pullInformationFromFilters')
-                    setTimeout(function () {
-                        window.location = "./home.html";
-                    }, 1000); // apenas para exibir o loading
+                    window.location = "./home.html";
                     
                 });
                 
@@ -140,8 +138,8 @@
         
         var tamanho = email.length - 1
         
-        if (email.includes('@')) { // Não pode ter mais de 1 '@'
-        email = email.replace('@', '*')
+        if (email.includes('@')) {
+            email = email.replace('@', '*')
         if (email.includes('@')) {
             email_input.innerHTML = 'Apenas 1 "@" é permitido'
         } else {
@@ -149,7 +147,7 @@
         }    
     } else {
         email_input.innerHTML = ''
-    }    
+    }   
     
     if (email[0] == '.' || (email[tamanho] == '.' && email[(tamanho - 1)] == '.')) { // Não deixa começar com ponto e nem ter 2 pontos seguidos
         email_input.value = email_input.value.slice(0, -1)
@@ -160,31 +158,28 @@
 }
 }
 
-function pullInformationFromFilters() {
+async function pullInformationFromFilters() {
     console.log('entrou no pullInformationFromFilters')
-    fetch('dashboard/infoFiltrar', {
-        method: 'POST',
-        headers: {
-            'Content-Type': 'application/json',
-        }        
-    })
-    .then(function (resposta) {
+    try {
+        const resposta = await fetch('dashboard/infoFiltrar', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            }        
+        })
         if (resposta.ok) {
             console.log("Dados chegou ok!");
-            resposta.json().then(json => {
-                sessionStorage.DATA_FILTERS = JSON.stringify(json)
-                console.log('sessionStorage.DATA_FILTERS: ' + sessionStorage.DATA_FILTERS)
-            })
+            const json = await resposta.json();
+            sessionStorage.DATA_FILTERS = JSON.stringify(json)
+            console.log('sessionStorage.DATA_FILTERS: ' + sessionStorage.DATA_FILTERS)
         } else {
             alert('Houve um erro para chegar dados de filtros')
             console.log('Houve um erro para chegar dados de filtros')
         }
-    })
-    .catch(function (resposta) {
-        console.log(`#ERRO: ${resposta}`)
-    })
+    } catch (erro) {
+        console.log(`#ERRO: ${erro}`)
+    }
     
     console.log('saiu do fetch de pullInformationFromFilters')
-    return false
 }
 </script>
