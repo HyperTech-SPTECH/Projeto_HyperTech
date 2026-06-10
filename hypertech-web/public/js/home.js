@@ -60,7 +60,7 @@ function handleNavClick(ev) {
             setTimeout(() => {
                 includeFiltersInDash()
                 listarFiltrosUsuario()
-            }, 500);
+            }, 1000);
         }
     }
 }
@@ -77,7 +77,7 @@ document.addEventListener('DOMContentLoaded', () => {
     setTimeout(() => {
         includeFiltersInDash()
         listarFiltrosUsuario()
-    }, 500);
+    }, 1000);
 });
 
 function trocarDashRegiao() {
@@ -85,7 +85,7 @@ function trocarDashRegiao() {
     setTimeout(() => {
         includeFiltersInDash()
         listarFiltrosUsuario();
-    }, 500);
+    }, 1000);
 }
 
 function trocarDashHoraDia() {
@@ -93,7 +93,7 @@ function trocarDashHoraDia() {
     setTimeout(() => {
         includeFiltersInDash();
         listarFiltrosUsuario();
-    }, 500);
+    }, 1000);
 }
 
 function trocarProfileDash() {
@@ -120,7 +120,7 @@ function trocarProfileDash() {
         document.getElementById('idInputDtCriadoEmpresa').value = novaDataEmpresa.toLocaleDateString('pt-BR');
         document.getElementById('idButtons').style.display = 'none'
 
-    }, 500)
+    }, 1000)
 }
 
 function trocarNotificationDash() {
@@ -132,7 +132,7 @@ function trocarNotificationDash() {
     }
     setTimeout(() => {
         organizerScreenNotification()
-    }, 500);
+    }, 1000);
 }
 
 function trocarFiltroDash() {
