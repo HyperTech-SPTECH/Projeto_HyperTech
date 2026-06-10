@@ -104,11 +104,11 @@
                         )
                     }
                     sessionStorage.setItem('DADOS_NOTIFICACOES', JSON.stringify(listNotification));
-                    
 
                     document.getElementById('res').textContent = 'Login efetuado!'
                     document.getElementById('res').style.color = '#00ff00'
                     pullInformationFromFilters();
+                    console.log('saiu do pullInformationFromFilters')
                     setTimeout(function () {
                         window.location = "./home.html";
                     }, 1000); // apenas para exibir o loading
@@ -163,7 +163,7 @@
     }
     
     function pullInformationFromFilters() {
-        console.log('aqui veio?')
+        console.log('entrou no pullInformationFromFilters')
         fetch('dashboard/infoFiltrar', {
             method: 'POST',
             headers: {
